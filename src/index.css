@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.isDarkMode{
+  color: #f1f1f1;
+  background-color: #1f1f1f;
+}
+
+.isLightMode{
+  background-color: #f1f1f1;
+  color: #1f1f1f;
+}
+
+
+*{
+  scroll-behavior: smooth;
+}
+
+table {
+    font-family: arial, sans-serif;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+  }
+  tr{
+    transition: 0.5s opacity;
+  }
+  
+  tr:hover{
+    opacity: 0.8;
+  }
+
+
+/* Scroll bar */
+::-webkit-scrollbar {
+  display: none;
+  border-radius: 0.1em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff; 
+  border-radius: 1em;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ff5a3d; 
+  border-radius: 1em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+a{
+  transition: 0.5s all;
+  cursor: pointer;
+  padding: 0.8em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1em;
+  box-shadow: 5px 5px 5px #0000000e;
+  font-weight: bold;
+}
+
+li:hover{
+  background-color: red;
+}
+
+input[type=file]::file-selector-button {
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  outline: none;
+  border: none;
+  height: 100%;
+  transition: 1s background-color,color;
+  cursor: pointer;
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: rgb(0, 0, 0); 
+  color: #fff;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  text-align: center;
+}
+
+select{
+  text-align: center;
+  font-size: 9px;
+  appearance: none;
+}
+
+.active{
+  text-decoration: underline;
+  color: red;
+}
+
+.report_vendor_card{
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5em; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.1em;
+}
+
+.report_vendor_card > p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+  padding: 1em;
+}
+

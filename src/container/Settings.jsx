@@ -1,0 +1,78 @@
+import React from 'react'
+import MainContainer from '../component/MainContainer'
+import { IoSettings } from "react-icons/io5";
+import { MdOutlineLightMode } from "react-icons/md";
+import { LuRefreshCcwDot } from "react-icons/lu";
+import { MdDarkMode } from "react-icons/md";
+import { useState } from 'react';
+
+const Settings = () => {
+    const [theme, setTheme] = useState('isLightMode');
+    const [isUniversalDashboardActive, setIsUniversalDashboardActive] = useState(true);
+
+    const handleDarkMode = () =>{
+        if(theme === 'isLightMode'){
+            setTheme('isDarkMode');
+            localStorage.setItem('theme','isDarkMode');
+            document.documentElement.classList.remove('isLightMode')
+            document.documentElement.classList.add('isDarkMode')
+        }else{
+            setTheme('isLightMode');
+            localStorage.setItem('theme','isLightMode');
+            document.documentElement.classList.remove('isDarkMode')
+            document.documentElement.classList.add('isLightMode');
+        }
+        
+    }
+
+    const handleResetDashBoard = () =>{
+        localStorage.removeItem('XLDATA');
+        localStorage.removeItem('formateIncidentData');
+    }
+  return (
+    <MainContainer>
+        <div className='flex justify-center items-center h-full w-full gap-4  text-xl font-bold uppercase flex-col'>
+            <div className='flex gap-4'>
+            <IoSettings className='text-3xl'/>
+            <h1>My Setting</h1>
+            </div>
+
+                <ul className='flex flex-col justify-center items-start gap-10 bg-white shadow-md p-8 border border-blue-500'>
+                    <li className='flex justify-between w-full items-center'>
+                        Universal Dashboard
+                        <input
+                        value={isUniversalDashboardActive}
+                        onChange={() => {
+                            setIsUniversalDashboardActive(!isUniversalDashboardActive);
+                            localStorage.setItem('isUniversalDashboardActive',isUniversalDashboardActive);
+                        }}
+                        className='bg-white w-6 h-6 cursor-pointer'
+                        type="checkbox" 
+                        name="universal-Dashboard"
+                        />
+                    </li>
+                    <li className='flex justify-between w-full items-center '>
+                        Dark Mode 
+                        {
+                            theme === 'isLightMode' ? (<MdOutlineLightMode onClick={handleDarkMode} 
+                            className='bg-white h-10 w-10 shadow-md rounded-full p-2
+                             border border-blue-500 text-3xl'/>) : (
+                                <MdDarkMode onClick={handleDarkMode} 
+                            className='bg-white h-10 w-10 shadow-md rounded-full p-2
+                             border border-blue-500 text-3xl'/>
+                             )
+                        }
+                    </li>
+                    <li className='flex justify-between w-full items-center gap-8'>
+                        Reset Dashboard
+                        <LuRefreshCcwDot
+                            onClick={handleResetDashBoard}
+                         className='bg-white h-10 w-10 shadow-md rounded-full p-2 border border-blue-500 text-3xl'/>
+                    </li>
+                </ul>
+        </div>
+    </MainContainer>
+  )
+}
+
+export default Settings
