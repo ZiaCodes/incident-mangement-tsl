@@ -59,7 +59,7 @@ const Upload = () => {
         <input 
         className='bg-blue-800 h-10 text-white p-1 mt-4 rounded-sm '
         type="file" 
-        accept=".xlsx, .xls"
+        accept=".xlsx,.xls"
         onInput={(e) => fileReader(e)}
         name="upload"
         />

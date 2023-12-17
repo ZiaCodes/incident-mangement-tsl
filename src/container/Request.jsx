@@ -1,102 +1,141 @@
-import React from 'react'
-import MainContainer from '../component/MainContainer'
-import { useState } from 'react';
+import * as XLSX from 'xlsx';
+import React, { useEffect, useState } from 'react'
 import TableContainer from '../component/Table/TableContainer';
-import { useEffect } from 'react';
+import TableHead from '../component/Table/TableHead';
+import Loader from '../component/Loader';
 import Pagination from '../component/Pagination';
 import FloatingBtn from '../component/FloatingBtn';
-import TableHead from '../component/Table/TableHead'
+import { FaFileUpload } from "react-icons/fa";
+import { FcInfo } from "react-icons/fc";
+import { CgSpinnerTwoAlt } from "react-icons/cg";
+
 
 const Request = () => {
-  const [pendingData , setPendingData] = useState([]);
+  const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
   const pageSet = [10,50,100,300,500];
+  const [isloading, setIsLoading] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [chooseFile, setChooseFile] = useState("Choose a new file");
 
-  const pendingTicket = (data) =>{
-    const pendingTickets = [];
-    for(let i=0;i<data?.length;i++){
-      if(data[i] !=0){
-        if((data[i][10]) === 'Convert to SR'){
-          pendingTickets?.push(data[i])
-        }
-      }
-    }
+  const fileReader =(oEvent) => {
+       
+    setIsLoading(true);
+    var oFile = oEvent.target.files[0];
+    // var sFilename = oFile.name;
 
-    setPendingData(pendingTickets);
+    var reader = new FileReader();
+    // var result = {};
+
+    reader.onload = function (e) {
+        var data = e.target.result;
+        data = new Uint8Array(data);
+        var workbook = XLSX.read(data, {type: 'array'});
+        // console.log(workbook);
+        var result = {};
+        workbook.SheetNames.forEach(function (sheetName) {
+            var roa = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], {header: 1});
+            if (roa.length) result[sheetName] = roa;
+        });
+        // see the result, caution: it works after reader event is done.
+        // console.log(result.SR);
+        setTableData(result?.SR);
+        setIsLoading(false);
+       
+    };
+    reader.readAsArrayBuffer(oFile);
+}
+
+  const uploadDaataIntoTable = () =>{
+    // setIsLoading(true);
+    setIsDataLoaded(true);
   }
 
-  const getpendingData = () =>{
-    const PendingTable = [];
-    const localData = JSON.parse(localStorage?.getItem('XLDATA'));
-    if(localData){
-      PendingTable.push(localData?.Incident)
-    }
-    
-    pendingTicket(PendingTable[0]);
-  }
 
-  useEffect(()=>{
-    getpendingData();
-  },[])
-
-
-  // console.log(theadData)
-  return (
+  return(
     <>
-    <MainContainer>
-      <div className='flex justify-around items-center gap-10 font-bold uppercase text-white '>
-        <p className='p-2 bg-yellow-600'>All Service Request Calls</p>
-        <p className='p-2 bg-yellow-600'>Total : {pendingData.length}</p>
-        <p className='p-2 bg-green-600'>Below 3(total) : {pendingData.length}</p>
-        <p className='p-2 bg-red-600'>Above 3(Total): {0}</p>
-      </div>
+
+    <div 
+    className='flex justify-center items-center 
+    mt-28 ml-4 bg-white shadow-md w-80 p-2'>
+      <input 
+      type="file" 
+      name="uploadRequest"
+      accept=".xlsx, .xls"
+      onInput={(e) => fileReader(e)}
+      className='request_upload'
+      />
+      <button 
+        type="submit"
+        className='flex justify-center items-center gap-2 rounded-sm
+        bg-blue-800 p-4 text-white hover:bg-blue-500'
+        onClick={uploadDaataIntoTable}
+        >
+        {
+            isloading ? <>
+            <CgSpinnerTwoAlt className="animate-spin"/>
+             wait..
+             </> : (<>
+                <FaFileUpload/> Upload
+             </>)
+        }
+        </button>
+    </div>
+    {
+      !tableData?.length < 0 ? 
+      <p className='flex  justify-center items-center gap-2 mt-40 text-xl font-bold '>
+        <FcInfo className='text-2xl'/>
+        Upload an Excel Data to get insight and visualization.
+      </p>: 
       <TableContainer>
-        <TableHead/>
-      <tbody>
+      {
+        isDataLoaded ?
+        <>
           {
-            pendingData?.slice(1,page)?.map((value,i)=>{
+            tableData?.slice(0,page).map((val,i) =>{
               return(
-                <tr key={i} className="">
-                {
-                  value?.map((val,j)=>{
-                    return(
-                      <td key={j} className="whitespace-nowrap px-6 py-4">
-                      { !isNaN(val) ? Math.round(val) : val}
-                    </td>
-                    )
-                  })
-                }
-                </tr>
+                <tbody key={i}>
+                  <tr className={i===0 ? 'bg-blue-600 text-white uppercase font-bold tracking-wide' : null} >
+                    {
+                      val.map((data,j)=>{
+                       return(
+                        <td key={j} className="whitespace-nowrap px-6 py-4" >
+                          {data}
+                        </td>
+                       ) 
+                      })
+                    }
+                  </tr>
+                </tbody>
               )
             })
           }
-      </tbody>
+        </> : null
+      } 
       </TableContainer>
-    </MainContainer>
-
-  {
-    pendingData?.length ? 
-    <Pagination
-      handlePage={(e)=> 
-      setPage(e.target.value)}
-    >
-      {
-        pageSet.map((pageNumber,i) =>{
-          return(
-            <option key={i} value={pageNumber}>
-              {pageNumber}
-            </option>
-          )
-        })
-      }
-      </Pagination> : null
     }
 
-  {
-    (page > 10 && pendingData?.length ) && <FloatingBtn/> 
-  }
-</>
-  
-)}
+        {
+          tableData?.length ? <Pagination
+          handlePage={(e)=> setPage(e.target.value)}
+        >
+          {
+            pageSet.map((pageNumber,i) =>{
+              return(
+                <option key={i} value={pageNumber}>
+                  {pageNumber}
+                </option>
+              )
+            })
+          }
+          </Pagination> : null
+        }
+
+        {
+          (page > 10 && tableData?.length ) && <FloatingBtn/> 
+        }
+    </>
+  )
+}
 
 export default Request

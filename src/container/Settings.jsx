@@ -1,10 +1,12 @@
-import React from 'react'
+import React,{useState} from 'react'
 import MainContainer from '../component/MainContainer'
 import { IoSettings } from "react-icons/io5";
 import { MdOutlineLightMode } from "react-icons/md";
 import { LuRefreshCcwDot } from "react-icons/lu";
 import { MdDarkMode } from "react-icons/md";
-import { useState } from 'react';
+import { IoIosColorPalette } from "react-icons/io";
+import { MdOutlineRoomPreferences } from "react-icons/md";
+import { MdOutlineResetTv } from "react-icons/md";
 
 const Settings = () => {
     const [theme, setTheme] = useState('isLightMode');
@@ -31,7 +33,7 @@ const Settings = () => {
     }
   return (
     <MainContainer>
-        <div className='flex justify-center items-center h-full w-full gap-4  text-xl font-bold uppercase flex-col'>
+        {/* <div className='flex justify-center items-center h-full w-full gap-4  text-xl font-bold uppercase flex-col'>
             <div className='flex gap-4'>
             <IoSettings className='text-3xl'/>
             <h1>My Setting</h1>
@@ -70,6 +72,56 @@ const Settings = () => {
                          className='bg-white h-10 w-10 shadow-md rounded-full p-2 border border-blue-500 text-3xl'/>
                     </li>
                 </ul>
+        </div> */}
+
+        <div className='h-full w-full flex justify-center gap-8 mt-56'>
+            <div className='h-auto bg-green-700 text-white rounded-sm w-auto shadow-md p-4'>
+                <ul>
+                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
+                        <IoSettings/>
+                        General Setting
+                    </li>
+                    <hr  className='mt-2 opacity-25'/>
+                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
+                       <IoIosColorPalette/> App theme 
+                    </li>
+                    <hr  className='mt-2 opacity-25'/>
+                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
+                        <MdOutlineRoomPreferences/> Your Prefrences
+                    </li>
+                    <hr className='mt-2 opacity-25' />
+                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
+                       <MdOutlineResetTv/> Reset Data
+                    </li>
+                </ul>
+            </div>
+            <div className='h-72 bg-green-700 text-white  rounded-sm w-72 shadow-md p-4'>
+                <h1 className='font-bold uppercase'>General Settings</h1>
+                <div className='flex justify-between mt-4 items-center  gap-2 '>
+                        <input
+                        value={isUniversalDashboardActive}
+                        onChange={() => {
+                            setIsUniversalDashboardActive(!isUniversalDashboardActive);
+                            localStorage.setItem('isUniversalDashboardActive',isUniversalDashboardActive);
+                        }}
+                        className='bg-white w-6 h-6 cursor-pointer'
+                        type="checkbox" 
+                        name="universal-Dashboard"
+                        />
+                        {
+                            theme === 'isLightMode' ? (<MdOutlineLightMode onClick={handleDarkMode} 
+                            className='bg-white text-black h-10 w-10 shadow-md rounded-full p-2
+                             border border-blue-500 text-3xl'/>) : (
+                                <MdDarkMode onClick={handleDarkMode} 
+                            className='bg-white cursor-pointer text-black h-10 w-10 shadow-md rounded-full p-2
+                             border border-blue-500 text-3xl'/>
+                             )
+                        }
+                    <LuRefreshCcwDot
+                            onClick={handleResetDashBoard}
+                         className='bg-white text-black cursor-pointer h-10 w-10 shadow-md rounded-full p-2 border border-blue-500 text-3xl'/>
+                </div>
+            </div>
         </div>
     </MainContainer>
   )
