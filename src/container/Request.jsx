@@ -1,7 +1,6 @@
 import * as XLSX from 'xlsx';
 import React, { useEffect, useState } from 'react'
 import TableContainer from '../component/Table/TableContainer';
-import TableHead from '../component/Table/TableHead';
 import Loader from '../component/Loader';
 import Pagination from '../component/Pagination';
 import FloatingBtn from '../component/FloatingBtn';
@@ -13,7 +12,7 @@ import { CgSpinnerTwoAlt } from "react-icons/cg";
 const Request = () => {
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
-  const pageSet = [10,50,100,300,500];
+  const pageSet = [10,50,100,150,300,500];
   const [isloading, setIsLoading] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [chooseFile, setChooseFile] = useState("Choose a new file");
@@ -95,7 +94,7 @@ const Request = () => {
             tableData?.slice(0,page).map((val,i) =>{
               return(
                 <tbody key={i}>
-                  <tr className={i===0 ? 'bg-blue-600 text-white uppercase font-bold tracking-wide' : null} >
+                  <tr className={i===0 ? 'bg-blue-600 text-white uppercase font-bold tracking-wide' : ((i>1 && i<5)  ? "bg-red-600 text-white" : (i>6 && i<9 ? 'bg-red-600 text-white' : (i>10 && i<14) ? 'bg-red-600 text-white' : (i===1 ? "bg-green-600 text-white" : (i>4 && i<7 ? "bg-green-600 text-white" : (i>8 && i<11 ? "bg-green-600 text-white" : (i>13 && i<23 ? "bg-green-600 text-white" : null))) )) )} >
                     {
                       val.map((data,j)=>{
                        return(

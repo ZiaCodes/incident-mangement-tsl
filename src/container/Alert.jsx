@@ -12,7 +12,7 @@ import MainContainer from '../component/MainContainer';
 const Alert = () => {
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
-  const pageSet = [10,50,100,300,500];
+  const pageSet = [10,50,100,150,300,500];
   const [filterOption, setFilterOpion] = useState([]);
 
   const getTableData = () =>{

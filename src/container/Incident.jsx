@@ -12,7 +12,7 @@ import MainContainer from '../component/MainContainer';
 const Incident = () => {
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
-  const pageSet = [10,50,100,300,500];
+  const pageSet = [10,50,100,150,300,500];
   const [filterOption, setFilterOpion] = useState([]);
   const [update, setUpdate] = useState(false)
 
@@ -48,7 +48,7 @@ const Incident = () => {
   const filterDropDownMenu = () =>{
     const filterValue = Object.groupBy(tableData, filter =>  filter.status);
     setFilterOpion(Object.keys(filterValue));
-    console.log("Options", filterOption)
+    // console.log("Options", filterOption)
   }
 
   const handleFilterChange = (e)=>{
@@ -62,7 +62,6 @@ const Incident = () => {
   useEffect(()=>{
     getTableData();
   },[])
-
   
   useEffect(()=>{
     filterDropDownMenu();

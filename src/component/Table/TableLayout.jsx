@@ -9,7 +9,7 @@ import { FcInfo } from "react-icons/fc";
 const TableLayout = () => {
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
-  const pageSet = [10,50,100,300,500];
+  const pageSet = [10,50,100,150,300,500];
   const [isloading, setIsLoading] = useState(true)
 
   const getTableData = () =>{
@@ -24,7 +24,7 @@ const TableLayout = () => {
         var tempObj = {
           sl: IncidentTable[i][0],
           ticketNo: IncidentTable[i][1],
-          Date: ExcelDateToJSDate(IncidentTable[i][2]).toISOString().split('T')[0],
+          Date: ExcelDateToJSDate(IncidentTable[i][2])?.toISOString()?.split('T')[0],
           age: Math.round(IncidentTable[i][3]),
           slab: IncidentTable[i][4],
           type: IncidentTable[i][5],
