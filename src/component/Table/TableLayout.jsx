@@ -24,7 +24,7 @@ const TableLayout = () => {
         var tempObj = {
           sl: IncidentTable[i][0],
           ticketNo: IncidentTable[i][1],
-          Date: ExcelDateToJSDate(IncidentTable[i][2])?.toISOString()?.split('T')[0],
+          Date: ExcelDateToJSDate(IncidentTable[i][2]).toDateString().split('T'),
           age: Math.round(IncidentTable[i][3]),
           slab: IncidentTable[i][4],
           type: IncidentTable[i][5],
