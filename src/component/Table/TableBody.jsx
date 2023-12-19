@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaEye } from "react-icons/fa";
 import { MdOutlineUpdate } from "react-icons/md";
+import { HiDotsVertical } from "react-icons/hi";
 
 const TableBody = (props) => {
   return (
@@ -43,7 +44,7 @@ const TableBody = (props) => {
               {props.remarks}
             </td>
             <td className="whitespace-nowrap px-6 py-4 cursor-pointer" >
-              <MdOutlineUpdate className='text-xl'/>
+              <HiDotsVertical className='text-xl'/>
             </td>
             <td className="whitespace-nowrap px-6 py-4 cursor-pointer" >
               <a className='shadow-none' target='_blank'

@@ -13,7 +13,7 @@ const NavLinks = () => {
         className="flex flex-col 
         bg-white text-red  
         right-0 top-16 shadow-lg p-8
-        w-60 gap-4 flex-wrap
+        w-60 gap-4 flex-wrap z-50
         fixed
         "
     >

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
-import { FaFilter } from "react-icons/fa6";
 import { FcInfo } from "react-icons/fc";
 import TableContainer from '../component/Table/TableContainer';
 import TableHead from '../component/Table/TableHead';
@@ -15,7 +13,7 @@ const Incident = () => {
   const pageSet = [10,50,100,150,300,500];
   const [filterOption, setFilterOpion] = useState([]);
   const [update, setUpdate] = useState(false)
-
+  
   const getTableData = () =>{
     const localData = JSON.parse(localStorage?.getItem('formateIncidentData'));
 
@@ -25,6 +23,8 @@ const Incident = () => {
     }
     
   }
+
+  
 
   let openCalls = 0;
   let closeCalls = 0
@@ -67,6 +67,7 @@ const Incident = () => {
     filterDropDownMenu();
     },[])
     
+
     return(
     <MainContainer>
       <div className='flex justify-left items-center gap-4 font-bold uppercase bg-white overflow-hidden shadow-md'>
