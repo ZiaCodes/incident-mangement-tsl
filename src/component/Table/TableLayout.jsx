@@ -22,20 +22,25 @@ const TableLayout = () => {
       const IncidentTable = localData.Incident
       for(let i=1;i<IncidentTable?.length;i++){
         var tempObj = {
-          sl: IncidentTable[i][0],
-          ticketNo: IncidentTable[i][1],
-          Date: ExcelDateToJSDate(IncidentTable[i][2]).toDateString().split('T'),
-          age: Math.round(IncidentTable[i][3]),
-          slab: IncidentTable[i][4],
+          sl: i,
+          ticketNo: IncidentTable[i][0],
+          Date: ExcelDateToJSDate(IncidentTable[i][1]).toDateString().split('T'),
+          age: Math.round(IncidentTable[i][2]),
+          slab: IncidentTable[i][3],
+          serviceNowStatus: IncidentTable[i][4],
           type: IncidentTable[i][5],
           name: IncidentTable[i][6],
-          location: IncidentTable[i][7],
-          subLocation: IncidentTable[i][8],
-          vendor: IncidentTable[i][9],
-          status: IncidentTable[i][10],
-          remarks: IncidentTable[i][11],
-          update: IncidentTable[i][12],
-          serviceNow: IncidentTable[i][13]
+          ticketDetails: IncidentTable[i][7],
+          ticketSummary: IncidentTable[i][8],
+          workNote: IncidentTable[i][9],
+          comment: IncidentTable[i][10],
+          location: IncidentTable[i][11],
+          subLocation: IncidentTable[i][12],
+          vendor: IncidentTable[i][13],
+          status: IncidentTable[i][14],
+          remarks: IncidentTable[i][15],
+          update: IncidentTable[i][16],
+          serviceNow: IncidentTable[i][17]
         }
         tableSet.push(tempObj);
       }

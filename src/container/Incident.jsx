@@ -8,35 +8,34 @@ import FloatingBtn from '../component/FloatingBtn';
 import MainContainer from '../component/MainContainer';
 
 const Incident = () => {
-  const [tableData , setTableData] = useState([]);
-  const [page,setPage] = useState(10);
-  const pageSet = [10,50,100,150,300,500];
+  const [tableData, setTableData] = useState([]);
+  const [page, setPage] = useState(10);
+  const pageSet = [10, 50, 100, 150, 300, 500];
   const [filterOption, setFilterOpion] = useState([]);
   const [update, setUpdate] = useState(false)
-  
-  const getTableData = () =>{
+
+  const getTableData = () => {
     const localData = JSON.parse(localStorage?.getItem('formateIncidentData'));
 
-    if(localData){
+    if (localData) {
       const incidentCalls = Object.groupBy(localData, place => place.type);
       setTableData(incidentCalls.Incident)
     }
-    
+
   }
 
-  
 
   let openCalls = 0;
   let closeCalls = 0
-  const getInsigntNumbers = () =>{
-    tableData.forEach((item)=>{
-      if(item.status !== 'Resolved'){
+  const getInsigntNumbers = () => {
+    tableData.forEach((item) => {
+      if (item.status !== 'Resolved') {
         openCalls++;
       }
     })
 
-    tableData.forEach((item)=>{
-      if(item.status === 'Resolved'){
+    tableData.forEach((item) => {
+      if (item.status === 'Resolved') {
         closeCalls++;
       }
     })
@@ -45,30 +44,30 @@ const Incident = () => {
 
   getInsigntNumbers();
 
-  const filterDropDownMenu = () =>{
-    const filterValue = Object.groupBy(tableData, filter =>  filter.status);
+  const filterDropDownMenu = () => {
+    const filterValue = Object.groupBy(tableData, filter => filter.status);
     setFilterOpion(Object.keys(filterValue));
     // console.log("Options", filterOption)
   }
 
-  const handleFilterChange = (e)=>{
+  const handleFilterChange = (e) => {
     const filter = e.target.value;
     console.log(filter)
-    const filterValue = Object.groupBy(tableData, newData =>  newData.status);
+    const filterValue = Object.groupBy(tableData, newData => newData.status);
     setTableData(filterValue[filter])
     // console.log(filterValue[filter])
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getTableData();
-  },[])
-  
-  useEffect(()=>{
-    filterDropDownMenu();
-    },[])
-    
+  }, [])
 
-    return(
+  useEffect(() => {
+    filterDropDownMenu();
+  }, [])
+
+
+  return (
     <MainContainer>
       <div className='flex justify-left items-center gap-4 font-bold uppercase bg-white overflow-hidden shadow-md'>
         <p className='p-2 '>All Incident Calls</p>
@@ -76,11 +75,11 @@ const Incident = () => {
         <p className='p-2 bg-red-600 text-white'>Open : {openCalls}</p>
         <p className='p-2 bg-green-600 text-white'>Closed: {closeCalls}</p>
         <select name="filter"
-        onChange={(e) => handleFilterChange(e)}
-         className='outline-none border border-red-600 cursor-grabbing text-left w-36 p-1 rounded-sm text-sm' >
+          onChange={(e) => handleFilterChange(e)}
+          className='outline-none border border-red-600 cursor-grabbing text-left w-36 p-1 rounded-sm text-sm' >
           {
-            filterOption.map((opt,i) =>{
-              return(
+            filterOption.map((opt, i) => {
+              return (
                 <option key={i} value={opt}>
                   {opt}
                 </option>
@@ -89,59 +88,59 @@ const Incident = () => {
           }
         </select>
       </div>
-    {
-      !tableData?.length > 0 ? 
-      <p className='flex  justify-center items-center gap-2 mt-40 text-xl font-bold '>
-        <FcInfo className='text-2xl'/>
-        Upload an Excel Data to get insight and visualization.
-      </p>: 
-      <TableContainer>
-      <TableHead/>
+      {
+        !tableData?.length > 0 ?
+          <p className='flex  justify-center items-center gap-2 mt-40 text-xl font-bold '>
+            <FcInfo className='text-2xl' />
+            Upload an Excel Data to get insight and visualization.
+          </p> :
+          <TableContainer>
+            <TableHead />
 
-          {
-            tableData.slice(0,page).map((dataField,index)=>{
-              return(
-                <TableBody
-                style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "bg-red-600 text-white" : ( dataField.status === "Resolved" ? "bg-green-600 text-white" : null)) }
-                key={index}
-                serialNumber={dataField.sl}
-                ticketNo={dataField.ticketNo}
-                reportedDate={dataField.Date}
-                age={dataField.age}
-                ageSlab={dataField.slab}
-                type={dataField.type}
-                userName={dataField.name}
-                location={dataField.location}
-                subLocation={dataField.subLocation}
-                vendor={dataField.vendor}
-                status={dataField.status}
-                remarks={dataField.remarks}
-              />
-              )
-            })
-          }
-      </TableContainer>
-    }
+            {
+              tableData.slice(0, page).map((dataField, index) => {
+                return (
+                  <TableBody
+                    style={(dataField.age > 3 && dataField.status !== "Resolved" ? "bg-red-600 text-white" : (dataField.status === "Resolved" ? "bg-green-600 text-white" : null))}
+                    key={index}
+                    serialNumber={dataField.sl}
+                    ticketNo={dataField.ticketNo}
+                    reportedDate={dataField.Date}
+                    age={dataField.age}
+                    ageSlab={dataField.slab}
+                    type={dataField.type}
+                    userName={dataField.name}
+                    location={dataField.location}
+                    subLocation={dataField.subLocation}
+                    vendor={dataField.vendor}
+                    status={dataField.status}
+                    remarks={dataField.remarks}
+                  />
+                )
+              })
+            }
+          </TableContainer>
+      }
 
-        {
-          tableData?.length ? <Pagination
-          handlePage={(e)=> setPage(e.target.value)}
+      {
+        tableData?.length ? <Pagination
+          handlePage={(e) => setPage(e.target.value)}
         >
           {
-            pageSet.map((pageNumber,i) =>{
-              return(
+            pageSet.map((pageNumber, i) => {
+              return (
                 <option key={i} value={pageNumber}>
                   {pageNumber}
                 </option>
               )
             })
           }
-          </Pagination> : null
-        }
+        </Pagination> : null
+      }
 
-        {
-          (page > 10 && tableData?.length ) && <FloatingBtn/> 
-        }
+      {
+        (page > 10 && tableData?.length) && <FloatingBtn />
+      }
     </MainContainer>
   )
 }

@@ -163,8 +163,8 @@ const Report = () => {
     <>
     <MainContainer>
 
-      <div className=' w-full h-96 flex p-12 justify-center items-center mb-4 '>
-      <ResponsiveContainer width='100%' height='100%' >
+      <div className=' w-full h-96 gap-8 flex p-12 justify-center items-center mb-4 '>
+      <ResponsiveContainer  >
         <PieChart width={500} height={500}>
           <Pie
             dataKey="value"
@@ -180,9 +180,9 @@ const Report = () => {
         </PieChart>
       </ResponsiveContainer>
 
-      <ResponsiveContainer width='100%' height='100%'>
+      <ResponsiveContainer>
       <BarChart
-          width={500}
+          width={100}
           height={300}
           data={dataBarChart}
         >
