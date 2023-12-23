@@ -5,12 +5,21 @@ import TableContainer from './TableContainer'
 import TableHead from './TableHead'
 import TableBody from './TableBody'
 import Loader from '../Loader'
-import { FcInfo } from "react-icons/fc";
+import { FcInfo } from "react-icons/fc"
+import Upload from '../Upload'
+
+
 const TableLayout = () => {
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
   const pageSet = [10,50,100,150,300,500];
-  const [isloading, setIsLoading] = useState(true)
+  const [isloading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState("");
+
+  const handleSearch = ({target}) =>{
+    const {value} = target;
+    setSearch(value);
+  }
 
   const getTableData = () =>{
 
@@ -45,12 +54,15 @@ const TableLayout = () => {
         tableSet.push(tempObj);
       }
       setTableData(tableSet)
-      localStorage.setItem('formateIncidentData',JSON.stringify(tableSet))
+      localStorage.setItem('formateIncidentData',JSON.stringify(tableSet));
     }
-    setIsLoading(false)
+    setIsLoading(false);
     
   }
 
+  const countingStatus =  Object.groupBy(tableData, filter => filter.status);
+  const statusArr = Object.keys(countingStatus)
+  
 
   useEffect(()=>{
     const oldtable = JSON.parse(localStorage?.getItem('formateIncidentData'));
@@ -59,6 +71,7 @@ const TableLayout = () => {
     }else{
       getTableData();
     }
+
   },[])
   
 
@@ -69,6 +82,24 @@ const TableLayout = () => {
 
   return(
     <>
+    <Upload searchValue={search} method={handleSearch}/>
+    <div className='flex justify-left items-center gap-4 font-bold uppercase ml-4'>
+        <p className='p-2 bg-purple-500 text-white rounded-sm'>Total : {tableData?.length} </p>
+        {
+          statusArr.map((name,i) =>{
+            return (
+              <button key={i}
+              onClick={() => {
+                setSearch(name);
+              }}
+              id='statusType'
+              className={name ==='Pending' ? "p-2 bg-red-600 text-white cursor-pointer rounded-sm ": " rounded-sm p-2 bg-green-600 text-white cursor-pointer"}>
+                {name}
+              </button>
+            )
+          })
+        }
+        </div>
     {
       !tableData?.length > 0 ? 
       <p className='flex  justify-center items-center gap-2 mt-40 text-xl font-bold '>
@@ -79,7 +110,21 @@ const TableLayout = () => {
       <TableHead/>
 
           {
-            isloading ? tableData.slice(0,page).map((dataField,index)=>{
+            isloading ? tableData.filter((dataField)=>{
+              if(search === ""){
+                return dataField;
+              }else if(dataField.status.trim().toLowerCase().includes(search.trim().toLowerCase())){
+                return dataField
+              }else if(dataField.vendor.toLowerCase().trim().includes(search.toLowerCase().trim())){
+                return dataField
+              }else if(dataField.location.toLowerCase().trim().includes(search.toLowerCase().trim())){
+                return dataField
+              }else if(dataField.name.trim().toLowerCase().includes(search.trim().toLowerCase())){
+                return dataField
+              }else if(dataField.slab.trim().toLowerCase().includes(search.trim().toLowerCase())){
+                return dataField
+              }
+            }).slice(0,page).map((dataField,index)=>{
               return(
                 <TableBody
                 style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "bg-red-600 text-white" : ( dataField.status === "Resolved" ? "bg-green-600 text-white" : null)) }

@@ -47,7 +47,7 @@ const Alert = () => {
   const filterDropDownMenu = () =>{
     const filterValue = Object.groupBy(tableData, filter =>  filter.status);
     setFilterOpion(Object.keys(filterValue));
-    console.log("Options", filterOption)
+    // console.log("Options", filterOption)
   }
 
   const handleFilterChange = (e)=>{

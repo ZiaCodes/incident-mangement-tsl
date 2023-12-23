@@ -7,11 +7,9 @@ import { IoLogoTableau } from "react-icons/io5";
 import { RiArrowRightDoubleFill } from "react-icons/ri";
 import { FaFilter } from "react-icons/fa6";
 
-const Upload = () => {
+const Upload = (props) => {
     const [xlData , setXlData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    // const [search, setSearch] = useState("");
-
 
     const fileReader =(oEvent) => {
        
@@ -48,10 +46,7 @@ const Upload = () => {
        
     }
 
-    // const handleSearch = ({target}) =>{
-    //     const {value} = target;
-    //     setSearch(value);
-    // }
+    
 
   return (
     <>
@@ -81,14 +76,14 @@ const Upload = () => {
 
 
 
-        {/* <input 
-        className="border border-blue-800 h-10 p-0.8 outline-none mt-4"
-        placeholder='Search ..'
+        <input 
+        className="border border-blue-800 h-10 p-0.8 outline-none mt-4 p-2 rounded-sm" 
+        placeholder='Type anything..'
         type="search" 
         name="search" 
-        value={search}
-        onChange={handleSearch}
-        /> */}
+        value={props.searchValue}
+        onChange={props.method}
+        />
 
     </div>
     {
