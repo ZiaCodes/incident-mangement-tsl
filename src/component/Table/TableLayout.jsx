@@ -101,7 +101,16 @@ const TableLayout = () => {
   }
 
   const editRowItem = (data) =>{
-    console.log(data)
+    toast.error('Feature coming soon!', {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
   }
 
   return(
