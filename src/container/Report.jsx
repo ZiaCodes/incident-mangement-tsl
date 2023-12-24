@@ -78,6 +78,11 @@ const Report = () => {
   const [incidentLength, setIncidentLength] = useState([]);
   const [alertLength, setAlertLength] = useState([]);
   const [requestLength, setRequestLength] = useState([]);
+  const [apReq, setApReq] = useState([]);
+  const [workInProgress, setWorkInprogress] = useState([]);
+  const [newAssign,setNewAssign] = useState([]);
+  const [transfer, setTransfer] = useState([]);
+  const [reopne, setReopne] = useState([]);
 
   const dataBarChart = [
     {
@@ -99,13 +104,6 @@ const Report = () => {
 
   const statusBarChart = [
     {
-      name: 'Pending',
-      'Call status': openLength.reduce((partialSum, a) => partialSum + a, 0),
-      pv: 2400,
-      amt: 2400,
-      fill:'#ff0000'
-    },
-    {
       name: 'Close',
       'Call status': closeLength.reduce((partialSum, a) => partialSum + a, 0),
       pv: 1398,
@@ -113,43 +111,49 @@ const Report = () => {
       fill:'#008000'
     },
     {
-      name: 'AR',
-      'Call status': 5,
+      name: 'Pending',
+      'Call status': openLength.reduce((partialSum, a) => partialSum + a, 0),
+      pv: 2400,
+      amt: 2400,
+      fill:'#ff0000'
+    },
+    {
+      name: 'New',
+      'Call status': newAssign.reduce((partialSum, a) => partialSum + a, 0),
+      pv: 1398,
+      amt: 2210,
+      fill:'#ff001e'
+    },
+    {
+      name: 'WIP',
+      'Call status': workInProgress.reduce((partialSum, a) => partialSum + a, 0),
+      pv: 1398,
+      amt: 2210,
+      fill:'#00ff84'
+    },
+    {
+      name: 'AP',
+      'Call status': apReq.reduce((partialSum, a) => partialSum + a, 0),
       pv: 1398,
       amt: 2210,
       fill:'#004cff'
     },
     {
       name: 'Transfer',
-      'Call status': 3,
+      'Call status': transfer.reduce((partialSum, a) => partialSum + a, 0),
       pv: 1398,
       amt: 2210,
       fill:'#ff00d0'
     },
     {
-      name: 'WIP',
-      'Call status': 11,
-      pv: 1398,
-      amt: 2210,
-      fill:'#00ff84'
-    },
-    {
-      name: 'New',
-      'Call status': 19,
-      pv: 1398,
-      amt: 2210,
-      fill:'#ff001e'
-    },
-    {
       name: 'Reopen',
-      'Call status': 1,
+      'Call status': reopne.reduce((partialSum, a) => partialSum + a, 0),
       pv: 1398,
       amt: 2210,
       fill:'#bb00ff'
     }
   ]
   const opneTicket = () =>{
-    // console.log(callData)
     let open = [];
     let close = [];
     let incident = [];
@@ -160,7 +164,11 @@ const Report = () => {
     let length = [];
     const vendors = Object?.groupBy(callData, vData => vData.vendor);
     const nwArr = Object.values(vendors);
-    
+    let aPReq = [];
+    let wInprog = [];
+    let newAssignment = [];
+    let transfer = [];
+    let reOpne = [];
 
     for(let i=0;i<nwArr?.length;i++){
       let opn =0;
@@ -171,6 +179,12 @@ const Report = () => {
       let abv =0;
       let blw =0;
       let len =0;
+      let ar =0;
+      let wip =0;
+      let newAss =0;
+      let trans = 0;
+      let reOpn = 0;
+
       for(let j=0;j<nwArr[i]?.length;j++){
         if(nwArr[i][j]?.status !=='Resolved'){
           opn++;
@@ -191,7 +205,29 @@ const Report = () => {
           abv++;
         }
 
+        if(nwArr[i][j].status === 'AP Requirement'){
+          ar++;
+        }
+  
+        if(nwArr[i][j].status === 'Work is in Progress'){
+          wip++;
+        }
+
+        if(nwArr[i][j].status === 'Transfer'){
+          trans++;
+        }
+
+        if(nwArr[i][j].status === 'New Assignment'){
+          newAss++;
+        }
+
+        if(nwArr[i][j].status === 'Reopened'){
+          reOpn++;
+        }
+
       }
+
+
       open.push(opn);
       close.push(cls);
       incident.push(inc);
@@ -200,6 +236,11 @@ const Report = () => {
       above.push(abv);
       below.push(blw);
       length.push(len);
+      aPReq.push(ar);
+      wInprog.push(wip)
+      newAssignment.push(newAss);
+      transfer.push(trans);
+      reOpne.push(reOpn);
 
     }
     setOpenLength(open);
@@ -209,6 +250,11 @@ const Report = () => {
     setAboveLength(above);
     setBelowLength(below);
     setRequestLength(request);
+    setApReq(aPReq);
+    setWorkInprogress(wInprog);
+    setNewAssign(newAssignment)
+    setTransfer(transfer);
+    setReopne(reOpne);
 
   }
 
@@ -252,10 +298,10 @@ const Report = () => {
         </BarChart>
       </ResponsiveContainer>
 
-      <ResponsiveContainer>
+      <ResponsiveContainer width='100%' height='100%'>
       <BarChart
           width={100}
-          height={300}
+          height={200}
           data={dataBarChart}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -273,7 +319,7 @@ const Report = () => {
             return(
               <VendorCard 
               key={i}
-              liveStausStyle={vendorDetails !=="ITSOL" ? 'text-xl text-green-500 float-right animate-pulse' : "text-xl text-gray-500 float-right"}
+              liveStausStyle={openLength[i] !== 0 ? 'text-xl text-green-500 float-right animate-pulse' : "text-xl text-gray-500 float-right"}
               vendorName={vendorDetails}
               imgUrl={vendorDetails ==='TECHNET' ? Technet :
               (vendorDetails==='WIZER' ? Wizer :
