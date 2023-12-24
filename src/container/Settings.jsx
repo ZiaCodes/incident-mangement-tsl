@@ -32,6 +32,7 @@ const Settings = () => {
         localStorage.removeItem('formateIncidentData');
     }
   return (
+    <>
     <MainContainer>
         {/* <div className='flex justify-center items-center h-full w-full gap-4  text-xl font-bold uppercase flex-col'>
             <div className='flex gap-4'>
@@ -127,7 +128,10 @@ const Settings = () => {
                 </div>
             </div>
         </div>
+
     </MainContainer>
+        <p className=' mt-8 flex-wrap p-4 text-center flex justify-center items-center'>Incident management © 2023 from<a className='text-center shadow-none' href="https://syed.vercel.app">Syed Ziauddin</a></p>
+    </>
   )
 }
 
