@@ -10,7 +10,7 @@ import { FaAnglesUp } from "react-icons/fa6";
 
 const VendorCard = (props) => {
   return (
-    <div className='bg-white shadow-md h-auto w-80 rounded-sm p-4 hover:shadow-lg '>
+    <div className='bg-white border border-slate-100 shadow-md h-auto w-80 rounded-sm p-4 hover:shadow-lg '>
           <GoDotFill className={props.liveStausStyle}/>
           <div className='flex justify-center items-center flex-col mb-4'>
           <img 

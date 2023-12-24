@@ -4,7 +4,6 @@ import FloatingBtn from '../FloatingBtn'
 import TableContainer from './TableContainer'
 import TableHead from './TableHead'
 import TableBody from './TableBody'
-import Loader from '../Loader'
 import { FcInfo } from "react-icons/fc"
 import Upload from '../Upload'
 
@@ -118,6 +117,7 @@ const TableLayout = () => {
       draggable
       pauseOnHover
       theme="dark"
+      style={{width:'250px',margin:'10px'}}
 
     />
     <Upload searchValue={search} method={handleSearch}/>

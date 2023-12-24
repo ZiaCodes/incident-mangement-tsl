@@ -11,8 +11,6 @@ import Debug from '../assets/debug.png'
 import Others from '../assets/others.png'
 
 import { 
-  PieChart, 
-  Pie, 
   Legend, 
   Tooltip, 
   ResponsiveContainer,
@@ -22,78 +20,36 @@ import {
   YAxis, 
   CartesianGrid } from 'recharts';
 
-const data = [
-  { name: 'Embee', value: 400 },
-  { name: 'Wizer', value: 300 },
-  { name: 'SkyLink', value: 300 },
-  { name: 'LASETEK', value: 200 },
-  { name: 'TECHNET', value: 278 },
-  { name: 'DEBUG', value: 189 },
-  { name: 'IT SoL', value: 189 },
-  { name: 'MDSINHA', value: 189 },
-  { name: 'NATH&SONS', value: 189 }
-];
-
-
-const dataBarChart = [
-  {
-    name: 'Pending',
-    CallLogs: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Resolved',
-    CallLogs: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Convert to SR',
-    CallLogs: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'AP required',
-    CallLogs: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Transfer',
-    CallLogs: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'New Assignment',
-    CallLogs: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-];
-
 
 const getIntroOfPage = (label) => {
-  if (label === 'Page A') {
-    return "Page A is about men's clothing";
+  if (label === 'Above 3') {
+    return "More than 3 days";
   }
-  if (label === 'Page B') {
-    return "Page B is about women's dress";
+  if (label === 'Below 3') {
+    return "Less than 3 days";
   }
-  if (label === 'Page C') {
-    return "Page C is about women's bag";
+  if (label === 'Pending') {
+    return "Calls which is not resolved";
   }
-  if (label === 'Page D') {
-    return 'Page D is about household goods';
+  if (label === 'Close') {
+    return "Calls which are resolved";
   }
-  if (label === 'Page E') {
-    return 'Page E is about food';
+  if (label === 'AR') {
+    return "Access point Requirement";
   }
-  if (label === 'Page F') {
-    return 'Page F is about baby food';
+  if (label === 'Transfer') {
+    return "Need to transfer to another team";
   }
+  if (label === 'WIP') {
+    return "Work in progress";
+  }
+  if (label === 'New') {
+    return "New Assignments";
+  }
+  if (label === 'Reopen') {
+    return "Calls which are open again";
+  }
+  
   return '';
 };
 
@@ -103,7 +59,6 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="custom-tooltip">
         <p className="label">{`${label} : ${payload[0].value}`}</p>
         <p className="intro">{getIntroOfPage(label)}</p>
-        <p className="desc">Anything you want can be displayed here.</p>
       </div>
     );
   }
@@ -116,7 +71,6 @@ const Report = () => {
   const [callData, setCallData] = useState([]);
   const [vendorName, setVendorName] = useState([]);
   const [changeData, setChangeData] = useState(false)
-  const [assignCalls,setAssignCalls] = useState([]);
   const [aboveLength, setAboveLength] = useState([]);
   const [belowLength, setBelowLength] = useState([]);
   const [openLength, setOpenLength] = useState([]);
@@ -125,25 +79,143 @@ const Report = () => {
   const [alertLength, setAlertLength] = useState([]);
   const [requestLength, setRequestLength] = useState([]);
 
+  const dataBarChart = [
+    {
+      name: 'Above 3',
+      'Age slab': aboveLength.reduce((partialSum, a) => partialSum + a, 0),
+      pv: 2400,
+      amt: 2400,
+      fill:'#ff0000'
+    },
+    {
+      name: 'Below 3',
+      'Age slab': belowLength.reduce((partialSum, a) => partialSum + a, 0),
+      pv: 1398,
+      amt: 2210,
+      fill:'#008000'
+    }
+  ];
+
+
+  const statusBarChart = [
+    {
+      name: 'Pending',
+      'Call status': openLength.reduce((partialSum, a) => partialSum + a, 0),
+      pv: 2400,
+      amt: 2400,
+      fill:'#ff0000'
+    },
+    {
+      name: 'Close',
+      'Call status': closeLength.reduce((partialSum, a) => partialSum + a, 0),
+      pv: 1398,
+      amt: 2210,
+      fill:'#008000'
+    },
+    {
+      name: 'AR',
+      'Call status': 5,
+      pv: 1398,
+      amt: 2210,
+      fill:'#004cff'
+    },
+    {
+      name: 'Transfer',
+      'Call status': 3,
+      pv: 1398,
+      amt: 2210,
+      fill:'#ff00d0'
+    },
+    {
+      name: 'WIP',
+      'Call status': 11,
+      pv: 1398,
+      amt: 2210,
+      fill:'#00ff84'
+    },
+    {
+      name: 'New',
+      'Call status': 19,
+      pv: 1398,
+      amt: 2210,
+      fill:'#ff001e'
+    },
+    {
+      name: 'Reopen',
+      'Call status': 1,
+      pv: 1398,
+      amt: 2210,
+      fill:'#bb00ff'
+    }
+  ]
+  const opneTicket = () =>{
+    // console.log(callData)
+    let open = [];
+    let close = [];
+    let incident = [];
+    let alert = [];
+    let request = [];
+    let above = [];
+    let below = [];
+    let length = [];
+    const vendors = Object?.groupBy(callData, vData => vData.vendor);
+    const nwArr = Object.values(vendors);
+    
+
+    for(let i=0;i<nwArr?.length;i++){
+      let opn =0;
+      let cls=0;
+      let inc =0;
+      let alt=0;
+      let req=0;
+      let abv =0;
+      let blw =0;
+      let len =0;
+      for(let j=0;j<nwArr[i]?.length;j++){
+        if(nwArr[i][j]?.status !=='Resolved'){
+          opn++;
+        }else{
+          cls++;
+        }
+        if(nwArr[i][j]?.type === 'Incident'){
+          inc++;
+        }else if(nwArr[i][j]?.type === 'Alert'){
+          alt++;
+        }else{
+          req++;
+        }
+
+        if(nwArr[i][j]?.slab === 'Below 3'){
+          blw++;
+        }else{
+          abv++;
+        }
+
+      }
+      open.push(opn);
+      close.push(cls);
+      incident.push(inc);
+      alert.push(alt);
+      request.push(req);
+      above.push(abv);
+      below.push(blw);
+      length.push(len);
+
+    }
+    setOpenLength(open);
+    setCloseLength(close);
+    setIncidentLength(incident);
+    setAlertLength(alert);
+    setAboveLength(above);
+    setBelowLength(below);
+    setRequestLength(request);
+
+  }
+
   
   function groupingVendor(){
     const vendorCallGroup = Object?.groupBy(callData, vData => vData.vendor);
-    // setCallData(vendorCallGroup);
-    // const ageSlab = Object?.groupBy(callData, vData => vData.slab);
-    
     setVendorName(Object.keys(vendorCallGroup));
-    // console.log(vendorCallGroup)
-    let callArr = []
-    callArr.push(vendorCallGroup.SKYLINK?.length);
-    callArr.push(vendorCallGroup.EMBEE?.length);
-    callArr.push(vendorCallGroup.TECHNET?.length);
-    callArr.push(vendorCallGroup['NATH&SONS']?.length);
-    callArr.push(vendorCallGroup.LASETEK?.length);
-    callArr.push(vendorCallGroup.WIZER?.length);
-    callArr.push(vendorCallGroup.DEBUG?.length);
-    callArr.push(vendorCallGroup?.ITSOL?.length);
-    callArr.push(vendorCallGroup.MDSINHA?.length);
-    setAssignCalls(callArr.filter(Boolean));
     
   }
   useEffect(()=>{
@@ -156,29 +228,33 @@ const Report = () => {
 
   useEffect(()=>{
     groupingVendor();
+    opneTicket();
   },[changeData])
 
 
   return (
     <>
-      <div className=' w-full h-96 gap-8 flex p-12 justify-center items-center mb-4 '>
-        <PieChart width={500} height={500}>
-          <Pie
-            dataKey="value"
-            isAnimationActive={false}
-            data={data}
-            cx="50%"
-            cy="50%"
-            outerRadius={130}
-            fill='#3d43ff'
-            label
-          />
-          <Tooltip />
-        </PieChart>
+    <MainContainer>
 
-
+      <div className=' bg-white w-full h-96 gap-8 flex p-12 justify-center items-center mb-4 '>
+      <ResponsiveContainer  >
       <BarChart
           width={500}
+          height={300}
+          data={statusBarChart}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend />
+          <Bar dataKey="Call status" barSize={20} fill="#8884d8" />
+        </BarChart>
+      </ResponsiveContainer>
+
+      <ResponsiveContainer>
+      <BarChart
+          width={100}
           height={300}
           data={dataBarChart}
         >
@@ -187,13 +263,11 @@ const Report = () => {
           <YAxis />
           <Tooltip content={<CustomTooltip />} />
           <Legend />
-          <Bar dataKey="CallLogs" barSize={20} fill="#8884d8" />
+          <Bar dataKey="Age slab" barSize={20} fill="#8884d8" />
         </BarChart>
-
+      </ResponsiveContainer>
       </div>
-    <MainContainer>
-
-      <div className=' flex justify-center items-center flex-wrap gap-14 p-10'>
+      <div className='h-screen w-screen flex justify-center items-center flex-wrap gap-14 p-10'>
         {
           vendorName.map((vendorDetails,i) =>{
             return(
@@ -209,7 +283,7 @@ const Report = () => {
                   vendorDetails === 'DEBUG' ? Debug : Others
                 )
               ))) )}
-              total={assignCalls[i]}
+              total={openLength[i]+closeLength[i]}
               openCall={openLength[i]}
               closedCall={closeLength[i]}
               incidentCall={incidentLength[i]}

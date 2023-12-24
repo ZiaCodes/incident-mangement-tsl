@@ -108,7 +108,7 @@ select{
 
 .active{
   text-decoration: underline;
-  background-color: red;
+  background-color: #ff0000;
   color: #fff;
 }
 

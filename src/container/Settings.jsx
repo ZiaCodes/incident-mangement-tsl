@@ -74,7 +74,7 @@ const Settings = () => {
                 </ul>
         </div> */}
 
-        <div className='h-full w-full flex justify-center gap-8 mt-56'>
+        <div className='h-full w-full flex flex-wrap justify-center gap-8 mt-56'>
             <div className='h-auto bg-green-700 text-white rounded-sm w-auto shadow-md p-4'>
                 <ul>
                     <li className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
@@ -97,7 +97,8 @@ const Settings = () => {
             </div>
             <div className='h-72 bg-green-700 text-white  rounded-sm w-72 shadow-md p-4'>
                 <h1 className='font-bold uppercase'>General Settings</h1>
-                <div className='flex justify-between mt-4 items-center  gap-2 '>
+                <div className='flex justify-between flex-wrap flex-col mt-4 items-start  gap-2 '>
+                        <p>Universal Dash</p>
                         <input
                         value={isUniversalDashboardActive}
                         onChange={() => {
@@ -108,15 +109,18 @@ const Settings = () => {
                         type="checkbox" 
                         name="universal-Dashboard"
                         />
+
+                        <p>Switch Theme</p>
                         {
                             theme === 'isLightMode' ? (<MdOutlineLightMode onClick={handleDarkMode} 
-                            className='bg-white text-black h-10 w-10 shadow-md rounded-full p-2
+                            className='bg-white cursor-pointer text-black h-10 w-10 shadow-md rounded-full p-2
                              border border-blue-500 text-3xl'/>) : (
                                 <MdDarkMode onClick={handleDarkMode} 
                             className='bg-white cursor-pointer text-black h-10 w-10 shadow-md rounded-full p-2
                              border border-blue-500 text-3xl'/>
                              )
                         }
+                        <p>Reset Data</p>
                     <LuRefreshCcwDot
                             onClick={handleResetDashBoard}
                          className='bg-white text-black cursor-pointer h-10 w-10 shadow-md rounded-full p-2 border border-blue-500 text-3xl'/>

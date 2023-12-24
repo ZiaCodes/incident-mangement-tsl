@@ -5,7 +5,8 @@ import { CgSpinnerTwoAlt } from "react-icons/cg";
 import { SiMicrosoftexcel } from "react-icons/si";
 import { IoLogoTableau } from "react-icons/io5";
 import { RiArrowRightDoubleFill } from "react-icons/ri";
-import { FaFilter } from "react-icons/fa6";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Upload = (props) => {
     const [xlData , setXlData] = useState([]);
@@ -43,6 +44,19 @@ const Upload = (props) => {
         setIsLoading(true);
         localStorage.setItem('XLDATA', JSON.stringify(xlData));
         setIsLoading(false);
+
+        toast.success('Please refresh page!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored"
+        });
+
+        
        
     }
 
