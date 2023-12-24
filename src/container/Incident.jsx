@@ -18,7 +18,7 @@ const Incident = () => {
     const localData = JSON.parse(localStorage?.getItem('formateIncidentData'));
 
     if (localData) {
-      const incidentCalls = Object.groupBy(localData, place => place.type);
+      const incidentCalls = Object?.groupBy(localData, place => place.type);
       setTableData(incidentCalls.Incident)
     }
 
@@ -28,13 +28,13 @@ const Incident = () => {
   let openCalls = 0;
   let closeCalls = 0
   const getInsigntNumbers = () => {
-    tableData.forEach((item) => {
+    tableData?.forEach((item) => {
       if (item.status !== 'Resolved') {
         openCalls++;
       }
     })
 
-    tableData.forEach((item) => {
+    tableData?.forEach((item) => {
       if (item.status === 'Resolved') {
         closeCalls++;
       }
@@ -45,15 +45,15 @@ const Incident = () => {
   getInsigntNumbers();
 
   const filterDropDownMenu = () => {
-    const filterValue = Object.groupBy(tableData, filter => filter.status);
+    const filterValue = Object?.groupBy(tableData, filter => filter.status);
     setFilterOpion(Object.keys(filterValue));
     // console.log("Options", filterOption)
   }
 
   const handleFilterChange = (e) => {
     const filter = e.target.value;
-    console.log(filter)
-    const filterValue = Object.groupBy(tableData, newData => newData.status);
+    // console.log(filter)
+    const filterValue = Object?.groupBy(tableData, newData => newData.status);
     setTableData(filterValue[filter])
     // console.log(filterValue[filter])
   }
@@ -69,7 +69,7 @@ const Incident = () => {
 
   return (
     <MainContainer>
-      <div className='flex justify-left items-center gap-4 font-bold uppercase bg-white overflow-hidden shadow-md'>
+      <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase bg-white overflow-hidden shadow-md p-3'>
         <p className='p-2 '>All Incident Calls</p>
         <p className='p-2 bg-yellow-600 text-white'>Total : {tableData?.length} </p>
         <p className='p-2 bg-red-600 text-white'>Open : {openCalls}</p>

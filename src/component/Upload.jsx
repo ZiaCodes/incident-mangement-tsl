@@ -50,7 +50,7 @@ const Upload = (props) => {
 
   return (
     <>
-    <div className='flex justify-start items-center gap-2 m-4'>
+    <div className='flex flex-wrap justify-start items-center gap-2 m-4'>
         <input 
         className='bg-blue-800 h-10 text-white p-1 mt-4 rounded-sm '
         type="file" 

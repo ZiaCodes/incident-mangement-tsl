@@ -7,11 +7,11 @@ const TableLayout = React.lazy(() => import('../component/Table/TableLayout'));
 
 const Home = () => {
   return (
-    <Suspense fallback={<Loader/>}>
     <MainContainer>
+      <Suspense fallback={<Loader/>}>
       <TableLayout/>
-    </MainContainer>
     </Suspense>
+    </MainContainer>
   )
 }
 

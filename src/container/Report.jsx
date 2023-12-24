@@ -161,10 +161,7 @@ const Report = () => {
 
   return (
     <>
-    <MainContainer>
-
       <div className=' w-full h-96 gap-8 flex p-12 justify-center items-center mb-4 '>
-      <ResponsiveContainer  >
         <PieChart width={500} height={500}>
           <Pie
             dataKey="value"
@@ -178,11 +175,10 @@ const Report = () => {
           />
           <Tooltip />
         </PieChart>
-      </ResponsiveContainer>
 
-      <ResponsiveContainer>
+
       <BarChart
-          width={100}
+          width={500}
           height={300}
           data={dataBarChart}
         >
@@ -193,9 +189,11 @@ const Report = () => {
           <Legend />
           <Bar dataKey="CallLogs" barSize={20} fill="#8884d8" />
         </BarChart>
-      </ResponsiveContainer>
+
       </div>
-      <div className='h-screen w-screen flex justify-center items-center flex-wrap gap-14 p-10'>
+    <MainContainer>
+
+      <div className=' flex justify-center items-center flex-wrap gap-14 p-10'>
         {
           vendorName.map((vendorDetails,i) =>{
             return(

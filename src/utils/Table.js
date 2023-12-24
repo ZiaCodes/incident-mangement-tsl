@@ -60,13 +60,18 @@ export const tableHead = [
         icon: ""
     },
     {
-      id:13,
-      name: 'Action',
-      icon:""
-    },
-    {
       id:14,
       name:'SNow',
       icon:""
-    }
+    },
+    {
+      id:13,
+      name: 'Edit',
+      icon:""
+    },
+    {
+      id:15,
+      name: 'Delete',
+      icon:""
+    },
   ]
