@@ -1,17 +1,13 @@
-import React,{ useState,useEffect,Suspense } from 'react';
+import React,{ useEffect,Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom'
-import Loader from './component/Loader';
-
-
+import Loader from './component/util/Loader';
 const Settings = React.lazy(()=> import('./container/Settings'));
 const Incident = React.lazy(()=> import('./container/Incident'));
 const Alert = React.lazy(()=> import('./container/Alert'));
-// const UniversalDashBoard = React.lazy(()=> import('./container/UniversalDashBoard'));
 const Home = React.lazy(()=> import('./container/Home'));
-const Navigation = React.lazy(()=> import('./component/Navigation'))
+const Navigation = React.lazy(()=> import('./component/Navigation/Navigation'))
 const Report = React.lazy(()=> import('./container/Report'))
 const Request = React.lazy(() => import('./container/Request'));
-const Author = React.lazy(() => import('./component/Author'));
 
 
 function App() {
@@ -32,7 +28,7 @@ function App() {
     <Suspense fallback={<Loader/>}>
     <Navigation/>
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/*" element={<Home />} />
       <Route path="/incident" element={<Incident />} />
       <Route path="/alert" element={<Alert />} />
       <Route path="/request" element={<Request />} />

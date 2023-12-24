@@ -3,9 +3,9 @@ import { FcInfo } from "react-icons/fc";
 import TableContainer from '../component/Table/TableContainer';
 import TableHead from '../component/Table/TableHead';
 import TableBody from '../component/Table/TableBody';
-import Pagination from '../component/Pagination';
-import FloatingBtn from '../component/FloatingBtn';
-import MainContainer from '../component/MainContainer';
+import Pagination from '../component/util/Pagination';
+import FloatingBtn from '../component/util/FloatingBtn';
+import MainContainer from '../component/Wrapper/MainContainer';
 
 const Incident = () => {
   const [tableData, setTableData] = useState([]);

@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import MainContainer from '../component/MainContainer'
+import MainContainer from '../component/Wrapper/MainContainer'
 import { IoSettings } from "react-icons/io5";
 import { MdOutlineLightMode } from "react-icons/md";
 import { LuRefreshCcwDot } from "react-icons/lu";

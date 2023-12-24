@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Pagination from '../Pagination'
-import FloatingBtn from '../FloatingBtn'
+import Pagination from '../util/Pagination'
+import FloatingBtn from '../util/FloatingBtn'
 import TableContainer from './TableContainer'
 import TableHead from './TableHead'
 import TableBody from './TableBody'
 import { FcInfo } from "react-icons/fc"
-import Upload from '../Upload'
+import Upload from '../util/Upload'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

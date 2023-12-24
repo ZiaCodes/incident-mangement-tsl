@@ -1,9 +1,9 @@
 import * as XLSX from 'xlsx';
 import React, { useEffect, useState } from 'react'
 import TableContainer from '../component/Table/TableContainer';
-import Loader from '../component/Loader';
-import Pagination from '../component/Pagination';
-import FloatingBtn from '../component/FloatingBtn';
+import Loader from '../component/util/Loader';
+import Pagination from '../component/util/Pagination';
+import FloatingBtn from '../component/util/FloatingBtn';
 import { FaFileUpload } from "react-icons/fa";
 import { FcInfo } from "react-icons/fc";
 import { CgSpinnerTwoAlt } from "react-icons/cg";

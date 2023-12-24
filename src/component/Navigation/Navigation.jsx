@@ -4,7 +4,7 @@ import { MdMenu } from "react-icons/md";
 
 
 import { useState } from "react";
-import NavLinks from "./Navigation/NavLinks";
+import NavLinks from "./NavLinks";
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
 

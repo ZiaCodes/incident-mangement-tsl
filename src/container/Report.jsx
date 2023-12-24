@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import MainContainer from '../component/MainContainer'
+import MainContainer from '../component/Wrapper/MainContainer'
 import VendorCard from '../component/vendor/VendorCard';
 
 import Skylink from '../assets/skylink.png'
