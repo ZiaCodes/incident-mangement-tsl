@@ -205,7 +205,7 @@ const Report = () => {
           abv++;
         }
 
-        if(nwArr[i][j].status === 'AP Requirement'){
+        if(nwArr[i][j].status === 'AP required'){
           ar++;
         }
   
