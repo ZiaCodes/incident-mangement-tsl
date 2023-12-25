@@ -132,7 +132,7 @@ const Report = () => {
       fill:'#00ff84'
     },
     {
-      name: 'AP',
+      name: 'AR',
       'Call status': apReq.reduce((partialSum, a) => partialSum + a, 0),
       pv: 1398,
       amt: 2210,
