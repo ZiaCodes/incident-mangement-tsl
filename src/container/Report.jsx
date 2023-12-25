@@ -282,7 +282,7 @@ const Report = () => {
     <>
     <MainContainer>
 
-      <div className=' bg-white w-full h-96 gap-8 flex p-12 justify-center items-center mb-4 '>
+      <div className='w-full h-96 gap-8 flex p-12 justify-center items-center mb-4 '>
       <ResponsiveContainer  >
       <BarChart
           width={500}
@@ -312,6 +312,8 @@ const Report = () => {
           <Bar dataKey="Age slab" barSize={20} fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>
+
+
       </div>
       <div className='h-screen w-screen flex justify-center items-center flex-wrap gap-14 p-10'>
         {

@@ -8,6 +8,9 @@ import { IoIosColorPalette } from "react-icons/io";
 import { MdOutlineRoomPreferences } from "react-icons/md";
 import { MdOutlineResetTv } from "react-icons/md";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Settings = () => {
     const [theme, setTheme] = useState('isLightMode');
     const [isUniversalDashboardActive, setIsUniversalDashboardActive] = useState(true);
@@ -17,22 +20,57 @@ const Settings = () => {
             setTheme('isDarkMode');
             localStorage.setItem('theme','isDarkMode');
             document.documentElement.classList.remove('isLightMode')
-            document.documentElement.classList.add('isDarkMode')
+            document.documentElement.classList.add('isDarkMode');
         }else{
             setTheme('isLightMode');
             localStorage.setItem('theme','isLightMode');
             document.documentElement.classList.remove('isDarkMode')
             document.documentElement.classList.add('isLightMode');
         }
+
+        toast.success('Theme changed!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
         
     }
 
     const handleResetDashBoard = () =>{
         localStorage.removeItem('XLDATA');
         localStorage.removeItem('formateIncidentData');
+        toast.success('Data Formated!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
     }
   return (
     <>
+    <ToastContainer 
+      position="bottom-left"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      style={{width:'250px',margin:'10px'}}
+
+    />
     <MainContainer>
         {/* <div className='flex justify-center items-center h-full w-full gap-4  text-xl font-bold uppercase flex-col'>
             <div className='flex gap-4'>
