@@ -32,11 +32,16 @@ table {
     opacity: 0.8;
   }
 
+  label{
+    font-weight: bold;
+    text-transform: capitalize;
+  }
 
 /* Scroll bar */
 ::-webkit-scrollbar {
   display: none;
   border-radius: 0.1em;
+  /* width: 8px; */
 }
 
 /* Track */

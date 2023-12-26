@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import Pagination from '../util/Pagination'
 import FloatingBtn from '../util/FloatingBtn'
 import TableContainer from './TableContainer'
@@ -9,15 +9,33 @@ import Upload from '../util/Upload'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MdOutlineFileDownload } from "react-icons/md";
+import { DownloadTableExcel, useDownloadExcel } from 'react-export-table-to-excel'
+import ModelBox from '../util/ModelBox'
 
 
 const TableLayout = () => {
+  const tableRef = useRef(null);
+
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
   const pageSet = [10,50,100,150,300,500];
   const [isloading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [EditObject, setEditObject] = useState({
+    tn: "",
+    date:"",
+    age:"" , 
+    slab:"",
+    type:"" , 
+    user:"",    
+    loc:"",
+    team:"",
+    status:"",
+    remarks:"",
+  });
 
   const handleSearch = ({target}) =>{
     const {value} = target;
@@ -35,7 +53,7 @@ const TableLayout = () => {
         var tempObj = {
           sl: i,
           ticketNo: IncidentTable[i][0],
-          Date: ExcelDateToJSDate(IncidentTable[i][1]).toDateString().split('T'),
+          Date: ExcelDateToJSDate(IncidentTable[i][1]).toDateString(),
           age: Math.round(IncidentTable[i][2]),
           slab: IncidentTable[i][3],
           serviceNowStatus: IncidentTable[i][4],
@@ -101,7 +119,23 @@ const TableLayout = () => {
   }
 
   const editRowItem = (data) =>{
-    toast.error('Feature coming soon!', {
+    setIsOpen(true);
+    console.log(data);
+    setEditObject({
+      tn: data.ticketNo,
+      date:data.Date,
+      age:data.age,
+      slab:data.slab,
+      type:data.type,
+      user:data.name,
+      loc:data.location,
+      team:data.vendor,
+      status:data.status,
+      remarks:data.remarks,
+      subloc:data.subLocation
+
+    })
+    toast.info(`Edit user ${data.name}`, {
       position: "bottom-left",
       autoClose: 5000,
       hideProgressBar: false,
@@ -109,12 +143,47 @@ const TableLayout = () => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "colored",
+      theme: "dark",
       });
   }
 
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: 'incident table',
+    sheet: 'incident'
+})
+
+
+
   return(
     <>
+
+    {
+      isOpen ? 
+      <ModelBox 
+      ticketNo="Edit mode"
+      tn={EditObject.tn}
+      date={EditObject.date}
+      age={EditObject.age}
+      slab={EditObject.slab}
+      type={EditObject.type}
+      user={EditObject.user}
+      loc={EditObject.loc}
+      team={EditObject.team}
+      status={EditObject.status}
+      remarks={EditObject.remarks}
+      subloc={EditObject.subloc}
+      handleChange={({target}) => {
+        const {value, name} = target;
+        setEditObject({...EditObject, [name]:value});
+        // console.log(value,name)
+      }}
+      handleCancel={()=> setIsOpen(!isOpen)}
+      handleSave={()=>{
+        console.log(EditObject)
+      }}
+       /> : null
+    }
     <ToastContainer 
       position="bottom-left"
       autoClose={5000}
@@ -130,10 +199,13 @@ const TableLayout = () => {
 
     />
     <Upload searchValue={search} method={handleSearch}/>
+
     <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase ml-4'>
-        <p className='p-2 bg-purple-500 text-white rounded-sm'>Total : {tableData?.length} </p>
         {
-          statusArr.map((name,i) =>{
+          statusArr.length > 0 ? <p className='p-2 bg-purple-500 text-white rounded-sm'>Total : {tableData?.length} </p> : null
+        }
+        {
+          statusArr?.map((name,i) =>{
             return (
               <button key={i}
               onClick={() => {
@@ -146,6 +218,18 @@ const TableLayout = () => {
             )
           })
         }
+        <DownloadTableExcel
+          filename="Incident table"
+          sheet="Incident"
+          currentTableRef={tableRef.current}
+        >
+          <button 
+            onClick={onDownload}
+            className=' outline-none flex border border-red-600 p-2 rounded-sm justify-center items-center gap-2'>
+            <MdOutlineFileDownload/>
+            Download
+          </button>      
+        </DownloadTableExcel>
         </div>
     {
       !tableData?.length > 0 ? 
@@ -167,7 +251,7 @@ const TableLayout = () => {
         <p><b>Note:</b> Please keep same sheetName i.e-Incident</p>
       </div>
       </div>: 
-      <TableContainer>
+      <TableContainer propsTable={tableRef}>
       <TableHead/>
 
           {
@@ -230,8 +314,10 @@ const TableLayout = () => {
         {
           (page > 10 && tableData?.length ) && <FloatingBtn/> 
         }
+
     </>
   )
 }
+
 
 export default TableLayout

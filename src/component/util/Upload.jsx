@@ -98,6 +98,7 @@ const Upload = (props) => {
         value={props.searchValue}
         onChange={props.method}
         />
+        
 
     </div>
     {
