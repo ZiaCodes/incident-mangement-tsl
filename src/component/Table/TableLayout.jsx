@@ -9,13 +9,14 @@ import Upload from '../util/Upload'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { MdOutlineFileDownload } from "react-icons/md";
-import { DownloadTableExcel, useDownloadExcel } from 'react-export-table-to-excel'
 import ModelBox from '../util/ModelBox'
+import { FaFilePdf } from "react-icons/fa6";
+import { SiMicrosoftexcel } from "react-icons/si";
 
+import { Margin, usePDF } from "react-to-pdf";
+import * as XLSX from 'xlsx';
 
 const TableLayout = () => {
-  const tableRef = useRef(null);
 
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
@@ -147,11 +148,21 @@ const TableLayout = () => {
       });
   }
 
-  const { onDownload } = useDownloadExcel({
-    currentTableRef: tableRef.current,
-    filename: 'incident table',
-    sheet: 'incident'
-})
+  const { toPDF, targetRef } = usePDF({
+    filename: "usepdf-example.pdf",
+    page: { margin: Margin.MEDIUM }
+  });
+
+
+  // json to excel
+  const downloadExcel = (data) => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, "DataSheet.xlsx");
+  };
 
 
 
@@ -218,18 +229,20 @@ const TableLayout = () => {
             )
           })
         }
-        <DownloadTableExcel
-          filename="Incident table"
-          sheet="Incident"
-          currentTableRef={tableRef.current}
-        >
+        
           <button 
-            onClick={onDownload}
+            onClick={toPDF}
             className=' outline-none flex border border-red-600 p-2 rounded-sm justify-center items-center gap-2'>
-            <MdOutlineFileDownload/>
-            Download
-          </button>      
-        </DownloadTableExcel>
+            <FaFilePdf/>
+            PDF
+          </button>    
+
+          <button 
+            onClick={()=>downloadExcel(tableData)}
+            className=' outline-none flex border border-red-600 p-2 rounded-sm justify-center items-center gap-2'>
+            <SiMicrosoftexcel/>
+            EXCEL
+          </button>   
         </div>
     {
       !tableData?.length > 0 ? 
@@ -251,7 +264,7 @@ const TableLayout = () => {
         <p><b>Note:</b> Please keep same sheetName i.e-Incident</p>
       </div>
       </div>: 
-      <TableContainer propsTable={tableRef}>
+      <TableContainer propsTable={targetRef}>
       <TableHead/>
 
           {
