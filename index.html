@@ -8,20 +8,33 @@
       name="description"
       content="Incident Management System developed by Syed Ziauddin for it Network team"
     />
+    <!-- meta tags -->
+    <meta name="author" content="Syed Ziauddin, ZiaCodes" />
+    <meta name="description" content="Incident Management to manage your daily tickets and calls from excel sheet."/>
+    <meta name="keywords" content="Frontend Engineer , Software Developement Engineer, Syed , Ziacodes , Ziaxdev, Jgec, Jalpaiguri Government Engineer College, tata steel , tsl , gdsc jgec" />
+    <meta property="og:site_name" content="ZiaCodes" />
+    <meta property="og:title" content="Incident Management" />
+    <meta property="og:description" content="Incident Management to manage your daily tickets and calls from excel sheet"/>
+    <!-- <meta property="og:image" content="https://imtsl.vercel.app//assets/images/my-avatar.jpeg" /> -->
+    <meta property="og:url" content="https://imtsl.vercel.app/" />
+    <meta name="hostname" content="https://imtsl.vercel.app/">
+    <meta name="expected-hostname" content="https://imtsl.vercel.app/">
+    <link rel="shortcut icon" href="./public/logo.png" type="image/x-icon">
+    <link rel="manifest" href="public/manifest.json" />
     <title>Incident Management | IT NETWORK & COMMUNICATION ONEIT</title>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <!-- <script>
+    <script>
       if('serviceWorker' in navigator){
         window.addEventListener('load',() =>{
-          navigator.serviceWorker.register('./sw.js')
+          navigator.serviceWorker.register('/public/serviceworker.js')
           .then((reg)=>console.log('Success: ',reg.scope))
           .catch((err)=> console.log('Failure: ',err))
         })
       }
-    </script> -->
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
   
   </body>
 </html>

@@ -28,7 +28,7 @@ function App() {
     <Suspense fallback={<Loader/>}>
     <Navigation/>
     <Routes>
-      <Route path="/*" element={<Home />} />
+      <Route path="/" element={<Home />} />
       <Route path="/incident" element={<Incident />} />
       <Route path="/alert" element={<Alert />} />
       <Route path="/request" element={<Request />} />
