@@ -1,3 +1,1 @@
-### This is a private repository .
-
-### property of Syed Ziauddin : Syed.nlp00@gmail.com
+### Make changes according to your job need
