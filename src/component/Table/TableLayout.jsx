@@ -121,7 +121,7 @@ const TableLayout = () => {
 
   const editRowItem = (data) =>{
     setIsOpen(true);
-    console.log(data);
+    // console.log(data);
     setEditObject({
       tn: data.ticketNo,
       date:data.Date,
@@ -146,11 +146,12 @@ const TableLayout = () => {
       progress: undefined,
       theme: "dark",
       });
+      
   }
 
   const { toPDF, targetRef } = usePDF({
-    filename: "usepdf-example.pdf",
-    page: { margin: Margin.MEDIUM }
+    filename: "im-data.pdf",
+    page: { margin: Margin.MEDIUM },
   });
 
 
@@ -161,7 +162,17 @@ const TableLayout = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
     //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
     //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-    XLSX.writeFile(workbook, "DataSheet.xlsx");
+    XLSX.writeFile(workbook, "im-datasheet.xlsx");
+    toast.success('Downloaded Success!', {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
   };
 
 
@@ -191,7 +202,30 @@ const TableLayout = () => {
       }}
       handleCancel={()=> setIsOpen(!isOpen)}
       handleSave={()=>{
-        console.log(EditObject)
+        
+        const targetTicket = tableData.filter(val => val.ticketNo === EditObject.tn);
+
+        for(let i=0;i<tableData.length;i++){
+          if(tableData[i].ticketNo === targetTicket[0].ticketNo){
+            // console.log(tableData[i].ticketNo, targetTicket[0].ticketNo);
+              tableData[i].status = EditObject.status;
+              tableData[i].remarks = EditObject.remarks;
+          }
+        }
+        localStorage.setItem('formateIncidentData',JSON.stringify(tableData));
+        toast.success('Updated Successfully!', {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+
+          setIsOpen(false)
+
       }}
        /> : null
     }

@@ -38,6 +38,7 @@ export default function ModelBox(props) {
          name="age"
           placeholder='Ticket Age'
           onChange={props.handleChange}
+          readOnly
           value={props.age}
           />
         <input 
@@ -47,6 +48,7 @@ export default function ModelBox(props) {
           placeholder='Age Slab'
           onChange={props.handleChange}
           value={props.slab}
+          readOnly
           />
         <input 
         className='text-gray-400 border-green-500 mx-1 border p-2 outline-none rounded-sm w-20'
@@ -73,6 +75,7 @@ export default function ModelBox(props) {
          placeholder='User Location' 
          onChange={props.handleChange}
          value={props.loc}
+         readOnly
          />
          <input 
         className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-12'
@@ -81,6 +84,7 @@ export default function ModelBox(props) {
          placeholder='User Sub-Location' 
          onChange={props.handleChange}
          value={props.subloc}
+         readOnly
          />
         <input 
         className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-20'
@@ -89,6 +93,7 @@ export default function ModelBox(props) {
          placeholder='Team' 
          onChange={props.handleChange}
          value={props.team}
+         readOnly
          />
         <input 
         className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-32'
