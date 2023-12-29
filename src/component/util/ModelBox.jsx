@@ -96,7 +96,7 @@ export default function ModelBox(props) {
          readOnly
          />
         <input 
-       className='border-green-500 mx-1 text-xl border text-left p-2 outline-none rounded-sm w-80'
+       className='border-green-500 mx-1 border text-left p-2 outline-none rounded-sm w-72'
          type="text" 
          name="status" 
          placeholder='status' 
