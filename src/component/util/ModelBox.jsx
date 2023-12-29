@@ -14,7 +14,7 @@ export default function ModelBox(props) {
 
       <div className=' p-4 flex flex-wrap justify-center lg:justify-start gap-2 mb-8 mt-8 '>
         <input 
-        className='text-gray-400 border-green-500 mx-1 border p-2 outline-none rounded-sm w-20'
+        className='text-gray-400 border-red-500 mx-1 border p-2 outline-none rounded-sm w-20'
          type="number" 
          name="ticketNo" 
          onChange={props.handleChange}
@@ -24,7 +24,7 @@ export default function ModelBox(props) {
          
          />
         <input 
-        className='border-green-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-40'
+        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-40'
          type="text" 
          name="reportedDate"
          onChange={props.handleChange}
@@ -33,7 +33,7 @@ export default function ModelBox(props) {
         placeholder='Reported Date'
           />
         <input 
-        className='border-green-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-12'
+        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-12'
          type="number" 
          name="age"
           placeholder='Ticket Age'
@@ -42,7 +42,7 @@ export default function ModelBox(props) {
           value={props.age}
           />
         <input 
-        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-20'
+        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-20'
          type="text" 
          name="ageSlab"
           placeholder='Age Slab'
@@ -51,7 +51,7 @@ export default function ModelBox(props) {
           readOnly
           />
         <input 
-        className='text-gray-400 border-green-500 mx-1 border p-2 outline-none rounded-sm w-20'
+        className='text-gray-400 border-red-500 mx-1 border p-2 outline-none rounded-sm w-20'
          type="text" 
          name="type"
          placeholder='Incident type' 
@@ -60,7 +60,7 @@ export default function ModelBox(props) {
          readOnly
          />
         <input 
-        className='border-green-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-40'
+        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-40'
          type="text" 
          name="user" 
          placeholder='Affected user' 
@@ -69,7 +69,7 @@ export default function ModelBox(props) {
          value={props.user}
          />
         <input 
-        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-40'
+        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-40'
          type="text" 
          name="location " 
          placeholder='User Location' 
@@ -78,7 +78,7 @@ export default function ModelBox(props) {
          readOnly
          />
          <input 
-        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-12'
+        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-12'
          type="text" 
          name="sub-location " 
          placeholder='User Sub-Location' 
@@ -87,7 +87,7 @@ export default function ModelBox(props) {
          readOnly
          />
         <input 
-        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-20'
+        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-20'
          type="text" 
          name="team" 
          placeholder='Team' 
@@ -96,7 +96,7 @@ export default function ModelBox(props) {
          readOnly
          />
         <input 
-        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-32'
+       className='border-green-500 mx-1 text-xl border text-left p-2 outline-none rounded-sm w-80'
          type="text" 
          name="status" 
          placeholder='status' 

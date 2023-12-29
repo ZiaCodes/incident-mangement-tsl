@@ -198,11 +198,10 @@ const TableLayout = () => {
       handleChange={({target}) => {
         const {value, name} = target;
         setEditObject({...EditObject, [name]:value});
-        // console.log(value,name)
+        console.log(EditObject)
       }}
       handleCancel={()=> setIsOpen(!isOpen)}
       handleSave={()=>{
-        
         const targetTicket = tableData.filter(val => val.ticketNo === EditObject.tn);
 
         for(let i=0;i<tableData.length;i++){
