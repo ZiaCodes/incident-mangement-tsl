@@ -3,14 +3,23 @@ import { MdMenuOpen } from "react-icons/md";
 import { MdMenu } from "react-icons/md";
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isAuth,setIsAuth] = useState(false);
 
     const handlMenu = () =>{
         setIsOpen(!isOpen);
     }
+
+
+    useEffect(()=>{
+        let Jwt = JSON.parse(localStorage.getItem('userProfile'));
+        if(Jwt){
+            setIsAuth(true);
+        }
+      },[isAuth])
   return (
     <>
     <nav 
@@ -31,6 +40,9 @@ const Navigation = () => {
     </p>
 
     {
+        isAuth ? 
+        <>
+        {
         !isOpen ? 
         <MdMenu 
             className="text-4xl mr-4
@@ -42,6 +54,8 @@ const Navigation = () => {
             text-red-600 cursor-pointer"
             onClick={handlMenu}
         />
+    }
+        </> : null
     }
 
     </nav>

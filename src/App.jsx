@@ -1,6 +1,7 @@
 import React,{ useEffect,Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import Loader from './component/util/Loader';
+import Login from './component/Auth/Login';
 const Settings = React.lazy(()=> import('./container/Settings'));
 const Incident = React.lazy(()=> import('./container/Incident'));
 const Alert = React.lazy(()=> import('./container/Alert'));
@@ -11,6 +12,8 @@ const Request = React.lazy(() => import('./container/Request'));
 
 
 function App() {
+
+  const navigate = useNavigate();
   const getTheme = () =>{
       const localTheme = localStorage?.getItem('theme');
       if(localTheme){
@@ -21,6 +24,13 @@ function App() {
     useEffect(()=>{
       getTheme();
     })
+
+    useEffect(()=>{
+      let Jwt = JSON.parse(localStorage.getItem('userProfile'));
+      if(!Jwt?.jwtToken){
+          navigate('/login');
+        }
+    },[])
   
 
   return (
@@ -34,6 +44,7 @@ function App() {
       <Route path="/request" element={<Request />} />
       <Route path="/report" element={<Report />} />
       <Route path='/settings' element={<Settings/>} />
+      <Route path='/login' element={<Login/>} />
 
     </Routes>
     {/* <Author/> */}

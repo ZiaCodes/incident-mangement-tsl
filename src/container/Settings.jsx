@@ -55,6 +55,7 @@ const Settings = () => {
             theme: "colored",
             });
     }
+
   return (
     <>
     <ToastContainer 
