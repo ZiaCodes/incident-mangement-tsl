@@ -34,6 +34,7 @@ const Login = () => {
     localStorage.setItem('userProfile',JSON.stringify(res));
 
     setIsPending(false);
+    navigate('/');
 
   }
 
