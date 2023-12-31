@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { signInUser } from '../../apis/auth';
 import { CgSpinner } from "react-icons/cg";
 
+import { ToastContainer, toast } from 'react-toastify';
+
 const Login = () => {
 
   const navigate = useNavigate();
@@ -12,7 +14,6 @@ const Login = () => {
     password:""
   })
 
-  const [err, setErr] = useState("")
   const [isPending , setIsPending] = useState(false)
 
 
@@ -22,17 +23,38 @@ const Login = () => {
   }
 
   const handleSubmit = async(e) =>{
-    setErr(null)
-    setIsPending(true);
     e.preventDefault()
+    setIsPending(true);
     const res = await signInUser(userInfo);
+
     if(res.error){
-        setIsPending(false);
-        return setErr(res.error);
+      setIsPending(false);
+      return toast.error(res.error, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      
     }
     
-    localStorage.setItem('userProfile',JSON.stringify(res));
-
+    if(res){
+      localStorage.setItem('userProfile',JSON.stringify(res));
+      toast.success("Login Successful", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
     setIsPending(false);
     navigate('/');
 
@@ -49,6 +71,21 @@ const Login = () => {
   const {email, password} = userInfo;
   return (
     
+    <>
+    <ToastContainer 
+      position="bottom-left"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      style={{width:'250px',margin:'10px'}}
+
+    />
 
     <form onSubmit={handleSubmit} 
         className="flex justify-center items-center h-screen flex-col">
@@ -78,17 +115,10 @@ const Login = () => {
                     isPending ? <CgSpinner className='animate-spin text-xl'/> : "Log In"
                 }
             </button>
-
-            <h3 className='text-red-600 text-xl text-center'>
-                {
-                    err ? err : null
-                }
-            </h3>
             </div>
-
-
     </form>
 
+    </>
         
   )
 }

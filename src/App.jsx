@@ -9,7 +9,7 @@ const Home = React.lazy(()=> import('./container/Home'));
 const Navigation = React.lazy(()=> import('./component/Navigation/Navigation'))
 const Report = React.lazy(()=> import('./container/Report'))
 const Request = React.lazy(() => import('./container/Request'));
-
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -35,8 +35,8 @@ function App() {
 
   return (
     <>
-    <Suspense fallback={<Loader/>}>
     <Navigation/>
+    <Suspense fallback={<Loader/>}>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/incident" element={<Incident />} />
@@ -45,9 +45,7 @@ function App() {
       <Route path="/report" element={<Report />} />
       <Route path='/settings' element={<Settings/>} />
       <Route path='/login' element={<Login/>} />
-
     </Routes>
-    {/* <Author/> */}
     </Suspense>
     </>
   )

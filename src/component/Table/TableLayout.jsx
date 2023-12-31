@@ -8,7 +8,6 @@ import { FcInfo } from "react-icons/fc"
 import Upload from '../util/Upload'
 
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import ModelBox from '../util/ModelBox'
 import { FaFilePdf } from "react-icons/fa6";
 import { SiMicrosoftexcel } from "react-icons/si";
