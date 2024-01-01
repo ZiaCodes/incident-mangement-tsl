@@ -17,6 +17,7 @@ import * as XLSX from 'xlsx';
 
 const TableLayout = () => {
 
+  const [isVerified, setIsVerified] = useState(false);
   const [tableData , setTableData] = useState([]);
   const [page,setPage] = useState(10);
   const pageSet = [10,50,100,150,300,500];
@@ -101,7 +102,8 @@ const TableLayout = () => {
   }
 
   const deleteRowItem = (sl)=>{
-    let newTableData = [];
+    if(isVerified){
+      let newTableData = [];
     let storeData = JSON.parse(localStorage.getItem("formateIncidentData"));
     newTableData = storeData.filter(item => item.sl !== sl)
     localStorage.setItem("formateIncidentData",JSON.stringify(newTableData));
@@ -116,10 +118,23 @@ const TableLayout = () => {
       progress: undefined,
       theme: "colored",
       });
+    }else{
+      toast.error('You do not have permission to delete', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
   }
 
   const editRowItem = (data) =>{
-    setIsOpen(true);
+    if(isVerified){
+      setIsOpen(true);
     // console.log(data);
     setEditObject({
       tn: data.ticketNo,
@@ -145,34 +160,64 @@ const TableLayout = () => {
       progress: undefined,
       theme: "dark",
       });
+    }else{
+      toast.error('You do not have permission to edit', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
       
   }
 
   const { toPDF, targetRef } = usePDF({
-    filename: "im-data.pdf",
+    filename: "im-sheet.pdf",
     page: { margin: Margin.MEDIUM },
   });
 
 
   // json to excel
   const downloadExcel = (data) => {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
-    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
-    XLSX.writeFile(workbook, "im-datasheet.xlsx");
-    toast.success('Downloaded Success!', {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
+    if(isVerified){
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      XLSX.writeFile(workbook, "im-datasheet.xlsx");
+      toast.success('Downloaded Success!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }else{
+      toast.error("You don't have permission to downlaod as excel sheet", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+    }
   };
+
+  useEffect(()=>{
+    const userInfo = JSON.parse(localStorage?.getItem('userProfile'))
+    if(userInfo){
+      setIsVerified(userInfo.user.isVerified);
+    }
+  },[isVerified])
 
 
 
