@@ -11,6 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import ModelBox from '../util/ModelBox'
 import { FaFilePdf } from "react-icons/fa6";
 import { SiMicrosoftexcel } from "react-icons/si";
+import { FaPlus } from "react-icons/fa6";
 
 import { Margin, usePDF } from "react-to-pdf";
 import * as XLSX from 'xlsx';
@@ -104,20 +105,20 @@ const TableLayout = () => {
   const deleteRowItem = (sl)=>{
     if(isVerified){
       let newTableData = [];
-    let storeData = JSON.parse(localStorage.getItem("formateIncidentData"));
-    newTableData = storeData.filter(item => item.sl !== sl)
-    localStorage.setItem("formateIncidentData",JSON.stringify(newTableData));
-    setIsClicked(!isClicked);
-    toast.success('Item removed!', {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      });
+      let storeData = JSON.parse(localStorage.getItem("formateIncidentData"));
+      newTableData = storeData.filter(item => item.sl !== sl)
+      localStorage.setItem("formateIncidentData",JSON.stringify(newTableData));
+      setIsClicked(!isClicked);
+      toast.success('Item removed!', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
     }else{
       toast.error('You do not have permission to delete', {
         position: "bottom-left",
@@ -135,7 +136,7 @@ const TableLayout = () => {
   const editRowItem = (data) =>{
     if(isVerified){
       setIsOpen(true);
-    // console.log(data);
+
     setEditObject({
       tn: data.ticketNo,
       date:data.Date,
@@ -212,6 +213,43 @@ const TableLayout = () => {
     }
   };
 
+  const handleAddManually = () =>{
+    toast.info("This feature is coming soon.", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
+
+    // setTableData([
+    //   {
+    //     sl: "",
+    //     ticketNo: '',
+    //     Date: "",
+    //     age:'',
+    //     slab: '',
+    //     serviceNowStatus: '',
+    //     type: '',
+    //     name: '',
+    //     ticketDetails: '',
+    //     ticketSummary: '',
+    //     workNote: '',
+    //     comment: '',
+    //     location: '',
+    //     subLocation: '',
+    //     vendor: '',
+    //     status: "",
+    //     remarks: "",
+    //     update: '',
+    //     serviceNow: ''
+    // }
+    // ])
+  }
+
   useEffect(()=>{
     const userInfo = JSON.parse(localStorage?.getItem('userProfile'))
     if(userInfo){
@@ -242,7 +280,7 @@ const TableLayout = () => {
       handleChange={({target}) => {
         const {value, name} = target;
         setEditObject({...EditObject, [name]:value});
-        console.log(EditObject)
+        // console.log(EditObject)
       }}
       handleCancel={()=> setIsOpen(!isOpen)}
       handleSave={()=>{
@@ -340,6 +378,11 @@ const TableLayout = () => {
         <p>step-3 : Upload the same Excel sheet</p>
         <p><b>Note:</b> Please keep same sheetName i.e-Incident</p>
       </div>
+      <p className='text-slate-500'>--------- OR ---------</p>
+      <button
+      onClick={handleAddManually}
+      className='bg-green-600 gap-2 flex justify-around items-center p-2 rounded-sm text-white hover:bg-blue-600'>
+        <FaPlus className='text-xl'/> Add Manually</button>
       </div>: 
       <TableContainer propsTable={targetRef}>
       <TableHead/>
