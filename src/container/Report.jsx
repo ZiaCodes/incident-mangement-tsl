@@ -282,12 +282,13 @@ const Report = () => {
     <>
     <MainContainer>
 
-      <div className='w-full h-96 gap-8 flex p-12 justify-center items-center mb-4 '>
+      <div className='lg:flex-nowrap flex-wrap w-full h-96 gap-8 flex p-12 justify-center items-center '>
       <ResponsiveContainer  >
       <BarChart
           width={500}
           height={300}
           data={statusBarChart}
+          key={1}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
@@ -303,6 +304,7 @@ const Report = () => {
           width={100}
           height={200}
           data={dataBarChart}
+          key={1}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
@@ -312,10 +314,9 @@ const Report = () => {
           <Bar dataKey="Age slab" barSize={20} fill="#8884d8" />
         </BarChart>
       </ResponsiveContainer>
-
-
       </div>
-      <div className='h-screen w-screen flex justify-center items-center flex-wrap gap-14 p-10'>
+  </MainContainer>
+      <div className='lg:mt-10 mt-80 flex justify-center items-center flex-wrap gap-14 p-10'>
         {
           vendorName.map((vendorDetails,i) =>{
             return(
@@ -345,8 +346,6 @@ const Report = () => {
           })
         }
       </div>
-
-    </MainContainer>
   </>
   )
 }

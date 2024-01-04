@@ -57,6 +57,7 @@ const Login = () => {
     }
     setIsPending(false);
     navigate('/');
+    window.location.reload();
 
   }
 

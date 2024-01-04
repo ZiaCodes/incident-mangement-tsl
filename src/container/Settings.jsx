@@ -132,6 +132,7 @@ const Settings = () => {
                     <TbLogout
                     onClick={()=>{
                         localStorage.removeItem('userProfile');
+                        window.location.reload();
                         navigate('/login');
                     }}
                     className='bg-white text-black cursor-pointer h-10 w-10 shadow-md rounded-full p-2 border border-blue-500 text-3xl'
