@@ -9,9 +9,6 @@ const TableBody = (props) => {
     <tbody>
         <tr className={props.style}>
             <td className="whitespace-nowrap px-2 " >
-              {props.serialNumber}
-            </td>
-            <td className="whitespace-nowrap px-2 " >
               {props.ticketNo}
             </td>
             <td className="whitespace-nowrap px-2 " >

@@ -1,9 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { signInUser } from '../../apis/auth';
 import { CgSpinner } from "react-icons/cg";
 
 import { ToastContainer, toast } from 'react-toastify';
+import { isValidEmail } from '../../utils/helper';
+
+import {useAuth} from '../../hooks'
+
+const validateUserInfo = ({email,password}) =>{
+
+  if(!email.trim()) return {ok:false, error:'Email is missing!'}
+  if(!isValidEmail(email)) return {ok:false, error:'Invalid Email'}
+
+  if(!password.trim()) return {ok:false, error:'Password is missing!'}
+  if(password.length < 8) return {ok:false, error:'Password must be 8 character long!'}
+
+  return {ok:true}
+}
 
 const Login = () => {
 
@@ -14,8 +27,8 @@ const Login = () => {
     password:""
   })
 
-  const [isPending , setIsPending] = useState(false)
-
+  const {handleLogin, authInfo} = useAuth();
+  const {isPending,isLoggedIn} = authInfo;
 
   const handleChange = ({target})=>{
     const {value,name} = target;
@@ -24,54 +37,21 @@ const Login = () => {
 
   const handleSubmit = async(e) =>{
     e.preventDefault()
-    setIsPending(true);
-    const res = await signInUser(userInfo);
+    const {ok, error} = validateUserInfo(userInfo)
 
-    if(res.error){
-      setIsPending(false);
-      return toast.error(res.error, {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      
-    }
+    if(!ok) return console.log("error",error);
     
-    if(res){
-      localStorage.setItem('userProfile',JSON.stringify(res));
-      toast.success("Login Successful", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
-    setIsPending(false);
-    navigate('/');
-    window.location.reload();
-
+    handleLogin(userInfo.email, userInfo.password);
   }
 
   useEffect(()=>{
-    let Jwt = JSON.parse(localStorage.getItem('userProfile'));
-    if(Jwt){
-        navigate('/');
-    }
-  },[])
-
+    if(isLoggedIn) navigate('/');
+  },[isLoggedIn])
 
   const {email, password} = userInfo;
+
+
   return (
-    
     <>
     <ToastContainer 
       position="bottom-left"
@@ -96,6 +76,7 @@ const Login = () => {
 
             <div className='flex rounded-sm shadow-md flex-col gap-8 mt-6 p-12 bg-slate-700'>
                 <input 
+                autoComplete='off'
                 value={email}
                 onChange={handleChange}
                 name="email"
@@ -104,14 +85,31 @@ const Login = () => {
                 />
 
                 <input 
+                autoComplete='off'
                 value={password}
                 onChange={handleChange}
                 name="password"
                 placeholder='********'
                 type="password"
+                id='password'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
-            <button disabled={isPending} className='bg-green-600 flex justify-center items-center text-white text-center p-2 rounded-sm'>
+                <div className='-mt-5 flex justify-start items-center gap-1 text-gray-400'>
+                <input 
+                type="checkbox" 
+                name="password"
+                onChange={()=>{
+                  let passType = document.querySelector('#password');
+                  if(passType.type === 'password'){
+                    passType.setAttribute('type','text');
+                  }else{
+                    passType.setAttribute('type','password')
+                  }
+                }}
+                />
+                <p className='text-xs font-thin'> Show Password.</p>
+                </div>
+            <button type='submit' disabled={isPending} className='bg-green-600 flex justify-center items-center text-white text-center p-2 rounded-sm'>
                 {
                     isPending ? <CgSpinner className='animate-spin text-xl'/> : "Log In"
                 }

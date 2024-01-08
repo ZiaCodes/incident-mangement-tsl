@@ -1,10 +1,5 @@
 export const tableHead = [
     {
-      id:1,
-      name:'Sl No.',
-      icon: ""
-    },
-    {
       id:2,
       name:'Ticket No.',
       icon: ""
