@@ -14,6 +14,8 @@ const Upload = (props) => {
 
     const fileReader =(oEvent) => {
        
+        localStorage.removeItem('XLDATA');
+        localStorage.removeItem('formateIncidentData');
         setIsLoading(true);
         var oFile = oEvent.target.files[0];
         // var sFilename = oFile.name;
