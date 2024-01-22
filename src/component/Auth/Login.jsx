@@ -14,7 +14,7 @@ const Login = () => {
     password:""
   })
 
-  const [isPending , setIsPending] = useState(false)
+  const [isPending , setIsPending] = useState(false);
 
 
   const handleChange = ({target})=>{
@@ -109,6 +109,7 @@ const Login = () => {
                 name="password"
                 placeholder='********'
                 type="password"
+                autoComplete='off'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
             <button disabled={isPending} className='bg-green-600 flex justify-center items-center text-white text-center p-2 rounded-sm'>

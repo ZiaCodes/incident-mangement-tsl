@@ -50,7 +50,7 @@ const TableLayout = () => {
     const localData = JSON.parse(localStorage?.getItem('XLDATA'));
 
     if(localData){
-      const IncidentTable = localData.Incident
+      const IncidentTable = localData;
       for(let i=1;i<IncidentTable?.length;i++){
         var tempObj = {
           sl: i,

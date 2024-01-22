@@ -10,6 +10,7 @@ const Navigation = React.lazy(()=> import('./component/Navigation/Navigation'))
 const Report = React.lazy(()=> import('./container/Report'))
 const Request = React.lazy(() => import('./container/Request'));
 import 'react-toastify/dist/ReactToastify.css';
+import ControlRooom from './component/others/ControlRooom';
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
       <Route path="/report" element={<Report />} />
       <Route path='/settings' element={<Settings/>} />
       <Route path='/login' element={<Login/>} />
+      <Route path='/control-room' element={<ControlRooom/>} />
     </Routes>
     </Suspense>
     </>

@@ -32,8 +32,33 @@ const Upload = (props) => {
                 if (roa.length) result[sheetName] = roa;
             });
             // see the result, caution: it works after reader event is done.
-            setXlData(result);
-            setIsLoading(false);
+            let incidentData = result?.Incident || result?.incident;
+            if(!incidentData) {
+                setIsLoading(false);
+               return toast.error('Invalid Excel file', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"
+                });
+            }else{
+                setXlData(incidentData);
+                setIsLoading(false);
+                return toast.success('Data parsed successfully', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored"
+                });
+            }
            
         };
         reader.readAsArrayBuffer(oFile);
