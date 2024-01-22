@@ -2,17 +2,19 @@ import TableContainer from './TableContainer'
 import TableHead from './TableHead'
 import TableBody from './TableBody'
 import Instruction from '../util/Instruction'
-
+import { MdAdd } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
-import { useTicket } from '../../hooks'
+import { useCreateSingleTicket, useTicket } from '../../hooks'
 import { useQuery } from '@tanstack/react-query'
 
 const TableLayout = () => {
 
   const {getTicketDatas} = useTicket();
+  const {createSingleTicket} = useCreateSingleTicket();
 
-  const hanldeAddButton = () =>{
-    alert("under developement")
+  const hanldeAddButton = async() =>{
+    await createSingleTicket();
+
   }
 
   const { isPending, data, error } = useQuery({
@@ -22,11 +24,11 @@ const TableLayout = () => {
   })
 
   if(isPending){
-    return <h1>Loading table.....</h1>
+    return <h1 style={{textAlign:'center'}}>Loading table.....</h1>
   }
 
   if(error){
-    return <h1>There is an error == {error.message}</h1>
+    return <h1 style={{textAlign:'center'}}>Error Code : {error.message}</h1>
   }
 
 
@@ -48,7 +50,15 @@ const TableLayout = () => {
     />
   
     {
-      data?.length > 0 ? 
+      data?.length > 0 ?
+      <>
+      <div className='h-full flex justify-end mr-4'>
+        <button 
+        onClick={hanldeAddButton}
+        className='flex justify-center items-center gap-1 bg-green-600 p-2 text-white rounded-sm cursor-pointer'>
+        <MdAdd className='text-2xl'/> Add New Column
+        </button>
+      </div>
       <TableContainer>
         <TableHead/>
         {
@@ -71,7 +81,8 @@ const TableLayout = () => {
             )
           })
         }
-      </TableContainer> :
+      </TableContainer>
+      </> :
       <Instruction handleAddManually={hanldeAddButton}/>
       
     }
