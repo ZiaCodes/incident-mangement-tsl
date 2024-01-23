@@ -15,6 +15,9 @@ import { FaPlus } from "react-icons/fa6";
 
 import { Margin, usePDF } from "react-to-pdf";
 import * as XLSX from 'xlsx';
+import ContextMenu from '../util/ContextMenu';
+
+import { useClickAway } from 'react-hook-click-away';
 
 const TableLayout = () => {
 
@@ -39,6 +42,26 @@ const TableLayout = () => {
     remarks:"",
   });
 
+  const [contextTicket, setContextTicket] = useState("");
+  const [ContextEditTicket, setContextEditTicket] = useState(EditObject);
+
+  const initialContextMenu = {
+    show: false,
+    x:0,
+    y:0
+  }
+
+  const [contextMenu,setContextMenu] = useState(initialContextMenu);
+
+  const contextMenuClose = () => setContextMenu(initialContextMenu);
+
+
+  const contextRef = useRef(null);
+
+  useClickAway(contextRef, () => {
+    setContextMenu(initialContextMenu);
+  });
+
   const handleSearch = ({target}) =>{
     const {value} = target;
     setSearch(value);
@@ -53,7 +76,6 @@ const TableLayout = () => {
       const IncidentTable = localData;
       for(let i=1;i<IncidentTable?.length;i++){
         var tempObj = {
-          sl: i,
           ticketNo: IncidentTable[i][0],
           Date: ExcelDateToJSDate(IncidentTable[i][1]).toDateString(),
           age: Math.round(IncidentTable[i][2]),
@@ -102,11 +124,11 @@ const TableLayout = () => {
     return new Date(Math.round((date - 25569)*86400*1000));
   }
 
-  const deleteRowItem = (sl)=>{
+  const deleteRowItem = (ticketNo)=>{
     if(isVerified){
       let newTableData = [];
       let storeData = JSON.parse(localStorage.getItem("formateIncidentData"));
-      newTableData = storeData.filter(item => item.sl !== sl)
+      newTableData = storeData.filter(item => item.ticketNo !== ticketNo)
       localStorage.setItem("formateIncidentData",JSON.stringify(newTableData));
       setIsClicked(!isClicked);
       toast.success('Item removed!', {
@@ -225,30 +247,8 @@ const TableLayout = () => {
       theme: "dark",
       });
 
-    // setTableData([
-    //   {
-    //     sl: "",
-    //     ticketNo: '',
-    //     Date: "",
-    //     age:'',
-    //     slab: '',
-    //     serviceNowStatus: '',
-    //     type: '',
-    //     name: '',
-    //     ticketDetails: '',
-    //     ticketSummary: '',
-    //     workNote: '',
-    //     comment: '',
-    //     location: '',
-    //     subLocation: '',
-    //     vendor: '',
-    //     status: "",
-    //     remarks: "",
-    //     update: '',
-    //     serviceNow: ''
-    // }
-    // ])
   }
+
 
   useEffect(()=>{
     const userInfo = JSON.parse(localStorage?.getItem('userProfile'))
@@ -262,6 +262,17 @@ const TableLayout = () => {
   return(
     <>
 
+    {contextMenu.show && 
+    <ContextMenu 
+      contextRef={contextRef} 
+      x={contextMenu.x} 
+      y={contextMenu.y} 
+      closeContextMenu={contextMenuClose}
+      ticketNumber={contextTicket}
+      serviceNowLink={`https://tatasteel.service-now.com/now/nav/ui/search/0f8b85d0c7922010099a308dc7c2606a/params/search-term/${contextTicket}/global-search-data-config-id/c861cea2c7022010099a308dc7c26041/back-button-label/Incident%20-%2005750836/search-context/now%2Fnav%2Fui`}
+      openEditWindow={()=>editRowItem(ContextEditTicket)}
+      deleteContextTicket={()=>deleteRowItem(contextTicket)}
+    />}
     {
       isOpen ? 
       <ModelBox 
@@ -383,7 +394,7 @@ const TableLayout = () => {
       onClick={handleAddManually}
       className='bg-green-600 gap-2 flex justify-around items-center p-2 rounded-sm text-white hover:bg-blue-600'>
         <FaPlus className='text-xl'/> Add Manually</button>
-      </div>: 
+      </div>:
       <TableContainer propsTable={targetRef}>
       <TableHead/>
 
@@ -401,13 +412,17 @@ const TableLayout = () => {
                 return dataField
               }else if(dataField.slab.trim().toLowerCase().includes(search.trim().toLowerCase())){
                 return dataField
+              }else if(dataField.subLocation.trim().toLowerCase().includes(search.trim().toLowerCase())){
+                return dataField
+              }else if(dataField.remarks.trim().toLowerCase().includes(search.trim().toLowerCase())){
+                return dataField
               }
             }).slice(0,page).map((dataField,index)=>{
               return(
                 <TableBody
                 style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "bg-red-600 text-white" : ( dataField.status === "Resolved" ? "bg-green-600 text-white" : null)) }
                 key={index}
-                serialNumber={dataField.sl}
+                serialNumber={index+1}
                 ticketNo={dataField.ticketNo}
                 reportedDate={dataField.Date}
                 age={dataField.age}
@@ -419,8 +434,15 @@ const TableLayout = () => {
                 vendor={dataField.vendor}
                 status={dataField.status}
                 remarks={dataField.remarks}
-                handleDelete={() =>deleteRowItem(dataField.sl)}
+                handleDelete={() =>deleteRowItem(dataField.ticketNo)}
                 handleEdit={() =>editRowItem(dataField)} 
+                handleContextMenu={(e) => {
+                  e.preventDefault(); 
+                  const {pageX, pageY} = e;
+                  setContextMenu({show:true, x:pageX, y:pageY})
+                  setContextTicket(dataField.ticketNo)
+                  setContextEditTicket(dataField)
+                }}
               />
               )
             })
@@ -428,7 +450,7 @@ const TableLayout = () => {
       </TableContainer>
     }
 
-        {
+    {
           tableData?.length ? <Pagination
           handlePage={(e)=> setPage(e.target.value)}
         >
@@ -443,6 +465,7 @@ const TableLayout = () => {
           }
           </Pagination> : null
         }
+       
 
         {
           (page > 10 && tableData?.length ) && <FloatingBtn/> 

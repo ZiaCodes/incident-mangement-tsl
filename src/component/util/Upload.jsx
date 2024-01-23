@@ -82,12 +82,9 @@ const Upload = (props) => {
             progress: undefined,
             theme: "colored"
         });
-
-        
-       
+  
     }
 
-    
 
   return (
     <>

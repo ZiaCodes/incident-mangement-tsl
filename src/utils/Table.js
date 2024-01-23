@@ -1,7 +1,7 @@
 export const tableHead = [
     {
       id:1,
-      name:'Sl No.',
+      name:'#',
       icon: ""
     },
     {
@@ -26,12 +26,12 @@ export const tableHead = [
     },
     {
       id:6,
-      name:'Incident Type',
+      name:'Type',
       icon: ""
     },
     {
       id:7,
-      name:'Affected User',
+      name:'User',
       icon: ""
     },
     {
@@ -66,12 +66,32 @@ export const tableHead = [
     },
     {
       id:13,
-      name: 'Edit',
+      name: '#',
       icon:""
     },
     {
       id:15,
-      name: 'Delete',
+      name: '#',
       icon:""
     },
   ]
+
+
+export const contextMenu =[
+  {
+    id: 1,
+    title: "Message 1",
+  },
+  {
+    id: 2,
+    title: "Message 2",
+  },
+  {
+    id: 3,
+    title: "Message 3",
+  },
+  {
+    id: 4,
+    title: "Message 4",
+  },
+];

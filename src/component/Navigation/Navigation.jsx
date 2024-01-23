@@ -9,6 +9,7 @@ const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAuth,setIsAuth] = useState(false);
 
+
     const handlMenu = () =>{
         setIsOpen(!isOpen);
     }
