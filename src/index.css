@@ -25,26 +25,14 @@ table {
     border: 1px solid #dddddd;
   }
   tr{
-    transition: 0.5s all;
+    transition: 0.1s all;
   }
   
-  /* tr::before{
-    counter-increment: counter-name;
-    content: counter(counter-name) ' ';
-    color: #000000;
-    width: 10px;
-    height: 10px;
-    padding: 0.5em;
-  } */
 
   tr:hover{
     opacity: 0.8;
-    background-color: #000;
+    background-color: #000000;
     color: #fff;
-  }
-
-  tr:focus{
-    background-color: #000;
   }
 
   label{
@@ -126,18 +114,8 @@ select{
   appearance: none;
 }
 
-.active{
-  text-decoration: underline;
-  background-color: #ff0000;
-  color: #fff;
-}
 
 .report_vendor_card{
-  /* display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5em; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.1em;
@@ -150,10 +128,6 @@ select{
   gap: 0.3em;
   padding: 1em;
 }
-
-/* .request_upload{
-  opacity: 0;
-} */
 
 .request_upload::before{
   content: "Click to choose file";
@@ -175,18 +149,22 @@ select{
   background-color: #1f1f1f;
   display: flex;
   flex-direction: column;
-
+  width: 200px;
+  box-shadow: 5px 5px 10px #0000001e, -12px 5px 9px #0000001e,0px -5px 9px #0000001e;
+  border-radius: 0.1em;
 }
 
 .contextMenu{
   display: flex;
-  color: #fff;
+  color: #f0f0f0;
   justify-content: space-between;
   flex-direction: row-reverse;
-  padding: 1em;
+  padding: 0.5em;
   align-items: center;
   border-radius: 0.3em;
   cursor: pointer;
   text-transform: capitalize !important;
+  font-weight: lighter !important;
+  font-size: 0.9em;
 }
 

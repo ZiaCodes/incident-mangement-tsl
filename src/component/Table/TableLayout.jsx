@@ -335,6 +335,7 @@ const TableLayout = () => {
       style={{width:'250px',margin:'10px'}}
 
     />
+  <div className='fixed_top_bar'>
     <Upload searchValue={search} method={handleSearch}/>
 
     <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase ml-4'>
@@ -370,6 +371,7 @@ const TableLayout = () => {
             EXCEL
           </button>   
         </div>
+    </div>
     {
       !tableData?.length > 0 ? 
       <div className='flex flex-wrap p-4 flex-col justify-center mt-8 items-center gap-8'>
