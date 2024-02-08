@@ -8,7 +8,7 @@ import NavLinks from "./NavLinks";
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAuth,setIsAuth] = useState(false);
-
+    const [mode,setMode] = useState('Incident');
 
     const handlMenu = () =>{
         setIsOpen(!isOpen);
@@ -21,6 +21,11 @@ const Navigation = () => {
             setIsAuth(true);
         }
       },[isAuth])
+
+      useEffect(()=>{
+        setMode(localStorage.getItem('m_mode'));
+      },[])
+
   return (
     <>
     <nav 
@@ -37,7 +42,9 @@ const Navigation = () => {
     className="text-red-600 text-3xl"
     />
     <b className="text-red-600">
-        Incident</b>Mangement
+        {
+            mode === 'Incident' ? "Incident" : "Request"
+        }</b>Mangement
     </p>
 
     {

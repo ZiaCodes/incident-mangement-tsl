@@ -48,7 +48,6 @@ export default function ModelBox(props) {
           placeholder='Age Slab'
           onChange={props.handleChange}
           value={props.slab}
-          readOnly
           />
         <input 
         className='text-gray-400 border-red-500 mx-1 border p-2 outline-none rounded-sm w-20'
@@ -69,31 +68,28 @@ export default function ModelBox(props) {
          value={props.user}
          />
         <input 
-        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-40'
+        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-40'
          type="text" 
          name="location " 
          placeholder='User Location' 
          onChange={props.handleChange}
          value={props.loc}
-         readOnly
          />
          <input 
-        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-12'
+        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-12'
          type="text" 
          name="sub-location " 
          placeholder='User Sub-Location' 
          onChange={props.handleChange}
          value={props.subloc}
-         readOnly
          />
         <input 
-        className='border-red-500 text-gray-400 mx-1 border p-2 outline-none rounded-sm w-20'
+        className='border-green-500 mx-1 border p-2 outline-none rounded-sm w-20'
          type="text" 
          name="team" 
          placeholder='Team' 
          onChange={props.handleChange}
          value={props.team}
-         readOnly
          />
         <input 
        className='border-green-500 mx-1 border text-left p-2 outline-none rounded-sm w-72'
