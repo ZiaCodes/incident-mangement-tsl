@@ -7,6 +7,7 @@ import { FaNetworkWired } from "react-icons/fa6";
 import { MdOutlineWatchOff } from "react-icons/md";
 import { FaAnglesDown } from "react-icons/fa6";
 import { FaAnglesUp } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const VendorCard = (props) => {
   return (
@@ -18,7 +19,9 @@ const VendorCard = (props) => {
           src={props.imgUrl}
           className='w-20 h-auto'
            alt="logo" />
-          <h1 className='text-xl font-bold text-center m-2'>{props.vendorName}</h1>
+          <Link className="shadow-none" to={`/${props.vendorName}`}>
+            <h1 className='text-xl font-bold text-center m-2'>{props.vendorName}</h1>
+          </Link>
           </div>
           <div className='report_vendor_card'>
             <p  className='bg-orange-600 text-white'>

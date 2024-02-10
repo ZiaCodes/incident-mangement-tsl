@@ -14,7 +14,7 @@ const Login = () => {
     password:""
   })
 
-  const [isPending , setIsPending] = useState(false);
+  const [isPending , setIsPending] = useState(null);
 
 
   const handleChange = ({target})=>{

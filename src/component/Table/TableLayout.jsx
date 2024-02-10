@@ -18,6 +18,8 @@ import * as XLSX from 'xlsx';
 import ContextMenu from '../util/ContextMenu';
 
 import { useClickAway } from 'react-hook-click-away';
+import Request from '../../container/Request'
+import { useNavigate } from 'react-router-dom'
 
 const TableLayout = () => {
 
@@ -44,6 +46,7 @@ const TableLayout = () => {
 
   const [contextTicket, setContextTicket] = useState("");
   const [ContextEditTicket, setContextEditTicket] = useState(EditObject);
+  const [mode, setMode] = useState(localStorage?.getItem('m_mode'));
 
   const initialContextMenu = {
     show: false,
@@ -251,17 +254,21 @@ const TableLayout = () => {
 
 
   useEffect(()=>{
-    const userInfo = JSON.parse(localStorage?.getItem('userProfile'))
+    const userInfo = JSON.parse(localStorage?.getItem('userProfile'));
+
     if(userInfo){
       setIsVerified(userInfo.user.isVerified);
     }
   },[isVerified])
 
 
+  if(mode === 'Request'){
+    return <Request/>
+  }
+
 
   return(
     <>
-
     {contextMenu.show && 
     <ContextMenu 
       contextRef={contextRef} 
@@ -301,7 +308,10 @@ const TableLayout = () => {
           if(tableData[i].ticketNo === targetTicket[0].ticketNo){
             // console.log(tableData[i].ticketNo, targetTicket[0].ticketNo);
               tableData[i].status = EditObject.status;
+              tableData[i].vendor = EditObject.team;
               tableData[i].remarks = EditObject.remarks;
+              tableData[i].loc = EditObject.loc;
+
           }
         }
         localStorage.setItem('formateIncidentData',JSON.stringify(tableData));

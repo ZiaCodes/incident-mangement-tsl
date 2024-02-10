@@ -23,24 +23,7 @@ const NavLinks = () => {
              Home
             </Link>
         </li>
-        <li className="bg-sky-600 text-white">
-            <Link to='/incident'>
-            <MdOutlinePendingActions/>
-            Incident
-            </Link>
-        </li>
-        <li  className="bg-yellow-600 text-white">
-            <Link to='/alert'>
-            <MdOutlineWatchOff/>
-            Alert
-            </Link>
-        </li>
-        <li className="bg-red-500 text-white">
-            <Link to='/request'>
-            <FaNetworkWired/>
-             Request
-            </Link>
-        </li>
+        
         <li className="bg-yellow-300 text-white">
             <Link to='/report'>
             <MdBugReport/>
