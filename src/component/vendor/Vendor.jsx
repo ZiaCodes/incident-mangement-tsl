@@ -12,9 +12,9 @@ import {
     ResponsiveContainer,
   } from "recharts";
 import TableContainer from '../Table/TableContainer';
-import TableHead from '../Table/TableHead';
-import TableBody from '../Table/TableBody';
-  
+import {VendorTableHead} from '../Table/TableHead';
+import { VendorTableBody } from '../Table/TableBody';
+
   
   const getIntroOfPage = (label) => {
     if (label === "Resolved") {
@@ -135,11 +135,11 @@ const Vendor = () => {
 
     <div className='lg:mt-10 mt-80'>
     <TableContainer>
-        <TableHead/>
+        <VendorTableHead/>
         {
             tickets.map((dataField,index) =>{
                 return (
-                    <TableBody
+                    <VendorTableBody
                 style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "bg-red-600 text-white" : ( dataField.status === "Resolved" ? "bg-green-600 text-white" : null)) }
                 key={index}
                 serialNumber={index+1}
@@ -150,8 +150,6 @@ const Vendor = () => {
                 type={dataField.type}
                 userName={dataField.name}
                 location={dataField.location}
-                subLocation={dataField.subLocation}
-                vendor={dataField.vendor}
                 status={dataField.status}
                 remarks={dataField.remarks}
                 
@@ -161,6 +159,10 @@ const Vendor = () => {
           } 
  
     </TableContainer>
+    </div>
+
+    <div className='invisible'>
+      Hello world
     </div>
     </>
   )

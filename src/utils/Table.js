@@ -77,21 +77,50 @@ export const tableHead = [
   ]
 
 
-export const contextMenu =[
+export const vendorTableHead =[
   {
-    id: 1,
-    title: "Message 1",
+    id:1,
+    name:'#',
+    icon: ""
   },
   {
-    id: 2,
-    title: "Message 2",
+    id:2,
+    name:'Ticket No.',
+    icon: ""
   },
   {
-    id: 3,
-    title: "Message 3",
+    id:3,
+    name:'Reported On',
+    icon: ""
   },
   {
-    id: 4,
-    title: "Message 4",
+    id:4,
+    name:'Age',
+    icon: ""
   },
+  {
+    id:7,
+    name:'User',
+    icon: ""
+  },
+  {
+    id:8,
+    name:'Base Location',
+    icon: ""
+  },
+  {
+      id:11,
+      name:'Status',
+      icon: ""
+  },
+  {
+      id:12,
+      name:'Remarks',
+      icon: ""
+  },
+  {
+    id:14,
+    name:'SNow',
+    icon:""
+  }
 ];
