@@ -16,7 +16,7 @@ const Settings = () => {
     const [theme, setTheme] = useState('isLightMode');
     const [user, setUser] = useState("");
     const [isClicked , setIsClicked] = useState(false);
-    const [mode,setMode] = useState('Incident');
+    const [mode,setMode] = useState(localStorage?.getItem('m_mode'));
 
     const navigate = useNavigate();
     
@@ -47,7 +47,7 @@ const Settings = () => {
     }
 
     const changeMMode = () =>{
-        const localMode = localStorage.getItem('m_mode');
+        const localMode = localStorage?.getItem('m_mode');
 
         if(localMode === 'Incident'){
             setMode('Request');
@@ -196,35 +196,6 @@ const Settings = () => {
 }
 
 export default Settings
-
-
-
-{/* <div className='h-auto bg-green-700 text-white  rounded-sm w-auto shadow-md p-4'>
-<div className='flex justify-center flex-wrap mt-4 items-start  gap-2 '>
-        
-        {
-            theme === 'isLightMode' ? (<MdOutlineLightMode onClick={handleDarkMode} 
-            className='bg-white cursor-pointer text-black h-10 w-10 shadow-md rounded-full p-2
-                border border-blue-500 text-3xl'/>) : (
-                <MdDarkMode onClick={handleDarkMode} 
-            className='bg-white cursor-pointer text-black h-10 w-10 shadow-md rounded-full p-2
-                border border-blue-500 text-3xl'/>
-                )
-        }
-    <LuRefreshCcwDot
-        onClick={handleResetDashBoard}
-        className='bg-white text-black cursor-pointer h-10 w-10 shadow-md rounded-full p-2 border border-blue-500 text-3xl'/>
-
-    <TbLogout
-    onClick={()=>{
-        localStorage.removeItem('userProfile');
-        window.location.reload();
-        navigate('/login');
-    }}
-    className='bg-white text-black cursor-pointer h-10 w-10 shadow-md rounded-full p-2 border border-blue-500 text-3xl'
-    />
-</div>
-</div> */}
 
 
 

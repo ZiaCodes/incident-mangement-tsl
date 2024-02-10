@@ -206,3 +206,13 @@ select{
   top: -10px;
   left: -10px;
 }
+
+.long__text{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* truncate to 4 lines */
+  -webkit-line-clamp: 4;
+}
+
+
