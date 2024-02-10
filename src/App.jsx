@@ -34,6 +34,14 @@ function App() {
         }
     },[])
 
+
+  useEffect(()=>{
+    const isModeExist = localStorage?.getItem('m_mode')
+    if(!isModeExist){
+      localStorage.setItem('m_mode','Incident');
+    }
+  },[])
+
   return (
     <>
     <Navigation/>
