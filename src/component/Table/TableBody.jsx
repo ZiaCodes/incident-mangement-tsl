@@ -2,6 +2,7 @@ import React from 'react'
 import { FaEye } from "react-icons/fa";
 import { MdModeEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const TableBody = (props) => {  
   return (
@@ -13,7 +14,9 @@ const TableBody = (props) => {
               {props.serialNumber}
             </td>
             <td className="whitespace-nowrap px-2 " >
+              <Link className='shadow-none' to={`ticket/${props.ticketNo}`}>
               {props.ticketNo}
+              </Link>
             </td>
             <td className="whitespace-nowrap px-2 " >
                 {props.reportedDate}

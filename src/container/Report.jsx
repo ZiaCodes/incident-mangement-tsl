@@ -19,6 +19,7 @@ import {
   XAxis, 
   YAxis, 
   CartesianGrid } from 'recharts';
+import { useNavigate } from 'react-router-dom';
 
 
 const getIntroOfPage = (label) => {
@@ -163,6 +164,14 @@ const Report = () => {
     let below = [];
     let length = [];
     const vendors = Object?.groupBy(callData, vData => vData.vendor);
+    localStorage.setItem('SKYLINK',JSON.stringify(vendors?.SKYLINK));
+    localStorage.setItem('EMBEE',JSON.stringify(vendors?.EMBEE));
+    localStorage.setItem('ITSOL',JSON.stringify(vendors?.ITSOL));
+    localStorage.setItem('MDSINHA',JSON.stringify(vendors?.MDSINHA));
+    localStorage.setItem('TECHNET',JSON.stringify(vendors?.TECHNET));
+    localStorage.setItem('WIZER',JSON.stringify(vendors?.WIZER));
+    localStorage.setItem('NATH&SONS',JSON.stringify(vendors?.[`NATH&SONS`]));
+
     const nwArr = Object.values(vendors);
     let aPReq = [];
     let wInprog = [];

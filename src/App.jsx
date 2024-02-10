@@ -7,22 +7,26 @@ const Home = React.lazy(()=> import('./container/Home'));
 const Navigation = React.lazy(()=> import('./component/Navigation/Navigation'))
 const Report = React.lazy(()=> import('./container/Report'))
 import 'react-toastify/dist/ReactToastify.css';
+import Vendor from './component/vendor/Vendor';
+import TicketPage from './component/Tickets/TicketPage';
 
 function App() {
 
-  const navigate = useNavigate();
-
+  
   const getTheme = () =>{
-      const localTheme = localStorage?.getItem('theme');
-      if(localTheme){
-        document.documentElement.classList.add(localTheme)
-      }
+    const localTheme = localStorage?.getItem('theme');
+    if(localTheme){
+      document.documentElement.classList.add(localTheme)
     }
+  }
 
-    useEffect(()=>{
-      getTheme();
-    })
+  useEffect(()=>{
+    getTheme();
+  })
 
+  
+  const navigate = useNavigate();
+  
     useEffect(()=>{
       let Jwt = JSON.parse(localStorage.getItem('userProfile'));
       if(!Jwt?.jwtToken){
@@ -36,7 +40,9 @@ function App() {
     <Suspense fallback={<Loader/>}>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="ticket/:ticket" element={<TicketPage />} />
       <Route path="/report" element={<Report />} />
+      <Route path='/:vendor' element={<Vendor />} />
       <Route path='/settings' element={<Settings/>} />
       <Route path='/login' element={<Login/>} />
     </Routes>

@@ -100,6 +100,7 @@ const Settings = () => {
             setUser(Jwt?.user?.name);
         }
     },[])
+  
 
   return (
     <>

@@ -19,6 +19,7 @@ import ContextMenu from '../util/ContextMenu';
 
 import { useClickAway } from 'react-hook-click-away';
 import Request from '../../container/Request'
+import { useNavigate } from 'react-router-dom'
 
 const TableLayout = () => {
 
@@ -261,10 +262,9 @@ const TableLayout = () => {
   },[isVerified])
 
 
-  if(mode){
+  if(mode === 'Request'){
     return <Request/>
   }
-
 
 
   return(
