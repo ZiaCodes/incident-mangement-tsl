@@ -1,6 +1,6 @@
 import React from 'react'
 import MainContainer from '../Wrapper/MainContainer'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { FaClipboardUser } from "react-icons/fa6";
@@ -107,7 +107,10 @@ useEffect(()=>{
           </p>
 
           <p className='flex gap-2 items-center p-2'>
-            <FaUsersCog className='text-xl'/> {targetTicket.vendor} TEAM
+            <FaUsersCog className='text-xl'/> 
+            <Link className='shadow-none p-0' to={`/${targetTicket.vendor}`}>
+              {targetTicket.vendor} TEAM
+            </Link>
           </p>
 
 

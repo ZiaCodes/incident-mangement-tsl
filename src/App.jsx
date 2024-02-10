@@ -9,6 +9,7 @@ const Report = React.lazy(()=> import('./container/Report'))
 import 'react-toastify/dist/ReactToastify.css';
 import Vendor from './component/vendor/Vendor';
 import TicketPage from './component/Tickets/TicketPage';
+import NotFound from './component/util/NotFound';
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
       <Route path='/:vendor' element={<Vendor />} />
       <Route path='/settings' element={<Settings/>} />
       <Route path='/login' element={<Login/>} />
+      <Route path="*" element={<NotFound/>} />
     </Routes>
     </Suspense>
     </>
