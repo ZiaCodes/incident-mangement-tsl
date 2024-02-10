@@ -26,7 +26,6 @@ const TicketPage = () => {
       for(let i=0;i<data.length;i++){
         if(data[i].ticketNo == ticket){
           setTargetTicket(data[i])
-          console.log(data[i]);
         }
       }
     }

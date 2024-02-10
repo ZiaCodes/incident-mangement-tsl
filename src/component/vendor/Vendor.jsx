@@ -48,18 +48,22 @@ import { VendorTableBody } from '../Table/TableBody';
 
 const Vendor = () => {
     const [tickets,setTickets] = useState([]);
+    const [aboveLength, setAboveLength] = useState(0);
+    const [belowLength, setBelowLength] = useState(0);
+    const [openLength, setOpenLength] = useState(0);
+    const [closeLength, setCloseLength] = useState(0);
     const vendorParam = useParams()
     const {vendor} = vendorParam;
 
     const StatusData = [
         {
           name: "Resolved",
-          status: 17,
+          status: closeLength,
           fill:'#008000'
         },
         {
           name: "Pending",
-          status: 5,
+          status: openLength,
           fill:'#ff0000'
         },
       ];
@@ -67,12 +71,12 @@ const Vendor = () => {
       const slabData = [
         {
           name: "Below 3",
-          ageSlab: 17,
+          ageSlab: belowLength,
           fill:'#008000'
         },
         {
           name: "Above 3",
-          ageSlab: 5,
+          ageSlab: aboveLength,
           fill:'#ff0000'
         },
       ];
@@ -85,6 +89,38 @@ const Vendor = () => {
         getVendorData();
     },[])
 
+
+    const tciketStatusData = () =>{
+      let open = 0;
+      let close = 0;
+      let abv =0;
+      let blw = 0;
+
+      for(let i=0;i<tickets?.length;i++){
+        if(tickets[i].status != 'Resolved'){
+          open++;
+        }else{
+          close++;
+        }
+
+        if(tickets[i].age > 3){
+          abv++;
+        }else{
+          blw++;
+        }
+      }
+
+      setOpenLength(open);
+      setCloseLength(close);
+      setAboveLength(abv);
+      setBelowLength(blw)
+      
+    }
+
+    useEffect(()=>{
+      tciketStatusData();
+    },[tickets])
+
   return (
     <>
     <MainContainer>
@@ -93,7 +129,7 @@ const Vendor = () => {
                     {vendor}
                 </span>
                 <span className='vendorToolTip'>
-                    {tickets.length}
+                    {tickets?.length}
                 </span>
 
         </div>
