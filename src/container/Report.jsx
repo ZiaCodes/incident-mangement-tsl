@@ -171,6 +171,7 @@ const Report = () => {
     localStorage.setItem('TECHNET',JSON.stringify(vendors?.TECHNET));
     localStorage.setItem('WIZER',JSON.stringify(vendors?.WIZER));
     localStorage.setItem('NATH&SONS',JSON.stringify(vendors?.[`NATH&SONS`]));
+    localStorage.setItem('LASETEK',JSON.stringify(vendors?.LASETEK));
     localStorage.setItem('DEBUG',JSON.stringify(vendors?.DEBUG));
 
     const nwArr = Object.values(vendors);
