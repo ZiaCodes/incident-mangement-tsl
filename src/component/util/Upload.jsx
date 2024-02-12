@@ -16,6 +16,17 @@ const Upload = (props) => {
        
         localStorage.removeItem('XLDATA');
         localStorage.removeItem('formateIncidentData');
+        localStorage.removeItem('ITSOL');
+        localStorage.removeItem('MDSINHA');
+        localStorage.removeItem('TECHNET')
+        localStorage.removeItem('NATH&SONS')
+        localStorage.removeItem('SKYLINK')
+        localStorage.removeItem('WIZER')
+        localStorage.removeItem('LASETEK')
+        localStorage.removeItem('DEBUG')
+        localStorage.removeItem('EMBEE')
+        localStorage.removeItem('MDSINHA')
+
         setIsLoading(true);
         var oFile = oEvent.target.files[0];
         // var sFilename = oFile.name;

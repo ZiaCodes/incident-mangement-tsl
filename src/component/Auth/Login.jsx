@@ -61,6 +61,15 @@ const Login = () => {
 
   }
 
+  const showPassword = () =>{
+    let passType = document.querySelector('#passField');
+    if(passType.type === 'password'){
+      passType.type = 'text'
+    }else{
+      passType.type = 'password'
+    }
+  }
+
   useEffect(()=>{
     let Jwt = JSON.parse(localStorage.getItem('userProfile'));
     if(Jwt){
@@ -99,7 +108,7 @@ const Login = () => {
                 value={email}
                 onChange={handleChange}
                 name="email"
-                placeholder='john@gmail.com'
+                placeholder='Syed@gmail.com'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
 
@@ -110,8 +119,13 @@ const Login = () => {
                 placeholder='********'
                 type="password"
                 autoComplete='off'
+                id='passField'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
+                <div className='text-white font-thin text-xs flex gap-1 -mt-5'>
+                <input onClick={showPassword} type='checkbox'/>
+                <p>Show password.</p>
+                </div>
             <button disabled={isPending} className='bg-green-600 flex justify-center items-center text-white text-center p-2 rounded-sm'>
                 {
                     isPending ? <CgSpinner className='animate-spin text-xl'/> : "Log In"

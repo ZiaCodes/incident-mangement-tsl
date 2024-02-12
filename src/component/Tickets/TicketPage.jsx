@@ -23,7 +23,7 @@ const TicketPage = () => {
 
     const findingTicket = () =>{
       const data = JSON.parse(localStorage?.getItem('formateIncidentData'));
-      for(let i=0;i<data.length;i++){
+      for(let i=0;i<data?.length;i++){
         if(data[i].ticketNo == ticket){
           setTargetTicket(data[i])
         }
@@ -107,9 +107,7 @@ useEffect(()=>{
 
           <p className='flex gap-2 items-center p-2'>
             <FaUsersCog className='text-xl'/> 
-            <Link className='shadow-none p-0' to={`/${targetTicket.vendor}`}>
-              {targetTicket.vendor} TEAM
-            </Link>
+             {targetTicket.vendor} TEAM
           </p>
 
 
