@@ -38,7 +38,7 @@ const Request = () => {
         });
         // see the result, caution: it works after reader event is done.
         // console.log(result.SR);
-        setTableData(result?.SR);
+        setTableData(result?.Request);
         setIsLoading(false);
        
     };
@@ -94,7 +94,7 @@ const Request = () => {
             tableData?.slice(0,page).map((val,i) =>{
               return(
                 <tbody key={i}>
-                  <tr className={i===0 ? 'bg-blue-600 text-white uppercase font-bold tracking-wide' : ((i>1 && i<5)  ? "bg-red-600 text-white" : (i>6 && i<9 ? 'bg-red-600 text-white' : (i>10 && i<14) ? 'bg-red-600 text-white' : (i===1 ? "bg-green-600 text-white" : (i>4 && i<7 ? "bg-green-600 text-white" : (i>8 && i<11 ? "bg-green-600 text-white" : (i>13 && i<23 ? "bg-green-600 text-white" : null))) )) )} >
+                  <tr className={i===0 ? 'bg-blue-600 text-white uppercase font-bold tracking-wide' : null } >
                     {
                       val.map((data,j)=>{
                        return(
