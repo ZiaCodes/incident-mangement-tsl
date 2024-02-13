@@ -2,7 +2,7 @@ import React from 'react'
 import { IoCloseCircle } from "react-icons/io5";
 export default function ModelBox(props) {
   return (
-    <div className='fixed z-50 grid grid-cols-1 place-items-center mt-20 content-center w-screen'>
+    <div className='fixed text-black z-50 grid grid-cols-1 place-items-center mt-20 content-center w-screen'>
     <div 
     className=' border border-slate-400 h-auto lg:w-1/2 sm:w-96 sm:mx-8 bg-white shadow-lg rounded-sm '>
       <div className='px-2 text-white uppercase flex justify-between items-center bg-green-500 w-full h-14'>

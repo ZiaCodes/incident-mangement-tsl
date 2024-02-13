@@ -3,7 +3,7 @@ import MainContainer from '../component/Wrapper/MainContainer'
 import { IoSettings } from "react-icons/io5";
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
-import { IoArrowForward } from "react-icons/io5";
+import { IoIosNavigate } from "react-icons/io";
 import { MdOutlineRoomPreferences } from "react-icons/md";
 import { MdOutlineResetTv } from "react-icons/md";
 import { TbLogout } from "react-icons/tb";
@@ -17,6 +17,7 @@ const Settings = () => {
     const [user, setUser] = useState("");
     const [isClicked , setIsClicked] = useState(false);
     const [mode,setMode] = useState(localStorage?.getItem('m_mode'));
+    const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'))
 
     const navigate = useNavigate();
     
@@ -92,6 +93,28 @@ const Settings = () => {
             theme: "colored",
             });
     }
+
+
+    const handleNavStyle = () =>{
+        
+        if(navStyle === 'Menu'){
+            setNavStyle('Simple');
+            localStorage?.setItem('navigationStyle','Simple')
+        }else{
+            setNavStyle('Menu');
+            localStorage?.setItem('navigationStyle','Menu')
+        }
+        toast.success('Navigation changed!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+    }
     
 
     useEffect(()=>{
@@ -99,8 +122,7 @@ const Settings = () => {
         if(Jwt?.user){
             setUser(Jwt?.user?.name);
         }
-    },[])
-  
+    },[]);  
 
   return (
     <>
@@ -158,6 +180,12 @@ const Settings = () => {
                     {
                         isClicked ? 
                         <>
+                        <li 
+                            onClick={handleNavStyle}
+                            className='flex justify-start items-center gap-1 p-2 ml-6 rounded-md cursor-pointer'>
+                                <IoIosNavigate/> Navigation - {navStyle}
+                        </li>
+                        <hr />
                             <li className='flex justify-between items-center gap-2 p-2 ml-6 rounded-md cursor-pointer' onClick={changeMMode}>
                              Request Mode {mode === 'Request' ? <GoDotFill className='text-green-600'/> : null}
                             </li>

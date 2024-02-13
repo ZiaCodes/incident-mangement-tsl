@@ -37,7 +37,11 @@ function App() {
 
 
   useEffect(()=>{
-    const isModeExist = localStorage?.getItem('m_mode')
+    const isModeExist = localStorage?.getItem('m_mode');
+    const localMenuStyle = localStorage?.getItem('navigationStyle');
+    if(!localMenuStyle){
+      localStorage.setItem('navigationStyle','Menu');
+    }
     if(!isModeExist){
       localStorage.setItem('m_mode','Incident');
     }

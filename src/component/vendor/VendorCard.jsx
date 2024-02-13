@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 const VendorCard = (props) => {
   return (
     <div 
-      className=' bg-white border border-slate-100 shadow-md overflow-y-auto h-auto w-80 rounded-sm p-4 hover:shadow-lg '>
+      className='bg-white border border-slate-100 shadow-md overflow-y-auto h-auto w-80 rounded-sm p-4 hover:shadow-lg '>
           <GoDotFill className={props.liveStausStyle}/>
           <div className='flex justify-center items-center flex-col mb-4'>
           <img 
@@ -20,7 +20,7 @@ const VendorCard = (props) => {
           className='w-20 h-auto'
            alt="logo" />
           <Link className="shadow-none" to={`/${props.vendorName}`}>
-            <h1 className='text-xl font-bold text-center m-2'>{props.vendorName}</h1>
+            <h1 className='text-xl font-bold text-center m-2 text-black'>{props.vendorName}</h1>
           </Link>
           </div>
           <div className='report_vendor_card'>

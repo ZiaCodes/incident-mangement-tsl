@@ -1,7 +1,4 @@
 import { MdBugReport } from "react-icons/md";
-import { MdOutlinePendingActions } from "react-icons/md";
-import { FaNetworkWired } from "react-icons/fa6";
-import { MdOutlineWatchOff } from "react-icons/md";
 import { ImHome } from "react-icons/im";
 import { IoSettings } from "react-icons/io5";
 import { Link } from "react-router-dom";

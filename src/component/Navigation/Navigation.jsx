@@ -2,9 +2,13 @@ import { SiNginxproxymanager } from "react-icons/si";
 import { MdMenuOpen } from "react-icons/md";
 import { MdMenu } from "react-icons/md";
 
+import { MdBugReport } from "react-icons/md";
+import { ImHome } from "react-icons/im";
+import { IoSettings } from "react-icons/io5";
 
 import { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
+import { Link } from "react-router-dom";
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAuth,setIsAuth] = useState(false);
@@ -25,6 +29,10 @@ const Navigation = () => {
       useEffect(()=>{
         setMode(localStorage.getItem('m_mode'));
       },[])
+
+if(localStorage?.getItem('navigationStyle') === 'Simple'){
+    return <SimpleNavigation/>
+}
 
   return (
     <>
@@ -75,3 +83,41 @@ const Navigation = () => {
 }
 
 export default Navigation
+
+
+const SimpleNavigation = () =>{
+    return (
+        <nav 
+            className='fixed w-full top-0 
+            flex justify-between items-center
+            bg-white shadow-md z-50'
+        >
+            <p className="m-4 flex justify-center 
+            items-center gap-2 uppercase
+            text-blue-800 font-bold"
+            >
+            <SiNginxproxymanager 
+            className="text-red-600 text-3xl"
+            />
+            </p>
+
+            <ul className="flex mr-2 gap-2">
+                <li className="cursor-pointer text-black lg:text-xl lg:p-2 text-xs rounded-sm">
+                <Link className="p-0 shadow-none" to='/'>
+                    Dashboard
+                </Link>
+                </li>
+                <li className="cursor-pointer text-black lg:text-xl lg:p-2 text-xs rounded-sm">
+                    <Link className="p-0 shadow-none" to='/report'>
+                        Report
+                    </Link>
+                </li>
+                <li className="cursor-pointer text-black lg:text-xl lg:p-2 text-xs rounded-sm">
+                    <Link className="p-0 shadow-none" to='/settings'>
+                        Setting
+                    </Link>
+                </li>
+            </ul>
+        </nav>
+    )
+}

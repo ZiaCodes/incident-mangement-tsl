@@ -358,7 +358,6 @@ const TableLayout = () => {
               onClick={() => {
                 setSearch(name);
               }}
-              id='statusType'
               className={name ==='Pending' || name==='Reopened' ? "p-2 bg-red-600 text-white cursor-pointer rounded-sm ": " rounded-sm p-2 bg-green-600 text-white cursor-pointer"}>
                 {name}
               </button>
