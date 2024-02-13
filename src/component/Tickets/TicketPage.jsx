@@ -11,11 +11,15 @@ import { TbListDetails } from "react-icons/tb";
 import { TbMessagePlus } from "react-icons/tb";
 import { FaUsersCog } from "react-icons/fa";
 import { PiNotepadFill } from "react-icons/pi";
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const TicketPage = () => {
-    const vendorParam = useParams()
-    const {ticket} = vendorParam;
 
+  
+  const vendorParam = useParams()
+  const {ticket} = vendorParam;
+  
+    useDocumentTitle(`Ticket Page : ${ticket}`)
     const [targetTicket,setTargetTicket] = useState({});
     const [isClicked, setIsClicked] = useState(false);
     const [isClickedComment, setIsClickedComment] = useState(false);

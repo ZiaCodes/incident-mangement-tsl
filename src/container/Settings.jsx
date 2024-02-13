@@ -11,6 +11,7 @@ import { GoDotFill } from "react-icons/go";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Settings = () => {
     const [theme, setTheme] = useState('isLightMode');
@@ -20,6 +21,8 @@ const Settings = () => {
     const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'))
 
     const navigate = useNavigate();
+
+    useDocumentTitle(`Setting Page | ${user}`)
     
     const handleDarkMode = () =>{
         if(theme === 'isLightMode'){

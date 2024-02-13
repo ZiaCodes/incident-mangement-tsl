@@ -19,9 +19,11 @@ import ContextMenu from '../util/ContextMenu';
 
 import { useClickAway } from 'react-hook-click-away';
 import Request from '../../container/Request'
-import { useNavigate } from 'react-router-dom'
+import useDocumentTitle from '../../hooks/useDocumentTitle'
 
 const TableLayout = () => {
+
+  useDocumentTitle('Dashboard Page')
 
   const [isVerified, setIsVerified] = useState(false);
   const [tableData , setTableData] = useState([]);

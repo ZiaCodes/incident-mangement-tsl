@@ -14,9 +14,11 @@ import Others from '../assets/others.png'
 import DonutChart from '../charts/DonutChart';
 import AnotherChart from '../charts/LineChart';
 import AllCharts from '../charts/AllCharts';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 
 const Report = () => {
+  useDocumentTitle("Report Page")
   const [callData, setCallData] = useState([]);
   const [vendorName, setVendorName] = useState([]);
   const [changeData, setChangeData] = useState(false)

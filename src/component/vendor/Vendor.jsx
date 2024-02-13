@@ -14,6 +14,7 @@ import {
 import TableContainer from '../Table/TableContainer';
 import {VendorTableHead} from '../Table/TableHead';
 import { VendorTableBody } from '../Table/TableBody';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
   
   const getIntroOfPage = (label) => {
@@ -47,6 +48,7 @@ import { VendorTableBody } from '../Table/TableBody';
   };
 
 const Vendor = () => {
+
     const [tickets,setTickets] = useState([]);
     const [aboveLength, setAboveLength] = useState(0);
     const [belowLength, setBelowLength] = useState(0);
@@ -55,6 +57,7 @@ const Vendor = () => {
     const vendorParam = useParams()
     const {vendor} = vendorParam;
 
+    useDocumentTitle(`Vendor Page : ${vendor}`)
     const StatusData = [
         {
           name: "Resolved",

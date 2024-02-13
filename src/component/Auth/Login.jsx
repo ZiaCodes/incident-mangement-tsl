@@ -4,10 +4,13 @@ import { signInUser } from '../../apis/auth';
 import { CgSpinner } from "react-icons/cg";
 
 import { ToastContainer, toast } from 'react-toastify';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const Login = () => {
 
   const navigate = useNavigate();
+
+  useDocumentTitle("Login Page | Incident Management")
   
   const [userInfo,setUserinfo] = useState({
     email:"",
