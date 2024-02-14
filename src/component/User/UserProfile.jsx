@@ -31,7 +31,7 @@ const UserProfile = () => {
   return (
     <MainContainer>
         <div className='flex justify-start items-left m-4 gap-8'>
-            <div className='w-40 h-40 overflow-hidden shadow-md '>
+            <div className='w-40 h-40 overflow-hidden shadow-md p-2 hover:p-4 transition-all'>
                 <img src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4" alt="avatar" />
             </div>
             <div className='flex flex-col justify-start items-start'>
@@ -68,7 +68,7 @@ const UserProfile = () => {
                 <label htmlFor="name">
                     <FaUserSecret/>
                 </label>
-                <p className='capitalize'>{user.role}</p>
+                <p className='capitalize'>{user.role} (Role)</p>
             </div>
         </div>
 

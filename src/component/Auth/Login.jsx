@@ -111,6 +111,7 @@ const Login = () => {
                 value={email}
                 onChange={handleChange}
                 name="email"
+                autoComplete='on'
                 placeholder='Syed@gmail.com'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
@@ -121,7 +122,7 @@ const Login = () => {
                 name="password"
                 placeholder='********'
                 type="password"
-                autoComplete='off'
+                autoComplete='on'
                 id='passField'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
