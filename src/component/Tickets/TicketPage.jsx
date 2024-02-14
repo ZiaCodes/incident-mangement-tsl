@@ -111,7 +111,10 @@ useEffect(()=>{
 
           <p className='flex gap-2 items-center p-2'>
             <FaUsersCog className='text-xl'/> 
+             <Link className='shadow-none p-0' to={`/${targetTicket.vendor}`}>
              {targetTicket.vendor} TEAM
+             </Link>
+             
           </p>
 
 

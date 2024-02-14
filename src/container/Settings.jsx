@@ -7,10 +7,13 @@ import { IoIosNavigate } from "react-icons/io";
 import { MdOutlineRoomPreferences } from "react-icons/md";
 import { MdOutlineResetTv } from "react-icons/md";
 import { TbLogout } from "react-icons/tb";
-import { GoDotFill } from "react-icons/go";
+import { FaDiceTwo } from "react-icons/fa6";
+import { MdDeveloperMode } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Settings = () => {
@@ -18,7 +21,9 @@ const Settings = () => {
     const [user, setUser] = useState("");
     const [isClicked , setIsClicked] = useState(false);
     const [mode,setMode] = useState(localStorage?.getItem('m_mode'));
-    const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'))
+    const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'));
+    const [devMode, setDevMode] = useState('Off');
+    const [isgeneralSetting, setIsgeneralSetting] = useState(false)
 
     const navigate = useNavigate();
 
@@ -118,12 +123,25 @@ const Settings = () => {
             theme: "colored",
             });
     }
+
+    const handleDevMode = () =>{
+        toast.error('Feature coming soon!', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+    }
     
 
     useEffect(()=>{
-        let Jwt = JSON.parse(localStorage.getItem('userProfile'));
+        let Jwt = JSON?.parse(localStorage?.getItem('userProfile'));
         if(Jwt?.user){
-            setUser(Jwt?.user?.name);
+            setUser(Jwt?.user);
         }
     },[]);  
 
@@ -151,8 +169,8 @@ const Settings = () => {
         <div className='w-20 h-20 overflow-hidden shadow-md rounded-full'>
             <img src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4" alt="avatar" />
         </div>
-        <h1 className='font-bold'>
-        {user}
+        <h1 className='flex flex-col justify-center items-center'>
+        <Link className='p-0 shadow-none' to={`/settings/${user.id}`}>{user.name}</Link>
         </h1>
     </div>
 
@@ -161,10 +179,22 @@ const Settings = () => {
             <div className='h-auto flex flex-wrap rounded-sm shadow-md p-4 border border-slate-300'>
                 
                 <ul>
-                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
+                    <li 
+                     onClick={() => setIsgeneralSetting(!isgeneralSetting)}
+                    className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
                         <IoSettings/>
                         General Setting
                     </li>
+                    {
+                         isgeneralSetting ? 
+                         <li className='flex justify-start items-center gap-2 p-2 ml-6 rounded-md cursor-pointer'>
+                            <FaUserCircle/>
+                            <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user.id}`}>
+                                User profile
+                            </Link>
+                         </li>
+                          : null
+                    }
                     <hr  className='mt-2 opacity-25'/>
                     <li className='p-2 rounded-md cursor-pointer flex items-center gap-3' onClick={handleDarkMode}>
                     {
@@ -188,12 +218,13 @@ const Settings = () => {
                             className='flex justify-start items-center gap-1 p-2 ml-6 rounded-md cursor-pointer'>
                                 <IoIosNavigate/> Navigation - {navStyle}
                         </li>
-                        <hr />
-                            <li className='flex justify-between items-center gap-2 p-2 ml-6 rounded-md cursor-pointer' onClick={changeMMode}>
-                             Request Mode {mode === 'Request' ? <GoDotFill className='text-green-600'/> : null}
+                        <hr className='mt-2 opacity-25'/>
+                            <li className='flex justify-start items-center gap-1 p-2 ml-6 rounded-md cursor-pointer' onClick={changeMMode}>
+                              <FaDiceTwo/> Mode - {mode}
                             </li>
-                            <li className='flex justify-between items-center gap-2 p-2 ml-6 rounded-md cursor-pointer' onClick={changeMMode}>
-                             Incident Mode {mode === 'Incident' ? <GoDotFill className='text-green-600'/> : null}
+                            <hr className='mt-2 opacity-25' />
+                            <li className='flex justify-start items-center gap-1 p-2 ml-6 rounded-md cursor-pointer' onClick={handleDevMode}>
+                              <MdDeveloperMode/> Dev Mode - {devMode}
                             </li>
                         </> : null
                     }
@@ -218,8 +249,8 @@ const Settings = () => {
     </MainContainer>
         <p className=' mt-8 flex-wrap p-4 text-center flex justify-center items-center'>
             Incident management © 2023 from
-            <a className='text-center shadow-none' href="https://syed.vercel.app">
-                Syed Ziauddin
+            <a className='text-center shadow-none' target='_blank' href="https://syed.vercel.app">
+                ZiaCodes
             </a>
         </p>
     </>

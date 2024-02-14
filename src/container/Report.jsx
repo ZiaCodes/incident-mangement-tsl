@@ -12,7 +12,7 @@ import Others from '../assets/others.png'
 
 
 import DonutChart from '../charts/DonutChart';
-import AnotherChart from '../charts/LineChart';
+import AnotherChart, { LocationChart } from '../charts/LineChart';
 import AllCharts from '../charts/AllCharts';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
@@ -34,6 +34,7 @@ const Report = () => {
   const [newAssign,setNewAssign] = useState([]);
   const [transfer, setTransfer] = useState([]);
   const [reopne, setReopne] = useState([]);
+  const [locationData, setLocationData] = useState([]);
 
   
   const opneTicket = () =>{
@@ -176,6 +177,10 @@ const Report = () => {
     return "hsl(" + (colorNum * (360 / colors) % 360) + ",100%,50%)";
 }
 
+useEffect(()=>{
+  let locationCount = Object.groupBy(callData, loc => loc.location );
+  setLocationData(locationCount)
+},[])
 
 
   return (
@@ -206,6 +211,20 @@ const Report = () => {
       }
       />
     </div>
+
+    {/* <div className='flex justify-between items-center h-96 lg:mt-4'>
+        <LocationChart 
+          label={Object.keys(locationData)} 
+          dataset={[
+            {
+              label:["Total"],
+              data:callData.map(val => val.location),
+              backgroundColor: callData.map((_,i) => randomColor(Math.floor(Math.random() * 999), 10))
+          },
+        ]
+      }
+      />
+    </div> */}
 
     <div className='flex justify-between items-center h-96'>
       <AnotherChart

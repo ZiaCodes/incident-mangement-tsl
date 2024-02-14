@@ -82,7 +82,7 @@ export const VendorTableBody = (props) => {
               {props.serialNumber}
             </td>
             <td className="whitespace-nowrap px-2 " >
-              <Link className='shadow-none' to={`ticket/${props.ticketNo}`}>
+              <Link className='shadow-none' to={`/ticket/${props.ticketNo}`}>
               {props.ticketNo}
               </Link>
             </td>

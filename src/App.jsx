@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Vendor from './component/vendor/Vendor';
 import TicketPage from './component/Tickets/TicketPage';
 import NotFound from './component/util/NotFound';
+import UserProfile from './component/User/UserProfile';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
       <Route path="/report" element={<Report />} />
       <Route path='/:vendor' element={<Vendor />} />
       <Route path='/settings' element={<Settings/>} />
+      <Route path='settings/:userId' element={<UserProfile/>} />
       <Route path='/login' element={<Login/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>
