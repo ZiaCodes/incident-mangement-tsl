@@ -9,16 +9,49 @@ import { ImOffice } from "react-icons/im";
 import { FaUserSecret } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
 import { TiUserDelete } from "react-icons/ti";
+import { getAllUsers } from '../../apis/auth';
+import { CgSpinnerTwoAlt } from 'react-icons/cg';
+import { MdDelete } from "react-icons/md";
+import { ToastContainer,toast } from 'react-toastify';
 
 const UserProfile = () => {
     const [user,setUser] = useState({});
+    const [allUserData, setAllUserData] = useState([]);
+    const [isDeleteActive,setIsDeleteActive] = useState(false);
 
     const handleDeleteUser = () =>{
-        console.log("handle user is pending")
+        setIsDeleteActive(!isDeleteActive);
+        toast.success(`Delete Action is ${isDeleteActive ? "Off" : "On"}`, {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
     }
 
     const handleAddUser = () =>{
-        console.log("handle User is pending")
+        toast.error("Feature coming soon!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+    }
+
+    const getAllUsersData = async() =>{
+        let res = await getAllUsers();
+        if(res.error) return console.log(res.error);
+
+        let filterUser = res.filter((data) => data._id !== user.id);
+        setAllUserData(filterUser);
     }
 
     useEffect(()=>{
@@ -26,9 +59,27 @@ const UserProfile = () => {
         if(localuser){
             setUser(localuser.user);
         }
-        console.log(localuser)
+    },[])
+
+    useEffect(()=>{
+        getAllUsersData();
     },[])
   return (
+    <>
+    <ToastContainer 
+      position="bottom-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      style={{width:'250px',margin:'10px'}}
+
+    />
     <MainContainer>
         <div className='flex justify-start items-left m-4 gap-8'>
             <div className='w-40 h-40 overflow-hidden shadow-md p-2 hover:p-4 transition-all'>
@@ -79,19 +130,53 @@ const UserProfile = () => {
             <span 
             onClick={handleAddUser}
             className='flex items-center gap-2 bg-green-600 p-2 text-white rounded-sm cursor-pointer'>
-                <IoMdPersonAdd/> Add a new user
+                <IoMdPersonAdd/> Create
             </span>
             <span 
             onClick={handleDeleteUser}
             className='flex items-center gap-2 bg-red-600 p-2 text-white rounded-sm cursor-pointer'>
-                <TiUserDelete/> Delete a user
+                <TiUserDelete/> {isDeleteActive ? "Delete - Off" : "Delete - On"}
             </span>
             </div> : null
         }
-        
-        
 
     </MainContainer>
+
+        <section className="lg:absolute top-20 right-5">
+            <div class="box" id="box">
+                <p className='text-center p-2'>Active Users</p>
+                {
+                    allUserData.length > 0 ? allUserData.map((userData) =>{
+                        return(
+                            <div className="list">
+                                <div className="imgbox">
+                                    <img 
+                                     src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4"
+                                     alt="img"
+                                    />
+                                </div>
+                                    <div className="content">
+                                        <h2  className="rank">
+                                            <small>
+                                                {isDeleteActive ? <MdDelete/> : null}
+                                            </small>
+                                        </h2>
+                                        <h4>{userData.name}</h4>
+                                        <p className='supporting-text'>{userData.email}</p>
+                                        <p className='supporting-text'>{userData.company}</p>
+                                        <p className='supporting-text'>{userData.role}</p>
+                                    </div>
+                            </div>
+                        )
+                    }) : <div  className='flex justify-center items-center gap-2 mt-10'>
+                        <CgSpinnerTwoAlt className='animate-spin text-4xl'/> Please wait ..
+                        </div>
+                }
+            </div>
+        </section>
+    </>
+
+
   )
 }
 

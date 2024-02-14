@@ -216,3 +216,93 @@ select{
 }
 
 
+
+.box{
+  min-width: 350px;
+  min-height: 400px;
+  position: relative;
+  /* background: rgba(255, 255, 255, 0.1); */
+  box-shadow: 0px 25px 45px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.101);
+  border-radius: 5px;
+  padding: 20px;
+  backdrop-filter: blur(25px);
+}
+.box .list{
+  position: relative;
+  display: flex;
+  padding: 10px;
+  background: rgb(18, 144, 4);
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+
+}
+
+.box .list:hover{
+  background: #fff;
+  box-shadow: -7px 15px 25px rgba(0, 0, 0, 0.13);
+  transform: scale(1.05) translateX(10px) translateY(-5px);
+  z-index: 10000;
+}
+.list .imgbox{
+  width: 60px;
+  height: 60px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 10px;
+
+
+}
+.list .imgbox img{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.list .content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+}
+.box .list .content .rank{
+  position: absolute;
+  right: -50px;
+  color: #ff0156c9;
+  transition: 0.5s;
+  font-size: 2rem;
+}
+.box .list .content .rank small {
+  font-weight: 400;
+  opacity: 0.9;
+}
+.box .list:hover .content .rank {
+  right: 20px;
+}
+.box .list .content h4{
+  line-height: 1.2em;
+  font-weight: 600;
+  transition: 0.5s;
+
+}
+.box .list .content p{
+  font-size: 0.75em;
+  transition: 0.5s;
+}
+.box .list:hover .content h4,
+.box .list:hover .content p{
+  color: #333;
+
+}
+
+.supporting-text{
+  font-size: 8px !important;
+}
+
+
