@@ -232,7 +232,7 @@ select{
   position: relative;
   display: flex;
   padding: 10px;
-  background: rgb(18, 144, 4);
+  background: rgb(139, 139, 139);
   border-radius: 10px;
   margin: 10px;
   cursor: pointer;

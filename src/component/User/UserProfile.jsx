@@ -9,7 +9,7 @@ import { ImOffice } from "react-icons/im";
 import { FaUserSecret } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
 import { TiUserDelete } from "react-icons/ti";
-import { getAllUsers } from '../../apis/auth';
+import { createNewUser, getAllUsers } from '../../apis/auth';
 import { CgSpinnerTwoAlt } from 'react-icons/cg';
 import { MdDelete } from "react-icons/md";
 import { ToastContainer,toast } from 'react-toastify';
@@ -51,19 +51,33 @@ const UserProfile = () => {
         if(res.error) return console.log(res.error);
 
         let filterUser = res.filter((data) => data._id !== user.id);
-        setAllUserData(filterUser);
+        if(filterUser){
+            setAllUserData(filterUser);
+        }
+        
     }
+
+    const handleRegister = async(e) =>{
+        e.preventDefault()
+    
+        const response = await createNewUser(userInfo);
+        if(response.error) return console.log(response.error);
+
+        console.log(response);
+    
+      }
 
     useEffect(()=>{
         let localuser = JSON?.parse(localStorage?.getItem('userProfile'));
         if(localuser){
             setUser(localuser.user);
         }
+
     },[])
 
     useEffect(()=>{
         getAllUsersData();
-    },[])
+    },[user])
   return (
     <>
     <ToastContainer 
@@ -148,7 +162,7 @@ const UserProfile = () => {
                 {
                     allUserData.length > 0 ? allUserData.map((userData) =>{
                         return(
-                            <div className="list">
+                            <div key={userData._id} className="list">
                                 <div className="imgbox">
                                     <img 
                                      src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4"
@@ -174,6 +188,22 @@ const UserProfile = () => {
                 }
             </div>
         </section>
+
+            <form className='m-4 hidden flex lg:flex-row flex-col justify-between items-center lg:w-1/2 shadow-md border border-gray-400' onSubmit={handleRegister}>
+                <div className='flex w-1/2 flex-col gap-2 p-4'>
+                    <p className='text-center mb-4'>Create a New User</p>
+                    <input className='p-2 outline-none bg-transparent border-b-2' placeholder='Full Name' type="text"/>
+                    <input className='p-2 outline-none bg-transparent border-b-2' placeholder='Email' type="text"/>
+                    <input className='p-2 outline-none bg-transparent border-b-2' placeholder='Phone Number' type="text"/>
+                    <input className='p-2 outline-none bg-transparent border-b-2' placeholder='Company' type="text"/>
+                    <input className='p-2 outline-none bg-transparent border-b-2' placeholder='password' type="text"/>
+                    <button className='p-2 bg-green-600 text-white' type='submit'>Create</button>
+                </div>
+                <div className='w-1/2'>
+                    <img 
+                    src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4" alt="avatar" />
+                </div>
+            </form>
     </>
 
 
