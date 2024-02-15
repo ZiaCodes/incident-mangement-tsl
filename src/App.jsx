@@ -11,6 +11,8 @@ import Vendor from './component/vendor/Vendor';
 import TicketPage from './component/Tickets/TicketPage';
 import NotFound from './component/util/NotFound';
 import UserProfile from './component/User/UserProfile';
+import AdminPage from './component/Auth/AdminPage';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -51,6 +53,20 @@ function App() {
 
   return (
     <>
+    <ToastContainer 
+      position="bottom-left"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      style={{width:'250px',margin:'10px'}}
+
+    />
     <Navigation/>
     <Suspense fallback={<Loader/>}>
     <Routes>
@@ -60,6 +76,7 @@ function App() {
       <Route path='/:vendor' element={<Vendor />} />
       <Route path='/settings' element={<Settings/>} />
       <Route path='settings/:userId' element={<UserProfile/>} />
+      <Route path='settings/admin-page' element={<AdminPage/>} />
       <Route path='/login' element={<Login/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>

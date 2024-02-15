@@ -10,9 +10,9 @@ import { TbLogout } from "react-icons/tb";
 import { FaDiceTwo } from "react-icons/fa6";
 import { MdDeveloperMode } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
+import { IoMdPersonAdd } from "react-icons/io";
 
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
@@ -27,7 +27,7 @@ const Settings = () => {
 
     const navigate = useNavigate();
 
-    useDocumentTitle(`Setting Page | ${user}`)
+    useDocumentTitle(`Setting Page | ${user.name}`)
     
     const handleDarkMode = () =>{
         if(theme === 'isLightMode'){
@@ -187,12 +187,22 @@ const Settings = () => {
                     </li>
                     {
                          isgeneralSetting ? 
-                         <li className='flex justify-start items-center gap-2 p-2 ml-6 rounded-md cursor-pointer'>
-                            <FaUserCircle/>
-                            <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user.id}`}>
-                                User profile
-                            </Link>
-                         </li>
+                         <>
+                            <li className='flex justify-start items-center gap-2 p-2 ml-6 rounded-md cursor-pointer'>
+                                <FaUserCircle/>
+                                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user.id}`}>
+                                    My profile
+                                </Link>
+                            </li>
+                            {
+                                user.role === 'admin' ? <li className='flex justify-start items-center gap-2 p-2 ml-6 rounded-md cursor-pointer'>
+                                <IoMdPersonAdd/>
+                                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/admin-page`}>
+                                    Add User
+                                </Link>
+                            </li> : null
+                            }
+                         </>
                           : null
                     }
                     <hr  className='mt-2 opacity-25'/>
