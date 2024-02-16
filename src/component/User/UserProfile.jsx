@@ -6,13 +6,67 @@ import { MdAttachEmail } from "react-icons/md";
 import { BiSolidContact } from "react-icons/bi";
 import { ImOffice } from "react-icons/im";
 import { FaUserSecret } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { MdSyncProblem } from "react-icons/md";
+import { MdDangerous } from "react-icons/md";
+
 import { ToastContainer,toast } from 'react-toastify';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { forgetPassword } from '../../apis/auth';
+
+const findEmailByADID = (email) =>{
+    let isADEmail = email.startsWith('8');
+    if(isADEmail)
+        return "ADID Email is not supported."
+    
+    return email;
+}
 
 const UserProfile = () => {
     const [user,setUser] = useState({});
 
-    useDocumentTitle(`Profile | ${user.name}`)
+    useDocumentTitle(`Profile | ${user.name}`);
+
+    const forgetPasswordHandle = async() =>{
+        let targetEmail = findEmailByADID(user.email);
+        if(targetEmail != user.email){
+            return toast.error(`${targetEmail}`, {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+            });
+        }
+        let res = await forgetPassword(targetEmail);
+        if(res.error){
+            return toast.error(`${res.error}`, {
+                        position: "bottom-left",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+        }
+        
+        toast.success(`${res.message}`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+
+    }
 
 
     useEffect(()=>{
@@ -82,6 +136,24 @@ const UserProfile = () => {
         </div>
 
         <hr className='bg-black opacity-50'/>
+
+        <div className='flex flex-col m-4 gap-1'>
+            <p className='font-thin mb-4'>Access Control</p>
+            <div className='flex justify-start items-center gap-4'>
+                <label htmlFor="name"><RiLockPasswordFill/> </label>
+                <a className='capitalize p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer' href='#'>Change Password</a>
+            </div>
+            <div 
+            onClick={forgetPasswordHandle}
+                className='flex justify-start items-center gap-4'>
+                <label htmlFor="name"><MdSyncProblem/> </label>
+                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>Forget Password</p>
+            </div>
+            <div className='flex justify-start items-center gap-4'>
+                <label htmlFor="name"><MdDangerous className='text-red-600'/> </label>
+                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>Delete Account</p>
+            </div>
+        </div>
 
     </MainContainer>
 
