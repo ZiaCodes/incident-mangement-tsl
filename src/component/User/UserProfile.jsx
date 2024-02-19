@@ -68,6 +68,10 @@ const UserProfile = () => {
 
     }
 
+    const changePasswordHandle = () =>{
+        
+    }
+
 
     useEffect(()=>{
         let localuser = JSON?.parse(localStorage?.getItem('userProfile'));
@@ -139,28 +143,32 @@ const UserProfile = () => {
 
         <div className='flex flex-col m-4 gap-1'>
             <p className='font-thin mb-4'>Access Control</p>
-            <div className='flex justify-start items-center gap-4'>
+            <div 
+                onClick={changePasswordHandle}
+                className='flex justify-start items-center gap-4'>
                 <label htmlFor="name"><RiLockPasswordFill/> </label>
-                <a className='capitalize p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer' href='#'>Change Password</a>
+                <a className='capitalize p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer' href='#'>
+                    Change Password
+                </a>
             </div>
             <div 
             onClick={forgetPasswordHandle}
                 className='flex justify-start items-center gap-4'>
                 <label htmlFor="name"><MdSyncProblem/> </label>
-                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>Forget Password</p>
+                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>
+                    Forget Password
+                </p>
             </div>
             <div className='flex justify-start items-center gap-4'>
                 <label htmlFor="name"><MdDangerous className='text-red-600'/> </label>
-                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>Delete Account</p>
+                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>
+                    Delete Account
+                </p>
             </div>
         </div>
 
-    </MainContainer>
-
-        
+    </MainContainer> 
     </>
-
-
   )
 }
 

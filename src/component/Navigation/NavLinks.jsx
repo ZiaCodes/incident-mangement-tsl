@@ -8,7 +8,7 @@ const NavLinks = () => {
   return (
     <ul 
         className="flex flex-col 
-        text-red bg-white
+        text-red bg-transparent backdrop-blur-3xl
         right-0 top-16 shadow-lg p-8
         w-60 gap-4 flex-wrap z-50
         fixed

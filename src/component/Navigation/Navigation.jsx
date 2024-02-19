@@ -39,7 +39,7 @@ if(localStorage?.getItem('navigationStyle') === 'Simple'){
     <nav 
     className='fixed w-full top-0 
     flex justify-between items-center
-    bg-white shadow-md z-50'
+    bg-transparent backdrop-blur-3xl shadow-md z-50'
     >
     <p className="m-4 flex justify-center 
     items-center gap-2 uppercase
@@ -47,7 +47,7 @@ if(localStorage?.getItem('navigationStyle') === 'Simple'){
     >
 
     <SiNginxproxymanager 
-    className="text-red-600 text-3xl"
+    className="text-red-600 text-3xl "
     />
     <b className="text-red-600">
         {
