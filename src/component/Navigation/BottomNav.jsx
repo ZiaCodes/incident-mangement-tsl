@@ -16,11 +16,10 @@ const BottomNav = () => {
         setUser(localUser.user);
     },[])
   return (
-    <>
-    <nav 
-    className='fixed w-full bottom-0 
+    <div 
+    className='fixed w-full bottom-0
     grid grid-cols-4  divide-x
-    bg-white backdrop-blur-3xl shadow-md z-50'
+    light:bg-white dark:bg-black text-white backdrop-blur-3xl shadow-md z-50'
     >
     
 
@@ -48,8 +47,7 @@ const BottomNav = () => {
         />
     </Link>
 
-    </nav>
-    </>
+    </div>
   )
 }
 

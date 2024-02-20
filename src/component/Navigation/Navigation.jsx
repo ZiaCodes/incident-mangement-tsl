@@ -9,6 +9,7 @@ import { IoSettings } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 import { Link } from "react-router-dom";
+import BottomNav from "./BottomNav";
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAuth,setIsAuth] = useState(false);
@@ -31,7 +32,7 @@ const Navigation = () => {
       },[])
 
 if(localStorage?.getItem('navigationStyle') === 'Simple'){
-    return <SimpleNavigation/>
+    return <BottomNav/>
 }
 
   return (
