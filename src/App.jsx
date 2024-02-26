@@ -13,7 +13,6 @@ import NotFound from './component/util/NotFound';
 import UserProfile from './component/User/UserProfile';
 import AdminPage from './component/Auth/AdminPage';
 import { ToastContainer } from 'react-toastify';
-import BottomNav from './component/Navigation/BottomNav';
 
 
 function App() {

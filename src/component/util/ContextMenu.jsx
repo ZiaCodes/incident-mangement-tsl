@@ -5,8 +5,9 @@ import { MdDelete } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 import { MdBugReport } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { CiHeart } from "react-icons/ci";
 
-const ContextMenu = ({x,y,closeContextMenu,serviceNowLink,ticketNumber,openEditWindow,deleteContextTicket}) => {
+const ContextMenu = ({x,y,closeContextMenu,serviceNowLink,ticketNumber,openEditWindow,deleteContextTicket,addToFavList}) => {
   return (
     <div 
     onContextMenu={(e)=> e.preventDefault()}
@@ -17,8 +18,12 @@ const ContextMenu = ({x,y,closeContextMenu,serviceNowLink,ticketNumber,openEditW
         zIndex:'9999999999999'}}
     >
         <ul className='contextMenuContainer'>
-        <li className='contextMenu'> 
-        <span className="text-xl">#</span> {ticketNumber} 
+        <li className='contextMenu hover:bg-green-600'> 
+        <span className="text-xl">
+            <CiHeart 
+                onClick={addToFavList}
+            className="text-2xl"/>
+        </span> {ticketNumber} 
         </li>
         <a href={serviceNowLink} target="_blank" className='contextMenu'>
                 <FaEye/> Service now
