@@ -126,7 +126,7 @@ const Upload = (props) => {
 
 
         <input 
-        className="border border-blue-800 h-10 p-0.8 outline-none mt-4 p-2 rounded-sm" 
+        className="border text-black border-blue-800 h-10 p-0.8 outline-none mt-4 p-2 rounded-sm" 
         placeholder='Type anything..'
         type="search" 
         name="search" 

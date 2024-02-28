@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { SiNginxproxymanager } from "react-icons/si";
 const BottomNav = () => {
 
     const [user,setUser] = useState({});
@@ -16,8 +17,23 @@ const BottomNav = () => {
         setUser(localUser.user);
     },[])
   return (
+  <>
     <div 
-    className='fixed w-full bottom-0
+    className='fixed w-full top-0 
+    flex justify-between items-center
+    bg-white shadow-md z-50'
+    >
+        <p className="m-4 flex justify-center 
+        items-center gap-2 uppercase
+        text-blue-800 font-bold"
+        >
+        <SiNginxproxymanager 
+        className="text-red-600 text-3xl"
+        /> <b className="text-red-600">Incident</b>Mangement
+        </p>
+    </div>
+    <div 
+    className='fixed w-full bottom-0 p-2
     grid grid-cols-4  divide-x
     light:bg-white dark:bg-black text-white backdrop-blur-3xl shadow-md z-50'
     >
@@ -48,6 +64,7 @@ const BottomNav = () => {
     </Link>
 
     </div>
+    </>
   )
 }
 
