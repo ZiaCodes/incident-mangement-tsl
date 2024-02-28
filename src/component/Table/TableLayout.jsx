@@ -281,6 +281,18 @@ const TableLayout = () => {
       serviceNowLink={`https://tatasteel.service-now.com/now/nav/ui/search/0f8b85d0c7922010099a308dc7c2606a/params/search-term/${contextTicket}/global-search-data-config-id/c861cea2c7022010099a308dc7c26041/back-button-label/Incident%20-%2005750836/search-context/now%2Fnav%2Fui`}
       openEditWindow={()=>editRowItem(ContextEditTicket)}
       deleteContextTicket={()=>deleteRowItem(contextTicket)}
+      addToFavList={()=> {
+        let localFevItems = JSON.parse(localStorage.getItem('watchList'));
+
+        let newSet = new Set(localFevItems);
+        console.log(newSet)
+
+        if(newSet){
+          newSet.add(contextTicket);
+          console.log(newSet)
+          localStorage.setItem('watchList',JSON.stringify(newSet));
+        }
+      }}
     />}
     {
       isOpen ? 

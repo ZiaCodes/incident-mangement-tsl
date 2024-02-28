@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react'
 import MainContainer from '../component/Wrapper/MainContainer'
 import VendorCard from '../component/vendor/VendorCard';
 
-import Skylink from '../assets/skylink.png'
-import Wizer from '../assets/wizer.png'
-import Lasetek from '../assets/lasetek.jpg'
-import Technet from '../assets/technet.webp'
-import Embee from '../assets/embee.png'
-import Debug from '../assets/debug.png'
-import Others from '../assets/others.png'
+// import Skylink from '../assets/skylink.png'
+// import Wizer from '../assets/wizer.png'
+// import Lasetek from '../assets/lasetek.jpg'
+// import Technet from '../assets/technet.webp'
+// import Embee from '../assets/embee.png'
+// import Debug from '../assets/debug.png'
+// import Others from '../assets/others.png'
 
 
 import DonutChart from '../charts/DonutChart';
 import AnotherChart, { LocationChart } from '../charts/LineChart';
 import AllCharts from '../charts/AllCharts';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+// import { serviceNowCablingRequest } from '../apis/auth';
 
 
 const Report = () => {
@@ -159,6 +160,7 @@ const Report = () => {
     setVendorName(Object.keys(vendorCallGroup));
     
   }
+
   useEffect(()=>{
     const localTableData = JSON.parse(localStorage.getItem('formateIncidentData'));
     if(localTableData){
@@ -181,6 +183,15 @@ useEffect(()=>{
   let locationCount = Object.groupBy(callData, loc => loc.location );
   setLocationData(locationCount)
 },[])
+
+// useEffect(()=>{
+//   const formns = async () =>{
+//     let res = await serviceNowCablingRequest();
+//     console.log(res)
+//   }
+
+//   formns();
+// },[])
 
 
   return (
@@ -250,14 +261,14 @@ useEffect(()=>{
               key={i}
               liveStausStyle={openLength[i] !== 0 ? 'text-xl text-green-500 float-right animate-pulse' : "text-xl text-gray-500 float-right"}
               vendorName={vendorDetails}
-              imgUrl={vendorDetails ==='TECHNET' ? Technet :
-              (vendorDetails==='WIZER' ? Wizer :
-              (vendorDetails === 'EMBEE' ? Embee :
-              (vendorDetails === 'SKYLINK' ? Skylink : (
-                vendorDetails === 'LASETEK' ? Lasetek : (
-                  vendorDetails === 'DEBUG' ? Debug : Others
-                )
-              ))) )}
+              // imgUrl={vendorDetails ==='TECHNET' ? Technet :
+              // (vendorDetails==='WIZER' ? Wizer :
+              // (vendorDetails === 'EMBEE' ? Embee :
+              // (vendorDetails === 'SKYLINK' ? Skylink : (
+              //   vendorDetails === 'LASETEK' ? Lasetek : (
+              //     vendorDetails === 'DEBUG' ? Debug : Others
+              //   )
+              // ))) )}
               total={openLength[i]+closeLength[i]}
               openCall={openLength[i]}
               closedCall={closeLength[i]}

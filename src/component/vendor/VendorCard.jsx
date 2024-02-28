@@ -15,10 +15,10 @@ const VendorCard = (props) => {
       className='bg-white border border-slate-100 shadow-md overflow-y-auto h-auto w-80 rounded-sm p-4 hover:shadow-lg '>
           <GoDotFill className={props.liveStausStyle}/>
           <div className='flex justify-center items-center flex-col mb-4'>
-          <img 
+          {/* <img 
           src={props.imgUrl}
-          className='w-20 h-auto'
-           alt="logo" />
+          className='object-fill w-20 h-20'
+           alt="logo" /> */}
           <Link className="shadow-none" to={`/${props.vendorName}`}>
             <h1 className='text-xl font-bold text-center m-2 text-black'>{props.vendorName}</h1>
           </Link>
@@ -33,13 +33,14 @@ const VendorCard = (props) => {
             <p  className='bg-green-600 text-white'>
               <TiLockClosed/>
               Closed: {props.closedCall}</p>
-            <p className='bg-pink-500 text-white'>
+            {localStorage?.getItem('m_mode') === 'Incident' ? <p className='bg-pink-500 text-white'>
               <MdOutlinePendingActions/>
-              Incident: {props.incidentCall}</p>
+              Incident: {props.incidentCall}</p> : null
+              }
             <p className='bg-yellow-600 text-white'>
               <MdOutlineWatchOff/>
               Alert : {props.alertCall}</p>
-            <p className='bg-purple-600 text-white'>
+              <p className='bg-purple-600 text-white'>
               <FaNetworkWired/>
               Request: {props.requestCall}</p>
               <p className='bg-slate-900 text-white'>
