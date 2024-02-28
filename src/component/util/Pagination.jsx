@@ -4,7 +4,7 @@ import { RiArrowRightDoubleLine } from "react-icons/ri";
 
 const Pagination = ({children,handlePage}) => {
   return (
-    <div className='flex justify-center items-center gap-2 mb-14'>
+    <div className='invisible flex justify-center items-center gap-2 mb-14'>
         <RiArrowLeftDoubleFill className='cursor-pointer opacity-30'/>
         <select 
         className='outline-none border bg-white text-black

@@ -440,7 +440,7 @@ const TableLayout = () => {
               }else if(dataField.remarks.trim().toLowerCase().includes(search.trim().toLowerCase())){
                 return dataField
               }
-            }).slice(0,page).map((dataField,index)=>{
+            }).map((dataField,index)=>{
               return(
                 <TableBody
                 style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "bg-red-600 text-white" : ( dataField.status === "Resolved" ? "bg-green-600 text-white" : null)) }
@@ -476,11 +476,11 @@ const TableLayout = () => {
     {
           tableData?.length ? <Pagination
           handlePage={(e)=> setPage(e.target.value)}
-        >
+          >
           {
             pageSet.map((pageNumber,i) =>{
               return(
-                <option key={i} value={pageNumber}>
+                <option  key={i} value={pageNumber}>
                   {pageNumber}
                 </option>
               )
@@ -490,9 +490,10 @@ const TableLayout = () => {
         }
        
 
-        {
+        {/* {
           (page > 10 && tableData?.length ) && <FloatingBtn/> 
-        }
+        } */}
+        <FloatingBtn/>
 
     </>
   )

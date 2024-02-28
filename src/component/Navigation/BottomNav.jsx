@@ -31,6 +31,13 @@ const BottomNav = () => {
         className="text-red-600 text-3xl"
         /> <b className="text-red-600">Incident</b>Mangement
         </p>
+
+        {
+            user ? 
+                <Link className="p-0 shadow-none mr-4 text-black" to={`/settings/${user.id}`} >
+                    <FaCircleUser className="text-2xl"/>
+                </Link> : null
+        }
     </div>
     <div 
     className='fixed w-full bottom-0 p-2
