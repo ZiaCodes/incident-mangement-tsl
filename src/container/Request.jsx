@@ -16,6 +16,8 @@ const Request = () => {
   const [isloading, setIsLoading] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [chooseFile, setChooseFile] = useState("Choose a new file");
+  const [tabData,setTabData] = useState([]);
+  const [cabData,setCabData] = useState([]);
 
   const fileReader =(oEvent) => {
        
@@ -37,8 +39,7 @@ const Request = () => {
             if (roa.length) result[sheetName] = roa;
         });
         // see the result, caution: it works after reader event is done.
-        // console.log(result.SR);
-        setTableData(result?.Request);
+        localStorage.setItem('SRCall',JSON.stringify(result));
         setIsLoading(false);
        
     };
@@ -50,35 +51,64 @@ const Request = () => {
     setIsDataLoaded(true);
   }
 
+  const handleTab = (label) =>{
+    setCabData(tableData[`${label}`]);
+    console.log(cabData)
+  }
+
+  useEffect(()=>{
+    let localData = JSON.parse(localStorage?.getItem('SRCall'));
+    if(localData){
+      setTableData(localData);
+      setTabData(Object.keys(localData))
+    }
+  },[])
+
+  console.log(tabData)
 
   return(
     <>
 
-    <div 
-    className='flex justify-center items-center 
-    mt-28 ml-4 bg-white shadow-md w-80 p-2'>
-      <input 
-      type="file" 
-      name="uploadRequest"
-      accept=".xlsx, .xls"
-      onInput={(e) => fileReader(e)}
-      className='request_upload'
-      />
-      <button 
-        type="submit"
-        className='flex justify-center items-center gap-2 rounded-sm
-        bg-blue-800 p-4 text-white hover:bg-blue-500'
-        onClick={uploadDaataIntoTable}
-        >
-        {
-            isloading ? <>
-            <CgSpinnerTwoAlt className="animate-spin"/>
-             wait..
-             </> : (<>
-                <FaFileUpload/> Upload
-             </>)
-        }
-        </button>
+     <div 
+      className='flex justify-center items-center 
+      mt-28 ml-4 bg-white shadow-md w-80 p-2'>
+        <input 
+        type="file" 
+        name="uploadRequest"
+        accept=".xlsx, .xls"
+        onInput={(e) => fileReader(e)}
+        className='request_upload'
+        />
+        <button 
+          type="submit"
+          className='flex justify-center items-center gap-2 rounded-sm
+          bg-blue-800 p-4 text-white hover:bg-blue-500'
+          onClick={uploadDaataIntoTable}
+          >
+          {
+              isloading ? <>
+              <CgSpinnerTwoAlt className="animate-spin"/>
+               wait..
+               </> : (<>
+                  <FaFileUpload/> Upload
+               </>)
+          }
+          </button>
+      </div> 
+
+    <div className='p-2 flex justify-center'>
+      {
+        tabData.map((label,index) =>{
+          return (
+          <span 
+            onClick={() => handleTab(label)}
+          className='p-2 bg-blue-700 m-2 text-white rounded-sm cursor-pointer'
+          key={index}>
+            {label}
+          </span>
+          )
+        })
+      }
     </div>
     {
       !tableData?.length < 0 ? 
@@ -87,11 +117,8 @@ const Request = () => {
         Upload an Excel Data to get insight and visualization.
       </p>: 
       <TableContainer>
-      {
-        isDataLoaded ?
-        <>
           {
-            tableData?.slice(0,page).map((val,i) =>{
+            cabData?.map((val,i) =>{
               return(
                 <tbody key={i}>
                   <tr className={i===0 ? 'bg-blue-600 text-white uppercase font-bold tracking-wide' : null } >
@@ -109,8 +136,6 @@ const Request = () => {
               )
             })
           }
-        </> : null
-      } 
       </TableContainer>
     }
 

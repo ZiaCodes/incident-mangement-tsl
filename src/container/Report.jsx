@@ -193,7 +193,7 @@ useEffect(()=>{
 //   formns();
 // },[])
 
-console.log(callData)
+// console.log(callData)
 
   return (
     <>

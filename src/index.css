@@ -39,8 +39,9 @@ table {
 
   tr:hover{
     opacity: 0.8;
-    background-color: #000;
+    background-color: #000000; 
     color: #fff;
+
   }
 
   tr:focus{

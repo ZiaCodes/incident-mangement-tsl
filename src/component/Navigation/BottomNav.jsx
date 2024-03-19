@@ -58,7 +58,7 @@ const BottomNav = () => {
         />
     </Link>
 
-    <Link title="fav" className="shadow-none flex justify-center items-center " to='/settings'>
+    <Link title="fav" className="shadow-none flex justify-center items-center " to='/watchlist'>
         <FaHeart 
         className=" text-xl text-center text-red-600"
         />

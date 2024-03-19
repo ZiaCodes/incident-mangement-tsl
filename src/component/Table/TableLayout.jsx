@@ -443,7 +443,7 @@ const TableLayout = () => {
             }).map((dataField,index)=>{
               return(
                 <TableBody
-                style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "bg-red-600 text-white" : ( dataField.status === "Resolved" ? "bg-green-600 text-white" : null)) }
+                style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "text-red-600" : ( dataField.status === "Resolved" ? "text-green-600" : null)) }
                 key={index}
                 serialNumber={index+1}
                 ticketNo={dataField.ticketNo}

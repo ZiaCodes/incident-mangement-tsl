@@ -13,6 +13,7 @@ import NotFound from './component/util/NotFound';
 import UserProfile from './component/User/UserProfile';
 import AdminPage from './component/Auth/AdminPage';
 import { ToastContainer } from 'react-toastify';
+import WatchList from './container/WatchList';
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="ticket/:ticket" element={<TicketPage />} />
+      <Route path='/watchlist' element={<WatchList/>} />
       <Route path="/report" element={<Report />} />
       <Route path='/:vendor' element={<Vendor />} />
       <Route path='/settings' element={<Settings/>} />
