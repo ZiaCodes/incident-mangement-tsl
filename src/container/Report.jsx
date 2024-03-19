@@ -193,6 +193,7 @@ useEffect(()=>{
 //   formns();
 // },[])
 
+console.log(callData)
 
   return (
     <>
@@ -222,20 +223,6 @@ useEffect(()=>{
       }
       />
     </div>
-
-    {/* <div className='flex justify-between items-center h-96 lg:mt-4'>
-        <LocationChart 
-          label={Object.keys(locationData)} 
-          dataset={[
-            {
-              label:["Total"],
-              data:callData.map(val => val.location),
-              backgroundColor: callData.map((_,i) => randomColor(Math.floor(Math.random() * 999), 10))
-          },
-        ]
-      }
-      />
-    </div> */}
 
     <div className='flex justify-between items-center h-96'>
       <AnotherChart
@@ -282,6 +269,23 @@ useEffect(()=>{
             
           })
         }
+      </div>
+
+      <div>
+        
+        <div className='flex justify-between items-center h-96 lg:mt-4 mb-16'>
+        <LocationChart 
+          label={Object.keys(locationData)} 
+          dataset={[
+            {
+              label:["Day",],
+              data:callData.map(val => val.age),
+              backgroundColor: callData.map((_,i) => randomColor(Math.floor(Math.random() * 999), 10))
+          },
+        ]
+      }
+      />
+    </div>
       </div>
   </>
   )
