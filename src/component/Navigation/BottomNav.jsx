@@ -34,7 +34,7 @@ const BottomNav = () => {
 
         {
             user ? 
-                <Link className="p-0 shadow-none mr-4 text-black" to={`/settings/${user.id}`} >
+                <Link className="p-0 shadow-none mr-4 text-black" to={`/settings/${user?.id}`} >
                     <FaCircleUser className="text-2xl"/>
                 </Link> : null
         }

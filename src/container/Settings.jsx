@@ -27,7 +27,7 @@ const Settings = () => {
 
     const navigate = useNavigate();
 
-    useDocumentTitle(`Setting Page | ${user.name}`)
+    useDocumentTitle(`Setting Page | ${user?.name}`)
     
     const handleDarkMode = () =>{
         if(theme === 'isLightMode'){
@@ -170,7 +170,7 @@ const Settings = () => {
             <img src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4" alt="avatar" />
         </div>
         <h1 className='flex flex-col justify-center items-center'>
-        <Link className='p-0 shadow-none' to={`/settings/${user.id}`}>{user.name}</Link>
+        <Link className='p-0 shadow-none' to={`/settings/${user?.id}`}>{user?.name}</Link>
         </h1>
     </div>
 
@@ -190,7 +190,7 @@ const Settings = () => {
                          <>
                             <li className='flex justify-start items-center gap-2 p-2 ml-6 rounded-md cursor-pointer'>
                                 <FaUserCircle/>
-                                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user.id}`}>
+                                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user?.id}`}>
                                     My profile
                                 </Link>
                             </li>

@@ -25,7 +25,7 @@ const findEmailByADID = (email) =>{
 const UserProfile = () => {
     const [user,setUser] = useState({});
 
-    useDocumentTitle(`Profile | ${user.name}`);
+    useDocumentTitle(`Profile | ${user?.name}`);
 
     const forgetPasswordHandle = async() =>{
         let targetEmail = findEmailByADID(user.email);
@@ -69,7 +69,17 @@ const UserProfile = () => {
     }
 
     const changePasswordHandle = () =>{
-        
+
+        toast.error("Feature coming soon.", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
     }
 
 
@@ -103,14 +113,14 @@ const UserProfile = () => {
             </div>
             <div className='flex flex-col justify-start items-start'>
                 <div className='flex justify-center items-center gap-2'>
-                    <p className='text-2xl font-bold'>{user.name}</p>
+                    <p className='text-2xl font-bold'>{user?.name}</p>
                     {
                         user.isVerified ? 
                         <MdVerified className='text-xl text-blue-600'/> : 
                         <MdReportProblem className='text-xl text-red-600'/>
                     }
                 </div>
-                <p className='font-thin text-gray-500'>{user.gender}, {user.age}</p>
+                <p className='font-thin text-gray-500'>{user?.gender}, {user?.age}</p>
             </div>
         </div>
 
@@ -119,23 +129,23 @@ const UserProfile = () => {
             <p className='font-thin mb-4'>Basic Details</p>
             <div className='flex items-center gap-4'>
                 <label htmlFor="name"><MdAttachEmail/> </label>
-                <p>{user.email}</p>
+                <p>{user?.email}</p>
             </div>
 
             <div className='flex items-center gap-4'>
                 <label htmlFor="name"><BiSolidContact/></label>
-                <p className='capitalize'>{user.phoneNumber}</p>
+                <p className='capitalize'>{user?.phoneNumber}</p>
             </div>
 
             <div className='flex items-center gap-4'>
                 <label htmlFor="name"><ImOffice/> </label>
-                <p>{user.company}</p>
+                <p>{user?.company}</p>
             </div>
             <div className='flex items-center gap-4'>
                 <label htmlFor="name">
                     <FaUserSecret/>
                 </label>
-                <p className='capitalize'>{user.role} (Role)</p>
+                <p className='capitalize'>{user?.role} (Role)</p>
             </div>
         </div>
 

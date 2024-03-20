@@ -9,7 +9,7 @@ const FloatingBtn = () => {
     items-center bg-blue-800 shadow-lg'
     onClick={()=> scrollTo(0, 0)}
     >
-        <MdKeyboardDoubleArrowUp className='text-white text-2xl'/>
+      <MdKeyboardDoubleArrowUp className='text-white text-2xl'/>
     </div>
   )
 }

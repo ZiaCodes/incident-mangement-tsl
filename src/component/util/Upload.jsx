@@ -101,29 +101,27 @@ const Upload = (props) => {
     <>
     <div className='flex flex-wrap justify-start items-center gap-2 m-4'>
         <input 
-        className='bg-blue-800 h-10 text-white p-1 mt-4 rounded-sm '
-        type="file" 
-        accept=".xlsx,.xls"
-        onInput={(e) => fileReader(e)}
-        name="upload"
+            className='bg-blue-800 h-10 text-white p-1 mt-4 rounded-sm '
+            type="file" 
+            accept=".xlsx,.xls"
+            onInput={(e) => fileReader(e)}
+            name="upload"
         />
         <button 
-        type="submit"
-        className='flex justify-center items-center gap-2 rounded-sm
-        bg-blue-800 p-2 mt-4 h-10 text-white hover:bg-blue-500'
-        onClick={UploadExcelData}
-        >
-        {
-            isLoading ? <>
-            <CgSpinnerTwoAlt className="animate-spin"/>
-             Uploading ...
-             </> : (<>
-                <FaFileUpload/> Upload Data
-             </>)
-        }
+            type="submit"
+            className='flex justify-center items-center gap-2 rounded-sm
+            bg-blue-800 p-2 mt-4 h-10 text-white hover:bg-blue-500'
+            onClick={UploadExcelData}
+            >
+            {
+                isLoading ? <>
+                <CgSpinnerTwoAlt className="animate-spin"/>
+                Uploading ...
+                </> : (<>
+                    <FaFileUpload/> Upload Data
+                </>)
+            }
         </button>
-
-
 
         <input 
         className="border text-black border-blue-800 h-10 p-0.8 outline-none mt-4 p-2 rounded-sm" 
@@ -134,16 +132,16 @@ const Upload = (props) => {
         onChange={props.method}
         />
         
-
     </div>
     {
-        isLoading ? <div className="ml-4">
-        <div className="flex gap-4 justify-start items-center text-blue-800">
-        <SiMicrosoftexcel className="animate-pulse"/>
-        <RiArrowRightDoubleFill className="animate-ping text-red-600"/>
-        <IoLogoTableau className="animate-pulse text-blue-800"/>
-        </div>
-    </div> : null
+        isLoading ? 
+        <div className="ml-4">
+            <div className="flex gap-4 justify-start items-center text-blue-800">
+                <SiMicrosoftexcel className="animate-pulse"/>
+                <RiArrowRightDoubleFill className="animate-ping text-red-600"/>
+                <IoLogoTableau className="animate-pulse text-blue-800"/>
+            </div>
+        </div> : null
     }
 
     </>
