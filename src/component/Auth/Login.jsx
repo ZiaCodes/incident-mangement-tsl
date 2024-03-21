@@ -80,6 +80,10 @@ const Login = () => {
     }
   },[])
 
+  useEffect(()=>{
+
+  },[])
+
 
   const {email, password} = userInfo;
   return (
@@ -106,10 +110,18 @@ const Login = () => {
         className="relative flex justify-center items-center h-screen flex-col">
 
           <div className="wallpaper">
-            
+          <header className="top-header">
+          </header>
+          <div>
+            <div className="starsec"></div>
+            <div className="starthird"></div>
+            <div className="starfourth"></div>
+            <div className="starfifth"></div>
+          </div>
           </div>
 
-            <div className='absolute flex rounded-sm shadow-md flex-col gap-8 mt-6 p-12 bg-slate-700'>
+            <div 
+              className='absolute flex rounded-md shadow-xl flex-col gap-8 mt-6 p-12 bg-transparent backdrop-blur-sm'>
             <h3 className='text-xl text-center font-bold text-white'>
                 Sign In
             </h3>
@@ -119,7 +131,7 @@ const Login = () => {
                 name="email"
                 autoComplete='on'
                 placeholder='Email'
-                className='p-2 outline-none border border-green-600 rounded-sm text-black'
+                className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
                 />
 
                 <input 
@@ -130,7 +142,7 @@ const Login = () => {
                 type="password"
                 autoComplete='on'
                 id='passField'
-                className='p-2 outline-none border border-green-600 rounded-sm text-black'
+                className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
                 />
 
                 <div className='text-white font-thin text-xs flex gap-1 -mt-5'>

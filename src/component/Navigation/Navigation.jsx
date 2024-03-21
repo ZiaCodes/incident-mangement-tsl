@@ -38,7 +38,7 @@ if(localStorage?.getItem('navigationStyle') === 'Simple'){
   return (
     <>
     <nav 
-    className='fixed w-full top-0 
+    className='fixed w-full top-0
     flex justify-between items-center
     bg-transparent backdrop-blur-3xl shadow-md z-50'
     >
