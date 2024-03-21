@@ -100,19 +100,25 @@ const Login = () => {
 
     />
 
-    <form onSubmit={handleSubmit} 
-        className="flex justify-center items-center h-screen flex-col">
-            <h3 className='text-xl font-bold'>
-                Please login to Continue
-            </h3>
+    
 
-            <div className='flex rounded-sm shadow-md flex-col gap-8 mt-6 p-12 bg-slate-700'>
+    <form onSubmit={handleSubmit} 
+        className="relative flex justify-center items-center h-screen flex-col">
+
+          <div className="wallpaper">
+            
+          </div>
+
+            <div className='absolute flex rounded-sm shadow-md flex-col gap-8 mt-6 p-12 bg-slate-700'>
+            <h3 className='text-xl text-center font-bold text-white'>
+                Sign In
+            </h3>
                 <input 
                 value={email}
                 onChange={handleChange}
                 name="email"
                 autoComplete='on'
-                placeholder='Syed@gmail.com'
+                placeholder='Email'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
 
@@ -120,12 +126,13 @@ const Login = () => {
                 value={password}
                 onChange={handleChange}
                 name="password"
-                placeholder='********'
+                placeholder='Password'
                 type="password"
                 autoComplete='on'
                 id='passField'
                 className='p-2 outline-none border border-green-600 rounded-sm text-black'
                 />
+
                 <div className='text-white font-thin text-xs flex gap-1 -mt-5'>
                 <input onClick={showPassword} type='checkbox'/>
                 <p>Show password.</p>

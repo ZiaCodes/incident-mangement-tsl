@@ -24,6 +24,7 @@ const findEmailByADID = (email) =>{
 
 const UserProfile = () => {
     const [user,setUser] = useState({});
+    const [avatar, setAvatar] = useState("");
 
     useDocumentTitle(`Profile | ${user?.name}`);
 
@@ -109,7 +110,7 @@ const UserProfile = () => {
     <MainContainer>
         <div className='flex justify-start items-left m-4 gap-8'>
             <div className='w-40 h-40 overflow-hidden shadow-md p-2 hover:p-4 transition-all'>
-                <img src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4" alt="avatar" />
+                <img src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.name}`} alt="avatar" />
             </div>
             <div className='flex flex-col justify-start items-start'>
                 <div className='flex justify-center items-center gap-2'>

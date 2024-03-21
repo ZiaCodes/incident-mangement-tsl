@@ -120,12 +120,14 @@ const AdminPage = () => {
             });
       }
 
+
       useEffect(()=>{
         getAllUsersData();
     },[isLoading,user])
 
     useEffect(()=>{
         let localuser = JSON?.parse(localStorage?.getItem('userProfile'));
+        console.log(localuser)
         if(localuser){
             setUser(localuser.user);
         }
@@ -145,7 +147,7 @@ const AdminPage = () => {
                             <div key={userData._id} className="list">
                                 <div className="imgbox">
                                     <img 
-                                     src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4"
+                                     src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${userData.name}`}
                                      alt="img"
                                     />
                                 </div>

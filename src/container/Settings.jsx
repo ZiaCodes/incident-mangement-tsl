@@ -23,7 +23,7 @@ const Settings = () => {
     const [mode,setMode] = useState(localStorage?.getItem('m_mode'));
     const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'));
     const [devMode, setDevMode] = useState('Off');
-    const [isgeneralSetting, setIsgeneralSetting] = useState(false)
+    const [isgeneralSetting, setIsgeneralSetting] = useState(false);
 
     const navigate = useNavigate();
 
@@ -143,7 +143,9 @@ const Settings = () => {
         if(Jwt?.user){
             setUser(Jwt?.user);
         }
-    },[]);  
+    },[]);
+
+    
 
   return (
     <>
@@ -167,7 +169,7 @@ const Settings = () => {
 
     <div className='flex justify-center flex-col items-center gap-4'>
         <div className='w-20 h-20 overflow-hidden shadow-md rounded-full'>
-            <img src="https://avatars.githubusercontent.com/u/56580229?s=400&u=f40607e876c993708ddbb8616c25e166023c246b&v=4" alt="avatar" />
+            <img src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.name}`} alt="avatar" />
         </div>
         <h1 className='flex flex-col justify-center items-center'>
         <Link className='p-0 shadow-none' to={`/settings/${user?.id}`}>{user?.name}</Link>

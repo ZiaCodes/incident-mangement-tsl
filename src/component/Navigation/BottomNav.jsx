@@ -14,7 +14,7 @@ const BottomNav = () => {
 
     useEffect(()=>{
         let localUser = JSON?.parse(localStorage?.getItem('userProfile'));
-        setUser(localUser.user);
+        setUser(localUser?.user);
     },[])
   return (
   <>
@@ -35,14 +35,16 @@ const BottomNav = () => {
         {
             user ? 
                 <Link className="p-0 shadow-none mr-4 text-black" to={`/settings/${user?.id}`} >
-                    <FaCircleUser className="text-2xl"/>
+                    <img 
+                        className="w-10 h-10 shadow-sm rounded-full"
+                        src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.name}`} alt={user.name} />
                 </Link> : null
         }
     </div>
-    <div 
-    className='fixed w-full bottom-0 p-2
-    grid grid-cols-4  divide-x
-    light:bg-white dark:bg-black text-white backdrop-blur-3xl shadow-md z-50'
+    {user ? <div 
+        className='fixed w-full bottom-0 p-2
+        grid grid-cols-4  divide-x
+        light:bg-white dark:bg-black text-white backdrop-blur-3xl shadow-md z-50'
     >
     
 
@@ -70,7 +72,7 @@ const BottomNav = () => {
         />
     </Link>
 
-    </div>
+    </div> : null}
     </>
   )
 }

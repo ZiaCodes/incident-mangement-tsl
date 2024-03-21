@@ -100,7 +100,7 @@ const Upload = (props) => {
   return (
     <>
     <div className='flex flex-wrap justify-start items-center gap-2 m-4'>
-        <input 
+            <input 
             className='bg-blue-800 h-10 text-white p-1 mt-4 rounded-sm '
             type="file" 
             accept=".xlsx,.xls"
@@ -121,7 +121,7 @@ const Upload = (props) => {
                     <FaFileUpload/> Upload Data
                 </>)
             }
-        </button>
+        </button> 
 
         <input 
         className="border text-black border-blue-800 h-10 p-0.8 outline-none mt-4 p-2 rounded-sm" 
