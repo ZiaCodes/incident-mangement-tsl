@@ -4,8 +4,7 @@ import FloatingBtn from '../util/FloatingBtn'
 import TableContainer from './TableContainer'
 import TableHead from './TableHead'
 import TableBody from './TableBody'
-import { FcInfo } from "react-icons/fc"
-import Upload from '../util/Upload'
+import { MdCloudUpload } from "react-icons/md";
 
 import { ToastContainer, toast } from 'react-toastify';
 import ModelBox from '../util/ModelBox'
@@ -20,6 +19,8 @@ import ContextMenu from '../util/ContextMenu';
 import { useClickAway } from 'react-hook-click-away';
 import Request from '../../container/Request'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
+import Instruction from '../util/Instruction'
+import UploadModel from '../Model/UploadModel'
 
 const TableLayout = () => {
 
@@ -49,6 +50,7 @@ const TableLayout = () => {
   const [contextTicket, setContextTicket] = useState("");
   const [ContextEditTicket, setContextEditTicket] = useState(EditObject);
   const [mode, setMode] = useState(localStorage?.getItem('m_mode'));
+  const [isFileUploadModelActive, setIsFileUploadModelActive] = useState(true)
 
   const initialContextMenu = {
     show: false,
@@ -240,26 +242,12 @@ const TableLayout = () => {
     }
   };
 
-  const handleAddManually = () =>{
-    toast.info("This feature is coming soon.", {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
-
-  }
-
 
   useEffect(()=>{
     const userInfo = JSON.parse(localStorage?.getItem('userProfile'));
 
     if(userInfo){
-      setIsVerified(userInfo.user.isVerified);
+      setIsVerified(userInfo?.user?.isVerified);
     }
   },[isVerified])
 
@@ -359,7 +347,7 @@ const TableLayout = () => {
       style={{width:'250px',margin:'10px'}}
 
     />
-    <Upload searchValue={search} method={handleSearch}/>
+    {/* <Upload searchValue={search} method={handleSearch}/> */}
 
     <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase ml-4'>
         {
@@ -379,7 +367,10 @@ const TableLayout = () => {
           })
         }
         
-          <button 
+          {
+            statusArr.length > 0 ? 
+            <>
+              <button 
             onClick={toPDF}
             className=' outline-none flex border border-red-600 p-2 rounded-sm justify-center items-center gap-2'>
             <FaFilePdf/>
@@ -391,33 +382,20 @@ const TableLayout = () => {
             className=' outline-none flex border border-red-600 p-2 rounded-sm justify-center items-center gap-2'>
             <SiMicrosoftexcel/>
             EXCEL
-          </button>   
+          </button>
+            </> : null
+          }   
         </div>
     {
       !tableData?.length > 0 ? 
-      <div className='flex flex-wrap p-4 flex-col justify-center mt-8 items-center gap-8'>
-        <p className='flex  justify-center items-center gap-2 '>
-        <FcInfo className='text-xl'/>
-        Upload an Excel Data to get insight and visualization.
-      </p>
-      <div className='flex p-2 gap-2 flex-col flex-wrap justify-center items-left'>
-        <h1 className='font-bold'>Instruction:</h1>
-        <p className='flex flex-wrap gap-2'>Step-1 : Download the  
-          <a 
-          className='text-red-600 shadow-none m-0 p-0 lowercase' 
-          href="./sample-excel-data.xlsx"
-          download
-          >sample Excel sheet</a>.</p>
-        <p>Step-2 : Fill your own data</p>
-        <p>step-3 : Upload the same Excel sheet</p>
-        <p><b>Note:</b> Please keep same sheetName i.e-Incident</p>
-      </div>
-      <p className='text-slate-500'>--------- OR ---------</p>
-      <button
-      onClick={handleAddManually}
-      className='bg-green-600 gap-2 flex justify-around items-center p-2 rounded-sm text-white hover:bg-blue-600'>
-        <FaPlus className='text-xl'/> Add Manually</button>
-      </div>:
+      <Instruction>
+        {
+          isFileUploadModelActive ? 
+          <UploadModel onClick={() => setIsFileUploadModelActive(false)}/> 
+          : null
+        }
+      </Instruction>
+      :
       <TableContainer propsTable={targetRef}>
       <TableHead/>
 
@@ -490,10 +468,10 @@ const TableLayout = () => {
         }
        
 
-        {/* {
-          (page > 10 && tableData?.length ) && <FloatingBtn/> 
-        } */}
-        <FloatingBtn/>
+        {
+          (tableData.length > 10 && tableData?.length ) && <FloatingBtn/> 
+        }
+       
 
     </>
   )
