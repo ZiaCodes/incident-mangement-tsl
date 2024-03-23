@@ -176,7 +176,7 @@ const Vendor = () => {
     <TableContainer>
         <VendorTableHead/>
         {
-            tickets.map((dataField,index) =>{
+            tickets?.map((dataField,index) =>{
                 return (
                     <VendorTableBody
                 style={ (dataField.age > 3 && dataField.status !=="Resolved" ? "bg-red-600 text-white" : ( dataField.status === "Resolved" ? "bg-green-600 text-white" : null)) }

@@ -68,7 +68,7 @@ const BottomNav = () => {
                             return (
                                 <div key={i} className="tooltip">
                                     <img 
-                                    className="w-10 h-10 shadow-md border bg-white border-red-600 rounded-full"
+                                    className="lg:w-10 lg:h-10 w-7 h-7 shadow-md border bg-white border-red-600 rounded-full"
                                     src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${usr.name}`} alt={user.name} 
                                     />
                                     <span className="tooltiptext">{usr.name}</span>
@@ -82,7 +82,7 @@ const BottomNav = () => {
     {user ? <div 
         className='fixed w-full bottom-0 p-2
         grid grid-cols-4  divide-x
-        light:bg-white dark:bg-black text-white backdrop-blur-3xl shadow-md z-50'
+        bg-slate-900 text-white backdrop-blur-3xl shadow-md z-50'
     >
     
 

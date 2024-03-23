@@ -35,7 +35,7 @@ function App() {
       let Jwt = JSON.parse(localStorage?.getItem('userProfile'));
 
       if(!Jwt?.user?.jwtToken){
-          navigate('/login',{replace:true});
+          navigate('/auth/login',{replace:true});
         }
     },[])
 
@@ -75,11 +75,11 @@ function App() {
       <Route path="ticket/:ticket" element={<TicketPage />} />
       <Route path='/watchlist' element={<WatchList/>} />
       <Route path="/report" element={<Report />} />
-      <Route path='/:vendor' element={<Vendor />} />
+      <Route path='team/:vendor' element={<Vendor />} />
       <Route path='/settings' element={<Settings/>} />
       <Route path='settings/:userId' element={<UserProfile/>} />
       <Route path='settings/admin-page' element={<AdminPage/>} />
-      <Route path='/login' element={<Login/>} />
+      <Route path='auth/login' element={<Login/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>
     </Suspense>

@@ -2,15 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-.isDarkMode{
-  color: #f1f1f1;
+
+.darkMode{
   background-color: #1f1f1f;
+  color: #f1f1f1;
 }
 
-.isLightMode{
-  background-color: #f1f1f1;
-  color: #1f1f1f;
-}
+ .lightMode{
+    background-color: #f1f1f1;
+    color: #1f1f1f;
+  }
 
 
 *{
@@ -90,8 +91,12 @@ a{
   font-weight: bold;
 }
 
+ul li{
+  transition: 0.5s all;
+}
+
 li:hover{
-  background-color: red;
+  opacity: 0.8;
 }
 
 input[type=file]::file-selector-button {
@@ -397,28 +402,38 @@ select{
 	--c-background-primary: #d0d1de;
 }
 
-/* .modal {
+
+
+/* setting page */
+.setting-wrapper {
   position: absolute; 
   left: 50%;
-  top: 90%;
+  top: 50%;
   transform: translate(-50%,-50%);
   width: 80%; 
   max-width: 500px;
-	background-color: #fff;
+	/* background-color: #fff; */
 	border-radius: 0.5rem;
-	box-shadow: 0 5px 15px rgba(#000, 0.2);
+	box-shadow: 0 5px 15px #0000002e;
   z-index: 9999999999999;
   font-family: Arial, Helvetica, sans-serif;
-} */
+}
 
-/* .modal-header {
+ .setting-header {
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
 	padding: 1.5rem 1.5rem 1rem;
 }
 
-.logo-circle {
+.setting-logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.avatar-circle {
 	width: 3.5rem;
 	height: 3.5rem;
 	display: flex;
@@ -429,38 +444,50 @@ select{
 	
 }
 
-.logo-circle svg {
-  max-width: 1.5rem;
+
+.avatar-circle img {
+  padding: 0.5em;
+
 }
 
-.btn-close {
+.setting-theme-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 2.25rem;
-	height: 2.25rem;
+	width: 2.5rem;
+	height: 2.5rem;
 	border-radius: 0.25rem;
-	border: none;
-	background-color: transparent;
-	
+  background-color: #000;
+  border-radius: 50%;
+  color: #fff;
 }
 
-.btn-close:hover,
-:focus {
-  background-color: var(--c-action-primary-accent);
-}
-
-.modal-body {
+.setting-body {
 	padding: 1rem 1.5rem;
+  position: relative;
 }
 
-.modal-title {
+.setting-title {
 	font-weight: 700;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5em;
 }
 
-.modal-description {
-	color: var(--c-text-secondary);
-} */
+.setting-description {
+  font-weight: 100;
+  font-size: 0.8em;
+} 
+
+.setting-main-area{
+  margin-top: 1.25rem;
+	padding: 3rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 .upload-area {
 	margin-top: 1.25rem;
@@ -504,12 +531,12 @@ select{
 	color: var(--c-text-secondary);
 }
 
-/* .upload-area-description strong {
+.upload-area-description strong {
   color: var(--c-action-primary);
   font-weight: 700;
-} */
+}
 
-/* .modal-footer {
+.setting-footer {
 	padding: 1rem 1.5rem 1.5rem;
 	display: flex;
 	justify-content: flex-end;
@@ -517,22 +544,24 @@ select{
 
 [class*="btn-"] {
   margin-left: 0.75rem;
-} */
+}
 
-/* .btn-secondary,
+.btn-secondary,
 .btn-primary {
 	padding: 0.5rem 1rem;
 	font-weight: 500;
-	border: 2px solid var(--c-action-secondary);
+	border: 1px solid var(--c-action-secondary);
 	border-radius: 0.25rem;
 	background-color: transparent;
+  color: rgb(255, 43, 43);
 }
 
 .btn-primary {
 	color: #fff;
-	background-color: var(--c-action-primary);
-	border-color: var(--c-action-primary);
-} */
+	background-color: rgb(255, 43, 43);
+}
+
+
 
 
 /* bottom Navigation */
@@ -565,12 +594,12 @@ select{
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: rgb(40, 16, 16);
+  width: 125px;
+  background-color: rgb(62, 2, 95);
   color: #fff;
   text-align: center;
   border-radius: 20px;
-  padding: 4px;
+  padding: 2px;
   position: absolute;
   z-index: 1;
   top: 100%;
@@ -580,6 +609,7 @@ select{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 10px;
   letter-spacing: 1.2px;
+  font-weight: lighter;
 }
 
 .tooltip .tooltiptext::after {
@@ -590,7 +620,7 @@ select{
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent black transparent;
+  border-color: transparent transparent rgb(62, 2, 95) transparent;
 }
 
 .tooltip:hover .tooltiptext {

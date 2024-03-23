@@ -75,12 +75,10 @@ const updateUserStatus = async() =>{
             });
   }
 
-  console.log(`User Active: ${initailLoggedIn.current}`)
 }
 
   useEffect(()=>{
       updateUserStatus()
-      console.log(isLoggedIn);
   },[isLoggedIn])
 
 }

@@ -5,7 +5,7 @@ import { MdError } from 'react-icons/md'
 const NotFound = () => {
   return (
     <MainContainer>
-        <div style={{display:'flex',justifyContent:'center',alignItems:'center',textAlign:'center',height:'100vh',gap:'10px'}}>
+        <div className='flex justify-center items-center gap-2 h-96 lg:mt-52 mt-40'>
             <MdError/>
             <h4>Page Not Found</h4>
         </div>

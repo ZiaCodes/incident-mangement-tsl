@@ -4,56 +4,30 @@ import { IoSettings } from "react-icons/io5";
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
 import { IoIosNavigate } from "react-icons/io";
-import { MdOutlineRoomPreferences } from "react-icons/md";
-import { MdOutlineResetTv } from "react-icons/md";
-import { TbLogout } from "react-icons/tb";
 import { FaDiceTwo } from "react-icons/fa6";
 import { MdDeveloperMode } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdPersonAdd } from "react-icons/io";
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import { useTheme } from '../context';
 
 const Settings = () => {
-    const [theme, setTheme] = useState('isLightMode');
+
+    const [theme, setTheme] = useState(localStorage?.getItem('theme'));
     const [user, setUser] = useState("");
     const [isClicked , setIsClicked] = useState(false);
     const [mode,setMode] = useState(localStorage?.getItem('m_mode'));
     const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'));
     const [devMode, setDevMode] = useState('Off');
-    const [isgeneralSetting, setIsgeneralSetting] = useState(false);
 
     const navigate = useNavigate();
+    const {toggleTheme} = useTheme();
 
     useDocumentTitle(`Setting Page | ${user?.name}`)
     
-    const handleDarkMode = () =>{
-        if(theme === 'isLightMode'){
-            setTheme('isDarkMode');
-            localStorage.setItem('theme','isDarkMode');
-            document.documentElement.classList.remove('isLightMode')
-            document.documentElement.classList.add('isDarkMode');
-        }else{
-            setTheme('isLightMode');
-            localStorage.setItem('theme','isLightMode');
-            document.documentElement.classList.remove('isDarkMode')
-            document.documentElement.classList.add('isLightMode');
-        }
-
-        toast.success('Theme changed!', {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-        
-    }
 
     const changeMMode = () =>{
         const localMode = localStorage?.getItem('m_mode');
@@ -146,127 +120,87 @@ const Settings = () => {
     },[]);
 
     
-
-  return (
-    <>
-    <ToastContainer 
-      position="bottom-left"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-      style={{width:'250px',margin:'10px'}}
-
-    />
-
-
-    <MainContainer>
-
-    <div className='flex justify-center flex-col items-center gap-4'>
-        <div className='w-20 h-20 overflow-hidden shadow-md rounded-full'>
-            <img src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.name}`} alt="avatar" />
-        </div>
-        <h1 className='flex flex-col justify-center items-center'>
-        <Link className='p-0 shadow-none' to={`/settings/${user?.id}`}>{user?.name}</Link>
-        </h1>
-    </div>
-
-
-        <div className=' select-none h-full w-full flex flex-wrap justify-center gap-4 mt-8'>
-            <div className='h-auto flex flex-wrap rounded-sm shadow-md p-4 border border-slate-300'>
-                
-                <ul>
-                    <li 
-                     onClick={() => setIsgeneralSetting(!isgeneralSetting)}
-                    className='p-2 rounded-md cursor-pointer flex items-center gap-3'>
-                        <IoSettings/>
-                        General Setting
-                    </li>
-                    {
-                         isgeneralSetting ? 
-                         <>
-                            <li className='flex justify-start items-center gap-2 p-2 ml-6 rounded-md cursor-pointer'>
-                                <FaUserCircle/>
-                                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user?.id}`}>
-                                    My profile
-                                </Link>
-                            </li>
-                            {
-                                user.role === 'admin' ? <li className='flex justify-start items-center gap-2 p-2 ml-6 rounded-md cursor-pointer'>
-                                <IoMdPersonAdd/>
-                                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/admin-page`}>
-                                    Add User
-                                </Link>
-                            </li> : null
-                            }
-                         </>
-                          : null
-                    }
-                    <hr  className='mt-2 opacity-25'/>
-                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3' onClick={handleDarkMode}>
-                    {
-                            theme === 'isLightMode' ? (<MdOutlineLightMode/>) : (
-                                <MdDarkMode/>
-                             )
-                        }
-                        App theme 
-                    </li>
-                    <hr  className='mt-2 opacity-25'/>
-                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3'
-                        onClick={()=> setIsClicked(!isClicked)}>
-                        <MdOutlineRoomPreferences/> Your Prefrences
-                    </li>
-
-                    {
-                        isClicked ? 
-                        <>
-                        <li 
-                            onClick={handleNavStyle}
-                            className='flex justify-start items-center gap-1 p-2 ml-6 rounded-md cursor-pointer'>
-                                <IoIosNavigate/> Navigation - {navStyle}
-                        </li>
-                        <hr className='mt-2 opacity-25'/>
-                            <li className='flex justify-start items-center gap-1 p-2 ml-6 rounded-md cursor-pointer' onClick={changeMMode}>
-                              <FaDiceTwo/> Mode - {mode}
-                            </li>
-                            <hr className='mt-2 opacity-25' />
-                            <li className='flex justify-start items-center gap-1 p-2 ml-6 rounded-md cursor-pointer' onClick={handleDevMode}>
-                              <MdDeveloperMode/> Dev Mode - {devMode}
-                            </li>
-                        </> : null
-                    }
-                    <hr className='mt-2 opacity-25' />
-                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3' onClick={handleResetDashBoard}>
-                       <MdOutlineResetTv/> Reset Data
-                    </li>
-                    <hr className='mt-2 opacity-25' />
-                    <li className='p-2 rounded-md cursor-pointer flex items-center gap-3' 
-                    onClick={()=>{
-                        localStorage.removeItem('userProfile');
-                        window.location.reload();
-                        navigate('/login');
-                    }}>
-                       <TbLogout/> Logout
-                    </li>
-                </ul>
-
-            </div>      
-        </div>
-
-    </MainContainer>
-        <p className=' mt-8 flex-wrap p-4 text-center flex justify-center items-center'>
-            Incident management © 2023 from
-            <a className='text-center shadow-none' target='_blank' href="https://syed.vercel.app">
-                ZiaCodes
-            </a>
+    return(
+        <MainContainer>
+        <div className='setting-wrapper'>
+         <div className="setting-header">
+          <div className="setting-logo">
+            <span className="avatar-circle">
+                <img src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.name}`} alt="avatar" />
+            </span>
+                <h1 className='flex flex-col justify-center items-center'>
+                <Link className='p-0 capitalize font-thin shadow-none' to={`/settings/${user?.id}`}>{user?.name}</Link>
+                <p className='-left-8 opacity-75 font-extralight text-xs relative'>{user.role}</p>
+                </h1>
+            </div>
+            <button className='setting-theme-btn '
+             onClick={() =>{
+                toggleTheme();
+                setTheme(localStorage?.getItem('theme'));
+            }} >
+                {
+                    theme !== 'lightMode' ? 
+                    <MdOutlineLightMode/> : <MdDarkMode/>
+                }
+            </button>
+        </div> 
+        <div className="setting-body">
+          <div className="setting-title">
+                <IoSettings/>
+                General Setting
+            </div>
+        <p className="setting-description">
+            Change your setting according to your prefernce.
         </p>
-    </>
-  )
+        <ul className="flex justify-self-end gap-2 mt-7 flex-col">
+            <li className='flex justify-start items-center gap-2  cursor-pointer'>
+                <FaUserCircle/>
+                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user?.id}`}>
+                    My profile
+                </Link>
+            </li>
+            <hr className='opacity-25' />
+            <li className='flex justify-start items-center gap-2 cursor-pointer'>
+                <IoMdPersonAdd/>
+                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/admin-page`}>
+                    Add User
+                </Link>
+            </li> 
+            <hr className='opacity-25' />
+            <li 
+                onClick={handleNavStyle}
+                className='flex justify-start items-center gap-1 cursor-pointer'>
+                    <IoIosNavigate/> Navigation style : {navStyle}
+            </li>
+            <hr className='opacity-25'/>
+                <li className='flex justify-start items-center gap-1 cursor-pointer' onClick={changeMMode}>
+                    <FaDiceTwo/>Application mode : {mode}
+                </li>
+                <hr className='opacity-25' />
+                <li className='flex justify-start items-center gap-1 cursor-pointer' onClick={handleDevMode}>
+                    <MdDeveloperMode/>Developer mode - {devMode}
+                </li>
+
+        </ul>
+        </div>
+        <div className="setting-footer">
+            <button 
+                className="btn-secondary"
+                onClick={handleResetDashBoard}
+            >Reset Data</button>
+            <button 
+                onClick={()=>{
+                    localStorage.removeItem('userProfile');
+                    window.location.reload();
+                    navigate('/auth/login');
+                }}
+            className="btn-primary"
+            >Logout</button>
+        </div> 
+    </div>
+    </MainContainer>
+    )
+
 }
 
 export default Settings

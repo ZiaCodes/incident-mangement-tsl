@@ -1,7 +1,9 @@
 import { FaCircleUser } from "react-icons/fa6";
 import MainContainer from '../component/Wrapper/MainContainer'
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 const WatchList = () => {
+    useDocumentTitle(`Your WatchList  `)
   return (
     <MainContainer>
         <div className="container mx-auto px-4 sm:px-8">

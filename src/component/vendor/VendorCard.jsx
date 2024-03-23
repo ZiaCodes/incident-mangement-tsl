@@ -19,7 +19,7 @@ const VendorCard = (props) => {
           src={props.imgUrl}
           className='object-fill w-20 h-20'
            alt="logo" /> */}
-          <Link className="shadow-none" to={`/${props.vendorName}`}>
+          <Link className="shadow-none" to={`/team/${props.vendorName}`}>
             <h1 className='text-xl font-bold text-center m-2 text-black'>{props.vendorName}</h1>
           </Link>
           </div>
