@@ -1,4 +1,4 @@
-import { FaCircleUser } from "react-icons/fa6";
+import { MdOutlineElectricBolt } from "react-icons/md";
 
 import { BiSolidReport } from "react-icons/bi";
 import { ImHome } from "react-icons/im";
@@ -8,9 +8,40 @@ import { FaHeart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SiNginxproxymanager } from "react-icons/si";
+import { getAllUsers } from "../../apis/auth";
 const BottomNav = () => {
 
     const [user,setUser] = useState({});
+    const [allUserData , setAllUserData] = useState([]);
+    const [activeUser, setActiveUser] = useState(new Set());
+
+
+    const getAllUsersData = async() =>{
+        let res = await getAllUsers();
+        if(res.error) 
+            return toast.error(`${response.error}`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            });
+        
+        setAllUserData(res)
+        setActiveUser(new Set(res));
+        console.log(activeUser)
+        console.log(allUserData)
+        
+    }
+
+    useEffect(()=>{
+        getAllUsersData();
+    },[allUserData.length])
+
+
 
     useEffect(()=>{
         let localUser = JSON?.parse(localStorage?.getItem('userProfile'));
@@ -34,10 +65,23 @@ const BottomNav = () => {
 
         {
             user ? 
-                <Link className="p-0 shadow-none mr-4 text-black" to={`/settings/${user?.id}`} >
-                    <img 
-                        className="w-10 h-10 shadow-sm rounded-full"
-                        src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.name}`} alt={user.name} />
+                <Link className="activeUserDashBoard" to={`/settings/${user?.id}`} >
+                    {
+                        allUserData.length > 0 ? 
+                        allUserData?.map((usr,i) => {
+                            return !activeUser?.has(usr.isOnline) ? (
+                                <>
+                                <div key={i} className="tooltip">
+                                    <img 
+                                    className="w-10 h-10 shadow-md border bg-white border-red-600 rounded-full"
+                                    src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${usr.name}`} alt={user.name} 
+                                    />
+                                    <span className="tooltiptext">{usr.name}</span>
+                                </div>
+                                </>
+                            ) : <></>
+                        }) : <MdOutlineElectricBolt title="Loading active users" className="animate-spin text-xl text-green-600 mr-4"/>
+                    }
                 </Link> : null
         }
     </div>

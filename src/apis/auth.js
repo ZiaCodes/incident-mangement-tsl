@@ -48,6 +48,20 @@ export const forgetPassword = async(email) =>{
     }
 }
 
+// user active status real time 
+
+export const updateUserActiveStatus = async(userInfo) =>{
+
+    try {
+        const {data} = await client.post('/user/update-user-status',userInfo);
+        return data;
+    } catch (error) {
+        const {response} = error;
+        if(response?.data) return response.data;
+        return {error: error.message || error};
+    }
+}
+
 
 
 export const serviceNowCablingRequest = async() =>{

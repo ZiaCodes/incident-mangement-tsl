@@ -15,56 +15,7 @@ import AdminPage from './component/Auth/AdminPage';
 import { ToastContainer } from 'react-toastify';
 import WatchList from './container/WatchList';
 
-
 function App() {
-
-  const [isLoggedIn,setIsLoggedIn] = useState(true);
-
-
-  const checkForInactivity = () =>{
-    const expireTime = localStorage.getItem('expireTime');
-
-    if(expireTime < Date.now()){
-      console.log("log out");
-      setIsLoggedIn(false);
-    }
-  }
-
-  const updateExpireTime = () =>{
-    const expireTime = Date.now() + 50000;
-
-    localStorage.setItem('expireTime',expireTime);
-  }
-
-  useEffect(()=>{
-    const interval = setInterval(() => {
-      checkForInactivity();
-    },50000);
-
-    return () => clearInterval(interval);
-  },[])
-
-  useEffect(()=>{
-    // set initial expireTime
-    updateExpireTime();
-
-    // set event listners
-    window.addEventListener('click',updateExpireTime);
-    window.addEventListener('keypress',updateExpireTime);
-    window.addEventListener('scroll',updateExpireTime);
-    window.addEventListener('mousemove',updateExpireTime);
-    window.addEventListener('wheel',updateExpireTime);
-
-    // clean up
-    return () =>{
-      window.addEventListener('click',updateExpireTime);
-      window.addEventListener('keypress',updateExpireTime);
-      window.addEventListener('scroll',updateExpireTime);
-      window.addEventListener('mousemove',updateExpireTime);
-      window.addEventListener('wheel',updateExpireTime);
-    }
-  },[])
-
   
   const getTheme = () =>{
     const localTheme = localStorage?.getItem('theme');
@@ -75,15 +26,16 @@ function App() {
 
   useEffect(()=>{
     getTheme();
-  })
+  },[])
 
   
   const navigate = useNavigate();
   
     useEffect(()=>{
-      let Jwt = JSON.parse(localStorage.getItem('userProfile'));
-      if(!Jwt?.jwtToken){
-          navigate('/login');
+      let Jwt = JSON.parse(localStorage?.getItem('userProfile'));
+
+      if(!Jwt?.user?.jwtToken){
+          navigate('/login',{replace:true});
         }
     },[])
 
@@ -98,6 +50,7 @@ function App() {
       localStorage.setItem('m_mode','Incident');
     }
   },[])
+
 
   return (
     <>

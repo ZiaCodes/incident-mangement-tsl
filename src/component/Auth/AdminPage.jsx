@@ -1,12 +1,13 @@
 import React from 'react'
 import MainContainer from '../Wrapper/MainContainer'
 import { CgSpinnerTwoAlt } from 'react-icons/cg';
-import { MdDelete } from "react-icons/md";
+// import { MdDelete } from "react-icons/md";
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { IoIosPersonAdd } from "react-icons/io";
 import { IoPersonRemoveSharp } from "react-icons/io5";
 import { MdNotificationsActive } from "react-icons/md";
+import { GiElectric } from "react-icons/gi";
 
 import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { createNewUser, getAllUsers } from '../../apis/auth';
@@ -127,7 +128,7 @@ const AdminPage = () => {
 
     useEffect(()=>{
         let localuser = JSON?.parse(localStorage?.getItem('userProfile'));
-        console.log(localuser)
+        // console.log(localuser)
         if(localuser){
             setUser(localuser.user);
         }
@@ -159,10 +160,13 @@ const AdminPage = () => {
                                                 <MdNotificationsActive/>
                                             </small>
                                         </h2>
-                                        <h4>{userData.name}</h4>
+                                        <h4 className='flex gap-0.5 justify-center items-start'>
+                                            {userData.name} { userData.isOnline ? <GiElectric className="text-red-600 text-xs animate-pulse"/> : null }
+                                        </h4>
                                         <p className='supporting-text'>{userData.email}</p>
                                         <p className='supporting-text'>{userData.company}</p>
                                         <p className='supporting-text'>{userData.role}</p>
+                                        
                                     </div>
                             </div>
                         )

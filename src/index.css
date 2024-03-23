@@ -234,7 +234,7 @@ select{
   position: relative;
   display: flex;
   padding: 10px;
-  background: rgb(139, 139, 139);
+  background: #401F71;
   border-radius: 10px;
   margin: 10px;
   cursor: pointer;
@@ -250,14 +250,13 @@ select{
   z-index: 10000;
 }
 .list .imgbox{
+  position: relative;
   width: 60px;
   height: 60px;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
   margin-right: 10px;
-
-
 }
 .list .imgbox img{
   position: absolute;
@@ -476,7 +475,7 @@ select{
 }
 
 .upload-area:hover,
-:focus {
+.upload-area:focus {
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%232e44ff' stroke-width='3' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
@@ -535,3 +534,80 @@ select{
 	border-color: var(--c-action-primary);
 } */
 
+
+/* bottom Navigation */
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  transition: 0.5s all;
+  margin: -15px;
+  padding: 0;
+  border-radius: 50%;
+  animation: circularProfile 1s linear infinite;
+  transition: 0.5s all;
+}
+
+@keyframes circularProfile {
+  0%{
+    border: 1px solid black;
+  }
+  50%{
+    border: 1px solid yellow;
+  }
+  75%{
+    border: 1px solid #3d43ff;
+  }
+  100%{
+    border: 1px solid green;
+  }
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgb(40, 16, 16);
+  color: #fff;
+  text-align: center;
+  border-radius: 20px;
+  padding: 4px;
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+  text-transform: capitalize;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent black transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+.tooltip:hover{
+  transform: translateY(-5px) scale(1.2);
+}
+
+.activeUserDashBoard{
+  padding: 20px;
+  box-shadow: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}

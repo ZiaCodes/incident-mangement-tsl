@@ -21,10 +21,12 @@ import Request from '../../container/Request'
 import useDocumentTitle from '../../hooks/useDocumentTitle'
 import Instruction from '../util/Instruction'
 import UploadModel from '../Model/UploadModel'
+import useUserActivity from '../../hooks/useUserActivity'
 
 const TableLayout = () => {
 
-  useDocumentTitle('Dashboard Page')
+  useDocumentTitle('Dashboard Page');
+  useUserActivity();
 
   const [isVerified, setIsVerified] = useState(false);
   const [tableData , setTableData] = useState([]);
