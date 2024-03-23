@@ -13,8 +13,6 @@ const BottomNav = () => {
 
     const [user,setUser] = useState({});
     const [allUserData , setAllUserData] = useState([]);
-    const [activeUser, setActiveUser] = useState(new Set());
-
 
     const getAllUsersData = async() =>{
         let res = await getAllUsers();
@@ -30,10 +28,8 @@ const BottomNav = () => {
             theme: "dark",
             });
         
-        setAllUserData(res)
-        setActiveUser(new Set(res));
-        console.log(activeUser)
-        console.log(allUserData)
+        let activeUser = res.filter((user) => user.isOnline === true);
+        setAllUserData(activeUser)
         
     }
 
@@ -69,8 +65,7 @@ const BottomNav = () => {
                     {
                         allUserData.length > 0 ? 
                         allUserData?.map((usr,i) => {
-                            return !activeUser?.has(usr.isOnline) ? (
-                                <>
+                            return (
                                 <div key={i} className="tooltip">
                                     <img 
                                     className="w-10 h-10 shadow-md border bg-white border-red-600 rounded-full"
@@ -78,8 +73,7 @@ const BottomNav = () => {
                                     />
                                     <span className="tooltiptext">{usr.name}</span>
                                 </div>
-                                </>
-                            ) : <></>
+                            )
                         }) : <MdOutlineElectricBolt title="Loading active users" className="animate-spin text-xl text-green-600 mr-4"/>
                     }
                 </Link> : null
