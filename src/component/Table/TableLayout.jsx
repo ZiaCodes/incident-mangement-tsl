@@ -4,14 +4,11 @@ import FloatingBtn from '../util/FloatingBtn'
 import TableContainer from './TableContainer'
 import TableHead from './TableHead'
 import TableBody from './TableBody'
-import { MdCloudUpload } from "react-icons/md";
 
 import { ToastContainer, toast } from 'react-toastify';
 import ModelBox from '../util/ModelBox'
 import { FaFilePdf } from "react-icons/fa6";
 import { SiMicrosoftexcel } from "react-icons/si";
-import { FaPlus } from "react-icons/fa6";
-
 import { Margin, usePDF } from "react-to-pdf";
 import * as XLSX from 'xlsx';
 import ContextMenu from '../util/ContextMenu';
@@ -22,6 +19,7 @@ import useDocumentTitle from '../../hooks/useDocumentTitle'
 import Instruction from '../util/Instruction'
 import UploadModel from '../Model/UploadModel'
 import useUserActivity from '../../hooks/useUserActivity'
+import SearchHandle from '../util/SearchHandle'
 
 const TableLayout = () => {
 
@@ -61,10 +59,7 @@ const TableLayout = () => {
   }
 
   const [contextMenu,setContextMenu] = useState(initialContextMenu);
-
   const contextMenuClose = () => setContextMenu(initialContextMenu);
-
-
   const contextRef = useRef(null);
 
   useClickAway(contextRef, () => {
@@ -272,16 +267,7 @@ const TableLayout = () => {
       openEditWindow={()=>editRowItem(ContextEditTicket)}
       deleteContextTicket={()=>deleteRowItem(contextTicket)}
       addToFavList={()=> {
-        let localFevItems = JSON.parse(localStorage.getItem('watchList'));
-
-        let newSet = new Set(localFevItems);
-        console.log(newSet)
-
-        if(newSet){
-          newSet.add(contextTicket);
-          console.log(newSet)
-          localStorage.setItem('watchList',JSON.stringify(newSet));
-        }
+        console.log(contextTicket);
       }}
     />}
     {
@@ -349,11 +335,12 @@ const TableLayout = () => {
       style={{width:'250px',margin:'10px'}}
 
     />
-    {/* <Upload searchValue={search} method={handleSearch}/> */}
+    
+    <SearchHandle/>
 
     <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase ml-4'>
         {
-          statusArr.length > 0 ? <p className='p-2 bg-purple-500 text-white rounded-sm'>Total : {tableData?.length} </p> : null
+          statusArr.length > 0 ? <p className='p-2 bg-purple-500 text-white rounded-md'>Total : {tableData?.length} </p> : null
         }
         {
           statusArr?.map((name,i) =>{
@@ -362,7 +349,7 @@ const TableLayout = () => {
               onClick={() => {
                 setSearch(name);
               }}
-              className={name ==='Pending' || name==='Reopened' ? "p-2 bg-red-600 text-white cursor-pointer rounded-sm ": " rounded-sm p-2 bg-green-600 text-white cursor-pointer"}>
+              className={name ==='Pending' || name==='Reopened' ? "p-2 bg-red-600 text-white cursor-pointer rounded-md ": " rounded-md p-2 bg-green-600 text-white cursor-pointer"}>
                 {name}
               </button>
             )
@@ -374,14 +361,14 @@ const TableLayout = () => {
             <>
               <button 
             onClick={toPDF}
-            className=' outline-none flex border border-red-600 p-2 rounded-sm justify-center items-center gap-2'>
+            className=' outline-none flex border border-red-600 p-2 rounded-md justify-center items-center gap-2'>
             <FaFilePdf/>
             PDF
           </button>    
 
           <button 
             onClick={()=>downloadExcel(tableData)}
-            className=' outline-none flex border border-red-600 p-2 rounded-sm justify-center items-center gap-2'>
+            className=' outline-none flex border border-red-600 p-2 rounded-md justify-center items-center gap-2'>
             <SiMicrosoftexcel/>
             EXCEL
           </button>

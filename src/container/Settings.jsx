@@ -128,9 +128,9 @@ const Settings = () => {
             <span className="avatar-circle">
                 <img src={`https://api.dicebear.com/8.x/adventurer/svg?seed=${user.name}`} alt="avatar" />
             </span>
-                <h1 className='flex flex-col justify-center items-center'>
+                <h1 className='flex flex-col justify-center items-start'>
                 <Link className='p-0 capitalize font-thin shadow-none' to={`/settings/${user?.id}`}>{user?.name}</Link>
-                <p className='-left-8 opacity-75 font-extralight text-xs relative'>{user.role}</p>
+                <p className=' opacity-75 font-extralight text-xs relative'>Application access : {user.role}</p>
                 </h1>
             </div>
             <button className='setting-theme-btn '
@@ -160,10 +160,10 @@ const Settings = () => {
                 </Link>
             </li>
             <hr className='opacity-25' />
-            <li className='flex justify-start items-center gap-2 cursor-pointer'>
+            <li  className='flex justify-start items-center gap-2 cursor-pointer'>
                 <IoMdPersonAdd/>
                 <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/admin-page`}>
-                    Add User
+                    Add User 
                 </Link>
             </li> 
             <hr className='opacity-25' />
@@ -178,7 +178,7 @@ const Settings = () => {
                 </li>
                 <hr className='opacity-25' />
                 <li className='flex justify-start items-center gap-1 cursor-pointer' onClick={handleDevMode}>
-                    <MdDeveloperMode/>Developer mode - {devMode}
+                    <MdDeveloperMode/>Developer Option : {devMode}
                 </li>
 
         </ul>
