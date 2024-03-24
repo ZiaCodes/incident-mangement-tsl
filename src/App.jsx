@@ -14,6 +14,7 @@ import UserProfile from './component/User/UserProfile';
 import AdminPage from './component/Auth/AdminPage';
 import { ToastContainer } from 'react-toastify';
 import WatchList from './container/WatchList';
+import UserList from './component/Auth/UserList';
 
 function App() {
   
@@ -79,6 +80,7 @@ function App() {
       <Route path='/settings' element={<Settings/>} />
       <Route path='settings/:userId' element={<UserProfile/>} />
       <Route path='settings/admin-page' element={<AdminPage/>} />
+      <Route path='/settings/admin-page/all-user' element={<UserList/>} />
       <Route path='auth/login' element={<Login/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>

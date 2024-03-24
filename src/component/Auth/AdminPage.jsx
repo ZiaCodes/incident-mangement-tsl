@@ -1,22 +1,18 @@
 import React from 'react'
 import MainContainer from '../Wrapper/MainContainer'
 
-import { useEffect } from 'react';
-import { useState } from 'react';
+import {useState, useEffect } from 'react';
 import { IoMdPersonAdd } from "react-icons/io";
-import { MdDarkMode } from "react-icons/md";
-
-
+import { IoIosLink } from "react-icons/io";
+import { CgSpinnerTwoAlt } from 'react-icons/cg';
 import useDocumentTitle from '../../hooks/useDocumentTitle';
-import { createNewUser, getAllUsers } from '../../apis/auth';
+import { createNewUser } from '../../apis/auth';
 import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
-import UserList from './UserList';
+import { useNavigate } from 'react-router-dom';
 
 const AdminPage =() =>{
 
-    const [allUserData, setAllUserData] = useState([]);
-    const [isLoading,setIsLoading] = useState(false)
+    const [isLoading,setIsLoading] = useState(false);
     const [user,setUser] = useState({});
 
     const navigate = useNavigate();
@@ -33,50 +29,28 @@ const AdminPage =() =>{
 
     });
 
-    const [AddUser,setAddUser] = useState(false);
-    const [removeUser, setRemoveUser] = useState(false);
+    const handleRedirectToAllUser = () =>{
+        if(user.role === "admin"){
+            return navigate('/settings/admin-page/all-user');
+        }else{
+           return  toast.warning(`You are not authorized!`, {
+           position: "bottom-left",
+           autoClose: 5000,
+           hideProgressBar: false,
+           closeOnClick: true,
+           pauseOnHover: true,
+           draggable: true,
+           progress: undefined,
+           theme: "dark",
+           });
+        }
+    }
+
 
     const handleChange = ({target})=>{
         const {value,name} = target;
         setUserInfo({...userInfo,[name]:value});
       }
-
-    
-
-    const handleDeleteUser = () =>{
-        toast.success("Feature coming soon.", {
-            position: "bottom-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-    }
-
-
-    const getAllUsersData = async() =>{
-        let res = await getAllUsers();
-        if(res.error) 
-            return toast.error(`${response.error}`, {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-        
-        let filterUser = res.filter((data) => data._id !== user.id);
-        if(filterUser){
-            setAllUserData(filterUser);
-        }
-        
-    }
 
     const handleRegister = async(e) =>{
         e.preventDefault()
@@ -111,23 +85,6 @@ const AdminPage =() =>{
     
       }
 
-      const notifyUser = () =>{
-        toast.loading('Notifying user', {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
-      }
-
-
-      useEffect(()=>{
-        getAllUsersData();
-    },[isLoading,user])
 
     useEffect(()=>{
         let localuser = JSON?.parse(localStorage?.getItem('userProfile'));
@@ -158,32 +115,27 @@ const AdminPage =() =>{
 
 
     return(
-        <div className='flex justify-around flex-wrap gap-4 items-center'>
         <MainContainer>
-        <div className='admin-page-wrapper'>
-         <div className="setting-header">
-          <div className="setting-logo">
-            <span className="avatar-circle">
-                <img src={`https://api.dicebear.com/8.x/adventurer/svg?seed=Syed`} alt="avatar" />
-            </span>
-                <h1 className='flex flex-col justify-center items-start'>
-                <Link className='p-0 capitalize font-thin shadow-none' to={`/settings/`}>Syed Ziauddoin</Link>
-                <p className=' opacity-75 font-extralight text-xs relative'>Application access : User</p>
-                </h1>
-            </div>
-            <button className='setting-theme-btn '>
-                <IoMdPersonAdd/>
-            </button>
-        </div> 
-        <div className="setting-body">
-          <div className="setting-title">
-                <IoMdPersonAdd/>
-                User Registration
-            </div>
-        <p className="setting-description">
-            Fill the basic form to add a new user
-        </p>
-        <form className='mt-5 flex flex-col flex-wrap gap-4' onSubmit={handleRegister}>
+            <div className='admin-page-wrapper'>
+            <div className="setting-header">
+            <div className="setting-logo">
+                <span className="avatar-circle">
+                    <IoMdPersonAdd/>
+                </span>
+                    <h1 className='flex flex-col justify-center items-start'>
+                    <p className='p-0 capitalize font-thin shadow-none' >User Registration</p>
+                    <p className=' opacity-75 font-extralight text-xs relative'>Add a new user by filling the form</p>
+                    </h1>
+                </div>
+                <button
+                    title='View all users'
+                onClick={handleRedirectToAllUser} 
+                className='setting-theme-btn'>
+                    <IoIosLink/>
+                </button>
+            </div> 
+            <div className="admin-page-body">
+                <form onSubmit={handleRegister} className='mt-5 flex flex-col flex-wrap gap-4'>
                     <input 
                         value={userInfo.name}
                         onChange={handleChange}
@@ -225,21 +177,20 @@ const AdminPage =() =>{
                         type="text"
                         autoComplete='off'
                     />
-            </form>
+                    <div className="w-full flex justify-end items-center mt-4">
+                    <button 
+                        className="btn-addUser-primary"
+                        type='submit'
+                    >
+                        {
+                            isLoading ? <CgSpinnerTwoAlt className='text-center animate-spin text-2xl'/> : "Add Now"
+                        }
+                    </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div className="setting-footer">
-            <button 
-                className="btn-addUser-secondary"
-                // onClick={handleResetDashBoard}
-            >Think Again</button>
-            <button 
-            className="btn-addUser-primary"
-            >Register</button>
-        </div> 
-    </div>
-        </MainContainer>
-        <UserList allUserData={allUserData} onClick={notifyUser}/>
-        </div>
+    </MainContainer>
 
     )
 }
