@@ -1,15 +1,10 @@
-import { SiNginxproxymanager } from "react-icons/si";
-import { MdMenuOpen } from "react-icons/md";
-import { MdMenu } from "react-icons/md";
-
-// import { MdBugReport } from "react-icons/md";
-// import { ImHome } from "react-icons/im";
-// import { IoSettings } from "react-icons/io5";
-
 import { useEffect, useState } from "react";
 import NavLinks from "./NavLinks";
 import { Link } from "react-router-dom";
 import BottomNav from "./BottomNav";
+
+import { SiNginxproxymanager } from "react-icons/si";
+import { MdMenuOpen,MdMenu } from "react-icons/md";
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isAuth,setIsAuth] = useState(false);
@@ -19,10 +14,9 @@ const Navigation = () => {
         setIsOpen(!isOpen);
     }
 
-
     useEffect(()=>{
         let Jwt = JSON.parse(localStorage.getItem('userProfile'));
-        if(Jwt){
+        if(Jwt?.user?.jwtToken){
             setIsAuth(true);
         }
       },[isAuth])

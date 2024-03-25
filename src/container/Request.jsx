@@ -1,7 +1,6 @@
 import * as XLSX from 'xlsx';
 import React, { useEffect, useState } from 'react'
 import TableContainer from '../component/Table/TableContainer';
-import Loader from '../component/util/Loader';
 import Pagination from '../component/util/Pagination';
 import FloatingBtn from '../component/util/FloatingBtn';
 import { FaFileUpload } from "react-icons/fa";
@@ -15,7 +14,6 @@ const Request = () => {
   const pageSet = [10,50,100,150,300,500];
   const [isloading, setIsLoading] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [chooseFile, setChooseFile] = useState("Choose a new file");
   const [tabData,setTabData] = useState([]);
   const [cabData,setCabData] = useState([]);
 
@@ -53,7 +51,7 @@ const Request = () => {
 
   const handleTab = (label) =>{
     setCabData(tableData[`${label}`]);
-    console.log(cabData)
+    // console.log(cabData)
   }
 
   useEffect(()=>{

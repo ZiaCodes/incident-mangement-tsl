@@ -1,20 +1,21 @@
-import React,{ useEffect,Suspense, useState } from 'react';
+import React,{ useEffect,Suspense } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import Loader from './component/util/Loader';
 import Login from './component/Auth/Login';
+
 const Settings = React.lazy(()=> import('./container/Settings'));
 const Home = React.lazy(()=> import('./container/Home'));
 const Navigation = React.lazy(()=> import('./component/Navigation/Navigation'))
 const Report = React.lazy(()=> import('./container/Report'))
-import 'react-toastify/dist/ReactToastify.css';
-import Vendor from './component/vendor/Vendor';
-import TicketPage from './component/Tickets/TicketPage';
-import NotFound from './component/util/NotFound';
-import UserProfile from './component/User/UserProfile';
-import AdminPage from './component/Auth/AdminPage';
-import { ToastContainer } from 'react-toastify';
-import WatchList from './container/WatchList';
-import UserList from './component/Auth/UserList';
+const Vendor  =  React.lazy(()=> import('./component/vendor/Vendor'));
+const TicketPage = React.lazy(()=> import('./component/Tickets/TicketPage'));
+const NotFound =  React.lazy(()=> import('./component/util/NotFound'));
+const UserProfile =  React.lazy(()=> import('./component/User/UserProfile'));
+const AdminPage = React.lazy(()=> import('./component/Auth/AdminPage'));
+const WatchList = React.lazy(()=> import('./container/WatchList'));
+const UserList = React.lazy(()=> import('./component/Auth/UserList'));
 
 function App() {
   
@@ -56,7 +57,7 @@ function App() {
   return (
     <>
     <ToastContainer 
-      position="bottom-left"
+      position="top-right"
       autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}

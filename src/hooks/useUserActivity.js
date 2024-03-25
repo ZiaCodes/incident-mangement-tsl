@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { updateUserActiveStatus } from '../apis/auth';
 import { toast } from 'react-toastify';
+import { ToastOption } from '../component/Wrapper/ToastOption';
 
 function useUserActivity() {
   const defaultUser = useRef(JSON.parse(localStorage.getItem('userProfile')));
@@ -63,16 +64,7 @@ const updateUserStatus = async() =>{
   const user_id = defaultUser.current.user.id;
   const res = await updateUserActiveStatus({userId : user_id, isOnline: initailLoggedIn.current});
   if(res.error) {
-     return toast.error(`${res.error}`, {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
+     return toast.error(`${res.error}`, ToastOption);
   }
 
 }

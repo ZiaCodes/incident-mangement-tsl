@@ -1,14 +1,15 @@
 import React from 'react'
 import MainContainer from '../Wrapper/MainContainer'
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { createNewUser } from '../../apis/auth';
 
 import {useState, useEffect } from 'react';
 import { IoMdPersonAdd } from "react-icons/io";
 import { IoIosLink } from "react-icons/io";
 import { CgSpinnerTwoAlt } from 'react-icons/cg';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import { createNewUser } from '../../apis/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { ToastOption } from '../Wrapper/ToastOption';
 
 const AdminPage =() =>{
 
@@ -33,16 +34,7 @@ const AdminPage =() =>{
         if(user.role === "admin"){
             return navigate('/settings/admin-page/all-user');
         }else{
-           return  toast.warning(`You are not authorized!`, {
-           position: "bottom-left",
-           autoClose: 5000,
-           hideProgressBar: false,
-           closeOnClick: true,
-           pauseOnHover: true,
-           draggable: true,
-           progress: undefined,
-           theme: "dark",
-           });
+           return  toast.warning(`You are not authorized!`, ToastOption);
         }
     }
 
@@ -59,29 +51,11 @@ const AdminPage =() =>{
         const response = await createNewUser(userInfo);
         if(response.error){
             setIsLoading(false);
-            return toast.error(`${response.error}`, {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    });
+            return toast.error(`${response.error}`, ToastOption);
         }
         
         setIsLoading(false);
-        toast.success('User Added Successfully!', {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
+        toast.success('User Added Successfully!', ToastOption);
     
       }
 
@@ -97,16 +71,7 @@ const AdminPage =() =>{
                 return console.log("welcome to admin page")
             }else{
 
-                toast.warning('You are not authorized!', {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    });
+                toast.warning('You are not authorized!', ToastOption);
                 return navigate('/settings',{replace:true})
             }
         }

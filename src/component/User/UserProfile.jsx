@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { MdReportProblem } from "react-icons/md";
 import MainContainer from '../Wrapper/MainContainer';
-import { MdVerified } from "react-icons/md";
-import { MdAttachEmail } from "react-icons/md";
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { forgetPassword } from '../../apis/auth';
+import { ToastOption } from '../Wrapper/ToastOption';
+
 import { BiSolidContact } from "react-icons/bi";
 import { ImOffice } from "react-icons/im";
 import { FaUserSecret } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { MdSyncProblem } from "react-icons/md";
-import { MdDangerous } from "react-icons/md";
-
-import { ToastContainer,toast } from 'react-toastify';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
-import { forgetPassword } from '../../apis/auth';
+import { MdSyncProblem,MdDangerous, MdReportProblem, MdVerified, MdAttachEmail } from "react-icons/md";
+import { toast } from 'react-toastify';
 
 const findEmailByADID = (email) =>{
     let isADEmail = email.startsWith('8');
@@ -24,89 +21,36 @@ const findEmailByADID = (email) =>{
 
 const UserProfile = () => {
     const [user,setUser] = useState({});
-    const [avatar, setAvatar] = useState("");
-
     useDocumentTitle(`Profile | ${user?.name}`);
 
     const forgetPasswordHandle = async() =>{
         let targetEmail = findEmailByADID(user.email);
         if(targetEmail != user.email){
-            return toast.error(`${targetEmail}`, {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
+            return toast.error(`${targetEmail}`, ToastOption);
         }
         let res = await forgetPassword(targetEmail);
         if(res.error){
-            return toast.error(`${res.error}`, {
-                        position: "bottom-left",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
+            return toast.error(`${res.error}`, ToastOption);
         }
         
-        toast.success(`${res.message}`, {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
+        toast.success(`${res.message}`, ToastOption);
 
     }
 
     const changePasswordHandle = () =>{
 
-        toast.error("Feature coming soon.", {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-        });
+        toast.error("Feature coming soon.", ToastOption);
     }
 
 
     useEffect(()=>{
         let localuser = JSON?.parse(localStorage?.getItem('userProfile'));
-        if(localuser){
+        if(localuser?.user){
             setUser(localuser.user);
         }
 
     },[])
   return (
-    <>
-    <ToastContainer 
-      position="bottom-right"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-      style={{width:'250px',margin:'10px'}}
-
-    />
     <MainContainer>
         <div className='flex justify-start items-left m-4 gap-8'>
             <div className='w-40 h-40 overflow-hidden shadow-md p-2 hover:p-4 transition-all'>
@@ -177,9 +121,7 @@ const UserProfile = () => {
                 </p>
             </div>
         </div>
-
-    </MainContainer> 
-    </>
+    </MainContainer>
   )
 }
 

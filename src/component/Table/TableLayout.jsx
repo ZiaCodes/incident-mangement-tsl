@@ -1,25 +1,28 @@
 import React, { useEffect, useState,useRef } from 'react'
-import Pagination from '../util/Pagination'
-import FloatingBtn from '../util/FloatingBtn'
-import TableContainer from './TableContainer'
-import TableHead from './TableHead'
-import TableBody from './TableBody'
 
-import { ToastContainer, toast } from 'react-toastify';
-import ModelBox from '../util/ModelBox'
+import * as XLSX from 'xlsx';
+import {  toast } from 'react-toastify';
 import { FaFilePdf } from "react-icons/fa6";
 import { SiMicrosoftexcel } from "react-icons/si";
 import { Margin, usePDF } from "react-to-pdf";
-import * as XLSX from 'xlsx';
-import ContextMenu from '../util/ContextMenu';
-
 import { useClickAway } from 'react-hook-click-away';
-import Request from '../../container/Request'
+
 import useDocumentTitle from '../../hooks/useDocumentTitle'
-import Instruction from '../util/Instruction'
-import UploadModel from '../Model/UploadModel'
 import useUserActivity from '../../hooks/useUserActivity'
-import SearchHandle from '../util/SearchHandle'
+import { ToastOption } from '../Wrapper/ToastOption';
+
+const Pagination = React.lazy(()=> import('../util/Pagination'));
+const FloatingBtn = React.lazy(()=> import('../util/FloatingBtn'));
+const TableContainer = React.lazy(()=> import('./TableContainer')); 
+const TableHead = React.lazy(()=> import('./TableHead'));
+const TableBody = React.lazy(()=> import('./TableBody')); 
+const ContextMenu = React.lazy(()=> import('../util/ContextMenu'));
+const Request = React.lazy(()=> import('../../container/Request')); 
+const Instruction = React.lazy(()=> import('../util/Instruction')); 
+const UploadModel = React.lazy(()=> import('../Model/UploadModel')); 
+const SearchHandle = React.lazy(()=> import('../util/SearchHandle')); 
+const ModelBox = React.lazy(()=> import('../util/ModelBox')); 
+
 
 const TableLayout = () => {
 
@@ -135,27 +138,9 @@ const TableLayout = () => {
       newTableData = storeData.filter(item => item.ticketNo !== ticketNo)
       localStorage.setItem("formateIncidentData",JSON.stringify(newTableData));
       setIsClicked(!isClicked);
-      toast.success('Item removed!', {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        });
+      toast.success('Item removed!', ToastOption);
     }else{
-      toast.error('You do not have permission to delete', {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
+      toast.error('You do not have permission to delete',ToastOption);
     }
   }
 
@@ -177,27 +162,9 @@ const TableLayout = () => {
       subloc:data.subLocation
 
     })
-    toast.info(`Edit user ${data.name}`, {
-      position: "bottom-left",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
+    toast.info(`Edit user ${data.name}`, ToastOption);
     }else{
-      toast.error('You do not have permission to edit', {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
+      toast.error('You do not have permission to edit', ToastOption);
     }
       
   }
@@ -215,27 +182,9 @@ const TableLayout = () => {
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
       XLSX.writeFile(workbook, "im-datasheet.xlsx");
-      toast.success('Downloaded Success!', {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
+      toast.success('Downloaded Success!', ToastOption);
     }else{
-      toast.error("You don't have permission to downlaod as excel sheet", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        });
+      toast.error("You don't have permission to downlaod as excel sheet", ToastOption);
     }
   };
 
@@ -273,19 +222,19 @@ const TableLayout = () => {
     {
       isOpen ? 
       <ModelBox 
-      ticketNo="Edit mode"
-      tn={EditObject.tn}
-      date={EditObject.date}
-      age={EditObject.age}
-      slab={EditObject.slab}
-      type={EditObject.type}
-      user={EditObject.user}
-      loc={EditObject.loc}
-      team={EditObject.team}
-      status={EditObject.status}
-      remarks={EditObject.remarks}
-      subloc={EditObject.subloc}
-      handleChange={({target}) => {
+        ticketNo="Edit mode"
+        tn={EditObject.tn}
+        date={EditObject.date}
+        age={EditObject.age}
+        slab={EditObject.slab}
+        type={EditObject.type}
+        user={EditObject.user}
+        loc={EditObject.loc}
+        team={EditObject.team}
+        status={EditObject.status}
+        remarks={EditObject.remarks}
+        subloc={EditObject.subloc}
+        handleChange={({target}) => {
         const {value, name} = target;
         setEditObject({...EditObject, [name]:value});
         // console.log(EditObject)
@@ -321,20 +270,6 @@ const TableLayout = () => {
       }}
        /> : null
     }
-    <ToastContainer 
-      position="bottom-left"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-      style={{width:'250px',margin:'10px'}}
-
-    />
     
     <SearchHandle/>
 

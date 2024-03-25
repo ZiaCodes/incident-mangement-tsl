@@ -1,21 +1,18 @@
-import React from 'react'
+import React,{ useEffect,useState } from 'react';
 import MainContainer from '../Wrapper/MainContainer'
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { Link, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useState } from 'react';
+
 import { FaClipboardUser } from "react-icons/fa6";
 import { IoLocation } from "react-icons/io5";
 import { BsCalendarDateFill } from "react-icons/bs";
 import { PiTimerFill } from "react-icons/pi";
-import { TbListDetails } from "react-icons/tb";
-import { TbMessagePlus } from "react-icons/tb";
+import { TbListDetails,TbMessagePlus } from "react-icons/tb";
 import { FaUsersCog } from "react-icons/fa";
 import { PiNotepadFill } from "react-icons/pi";
-import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const TicketPage = () => {
 
-  
   const vendorParam = useParams()
   const {ticket} = vendorParam;
   

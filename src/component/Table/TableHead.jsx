@@ -1,6 +1,4 @@
-import { RiExpandUpDownFill } from "react-icons/ri";
 import { tableHead,vendorTableHead } from '../../utils/Table'
-
 const TableHead = () => {
   return (
     <thead 

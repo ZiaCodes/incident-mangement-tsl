@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
+import { getAllUsers } from '../../apis/auth';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { useNavigate } from 'react-router-dom';
+import { ToastOption } from '../Wrapper/ToastOption';
+
 import { GiElectric } from "react-icons/gi";
 import { CgSpinnerTwoAlt } from 'react-icons/cg';
 import { MdNotificationsActive } from 'react-icons/md';
 import { useState } from 'react';
-import { getAllUsers } from '../../apis/auth';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
 
 
 const UserList = () => {
-
     const [allUserData, setAllUserData] = useState([]);
     const [isLoading,setIsLoading] = useState(false);
     const [user, setUser] = useState({});
@@ -22,16 +23,7 @@ const UserList = () => {
     const getAllUsersData = async() =>{
         let res = await getAllUsers();
         if(res.error) 
-            return toast.error(`${response.error}`, {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
+            return toast.error(`${response.error}`, ToastOption);
         
         let filterUser = res?.filter((data) => data._id !== user.id);
         if(filterUser){
@@ -41,16 +33,7 @@ const UserList = () => {
     }
 
     const notifyUser = () =>{
-        toast.loading('Notifying user', {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
+        toast.loading('Notifying user',ToastOption);
       }
 
 
@@ -68,16 +51,7 @@ const UserList = () => {
                 return console.log("welcome to All user page")
             }else{
 
-                toast.warning('You are not authorized!', {
-                    position: "bottom-left",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    });
+                toast.warning('You are not authorized!', ToastOption);
                 return navigate('/settings',{replace:true})
             }
         }
@@ -142,7 +116,6 @@ export default UserList
 
 
 const UserFaces = ({arr}) => {
-    // let arr = ["Today", "is", "the", "day."];
     let x, y, size;
   
     const getRandomInt = (min, max) => {

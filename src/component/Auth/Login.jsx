@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import useDocumentTitle from '../../hooks/useDocumentTitle';
+
 import { useNavigate } from 'react-router-dom';
 import { signInUser } from '../../apis/auth';
 import { CgSpinner } from "react-icons/cg";
 
-import { ToastContainer, toast } from 'react-toastify';
-import useDocumentTitle from '../../hooks/useDocumentTitle';
+import { toast } from 'react-toastify';
+import { ToastOption } from '../Wrapper/ToastOption';
 
 const Login = () => {
 
@@ -34,31 +36,13 @@ const Login = () => {
 
     if(res?.error){
       setIsPending(false);
-      return toast.error(res.error, {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      return toast.error(res.error, ToastOption);
       
     }
     
     if(res?.user){
       localStorage.setItem('userProfile',JSON.stringify(res));
-      toast.success("Login Successful", {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.success("Login Successful", ToastOption);
     }
     setIsPending(false);
     navigate('/');
@@ -90,24 +74,6 @@ const Login = () => {
   const {email, password} = userInfo;
   return (
     
-    <>
-    <ToastContainer 
-      position="bottom-left"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-      style={{width:'250px',margin:'10px'}}
-
-    />
-
-    
-
     <form onSubmit={handleSubmit} 
         className="relative flex justify-center items-center h-screen flex-col">
 
@@ -158,8 +124,6 @@ const Login = () => {
             </button>
             </div>
     </form>
-
-    </>
         
   )
 }

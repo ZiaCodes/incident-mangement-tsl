@@ -1,8 +1,8 @@
-import { FaCircleUser } from "react-icons/fa6";
+import { useEffect,useState } from "react";
 import MainContainer from '../component/Wrapper/MainContainer'
 import useDocumentTitle from "../hooks/useDocumentTitle";
-import { useEffect,useState } from "react";
 
+import { FaCircleUser } from "react-icons/fa6";
 const WatchList = () => {
     useDocumentTitle(`Your WatchList  `);
     const [ticketData , setTicketData] = useState([]);

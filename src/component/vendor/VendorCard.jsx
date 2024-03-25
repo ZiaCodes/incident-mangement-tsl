@@ -1,12 +1,8 @@
 import { PiLockKeyOpenFill } from "react-icons/pi";
-import { MdAssignment } from "react-icons/md";
+import { MdAssignment,MdOutlinePendingActions,MdOutlineWatchOff } from "react-icons/md";
 import { TiLockClosed } from "react-icons/ti";
 import { GoDotFill } from "react-icons/go";
-import { MdOutlinePendingActions } from "react-icons/md";
-import { FaNetworkWired } from "react-icons/fa6";
-import { MdOutlineWatchOff } from "react-icons/md";
-import { FaAnglesDown } from "react-icons/fa6";
-import { FaAnglesUp } from "react-icons/fa6";
+import { FaNetworkWired,FaAnglesUp, FaAnglesDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const VendorCard = (props) => {
@@ -15,10 +11,6 @@ const VendorCard = (props) => {
       className='bg-white border border-slate-100 shadow-md overflow-y-auto h-auto w-80 rounded-sm p-4 hover:shadow-lg '>
           <GoDotFill className={props.liveStausStyle}/>
           <div className='flex justify-center items-center flex-col mb-4'>
-          {/* <img 
-          src={props.imgUrl}
-          className='object-fill w-20 h-20'
-           alt="logo" /> */}
           <Link className="shadow-none" to={`/team/${props.vendorName}`}>
             <h1 className='text-xl font-bold text-center m-2 text-black'>{props.vendorName}</h1>
           </Link>

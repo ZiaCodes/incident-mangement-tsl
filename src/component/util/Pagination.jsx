@@ -1,6 +1,4 @@
-import { RiArrowLeftDoubleFill } from "react-icons/ri";
-import { RiArrowRightDoubleLine } from "react-icons/ri";
-
+import { RiArrowLeftDoubleFill,RiArrowRightDoubleLine } from "react-icons/ri";
 
 const Pagination = ({children,handlePage}) => {
   return (

@@ -63,6 +63,17 @@
     ],
     "shortcuts":[
       {
+        "name":"Add user",
+        "short_name": "Add user",
+        "description": "Add a New User",
+        "url": "settings/admin-page/?utm_source=jumplist&utm_medium=shortcut",
+        "icons": [{"src":"https://todoly1.netlify.app/icons/edit.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }]
+
+      },
+      {
         "name":"Report",
         "short_name": "Report",
         "description": "Incident Report",

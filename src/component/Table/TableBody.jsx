@@ -1,7 +1,6 @@
 import React from 'react'
 import { FaEye } from "react-icons/fa";
-import { MdModeEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
+import { MdModeEdit,MdDelete } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 const TableBody = (props) => {  

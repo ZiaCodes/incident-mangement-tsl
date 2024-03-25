@@ -1,9 +1,7 @@
 import { IoReload } from "react-icons/io5";
 import { FaEye } from "react-icons/fa";
-import { MdModeEdit } from "react-icons/md";
-import { MdDelete } from "react-icons/md";
+import { MdModeEdit,MdBugReport,MdDelete } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
-import { MdBugReport } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { CiHeart } from "react-icons/ci";
 

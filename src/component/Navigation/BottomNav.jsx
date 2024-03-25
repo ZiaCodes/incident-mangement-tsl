@@ -1,14 +1,14 @@
-import { MdOutlineElectricBolt } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { getAllUsers } from "../../apis/auth";
+import { Link } from "react-router-dom";
 
+import { MdOutlineElectricBolt } from "react-icons/md";
 import { BiSolidReport } from "react-icons/bi";
 import { ImHome } from "react-icons/im";
 import { IoSettings } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
-
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { SiNginxproxymanager } from "react-icons/si";
-import { getAllUsers } from "../../apis/auth";
+import { ToastOption } from "../Wrapper/ToastOption";
 const BottomNav = () => {
 
     const [user,setUser] = useState({});
@@ -17,16 +17,7 @@ const BottomNav = () => {
     const getAllUsersData = async() =>{
         let res = await getAllUsers();
         if(res.error) 
-            return toast.error(`${response.error}`, {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-            });
+            return toast.error(`${response.error}`, ToastOption);
         
         let activeUser = res.filter((user) => user.isOnline === true);
         setAllUserData(activeUser)
@@ -56,7 +47,7 @@ const BottomNav = () => {
         >
         <SiNginxproxymanager 
         className="text-red-600 text-3xl"
-        /> <p className="lg:block md:block hidden"><b className="text-red-600">Incident</b> Mangement</p>
+        /> <span className="lg:block md:block hidden"><b className="text-red-600">Incident</b> Mangement</span>
         </p>
 
         {

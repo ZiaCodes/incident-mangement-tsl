@@ -1,24 +1,20 @@
 import React,{useEffect, useState} from 'react'
-import MainContainer from '../component/Wrapper/MainContainer'
-import { IoSettings } from "react-icons/io5";
-import { MdOutlineLightMode } from "react-icons/md";
-import { MdDarkMode } from "react-icons/md";
-import { IoIosNavigate } from "react-icons/io";
-import { FaDiceTwo } from "react-icons/fa6";
-import { MdDeveloperMode } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
-import { IoMdPersonAdd } from "react-icons/io";
-
-import {  toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
+import MainContainer from '../component/Wrapper/MainContainer'
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import { useTheme } from '../context';
+import { ToastOption } from '../component/Wrapper/ToastOption'; 
+import {  toast } from 'react-toastify';
+import { IoSettings } from "react-icons/io5";
+import { MdDarkMode,MdOutlineLightMode,MdDeveloperMode } from "react-icons/md";
+import { IoIosNavigate, IoMdPersonAdd } from "react-icons/io";
+import { FaDiceTwo } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
 
 const Settings = () => {
 
     const [theme, setTheme] = useState(localStorage?.getItem('theme'));
     const [user, setUser] = useState("");
-    const [isClicked , setIsClicked] = useState(false);
     const [mode,setMode] = useState(localStorage?.getItem('m_mode'));
     const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'));
     const [devMode, setDevMode] = useState('Off');
@@ -35,45 +31,18 @@ const Settings = () => {
         if(localMode === 'Incident'){
             setMode('Request');
             localStorage.setItem('m_mode','Request');
-            toast.success('Mode changed to Request!', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
+            toast.success('Mode changed to Request!', ToastOption);
         }else{
             setMode('Incident');
             localStorage.setItem('m_mode','Incident');
-            toast.success('Mode changed to Incident!', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
+            toast.success('Mode changed to Incident!', ToastOption);
         }
     }
 
     const handleResetDashBoard = () =>{
         localStorage.removeItem('XLDATA');
         localStorage.removeItem('formateIncidentData');
-        toast.success('Data Formated!', {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
+        toast.success('Data Formated!', ToastOption);
     }
 
 
@@ -86,29 +55,11 @@ const Settings = () => {
             setNavStyle('Menu');
             localStorage?.setItem('navigationStyle','Menu')
         }
-        toast.success('Navigation changed!', {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
+        toast.success('Navigation changed!',ToastOption);
     }
 
     const handleDevMode = () =>{
-        toast.error('Feature coming soon!', {
-            position: "bottom-left",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
+        toast.error('Feature coming soon!', ToastOption);
     }
     
 
