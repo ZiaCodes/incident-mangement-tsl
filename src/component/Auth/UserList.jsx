@@ -33,7 +33,7 @@ const UserList = () => {
             theme: "dark",
             });
         
-        let filterUser = res.filter((data) => data._id !== user.id);
+        let filterUser = res?.filter((data) => data._id !== user.id);
         if(filterUser){
             setAllUserData(filterUser);
         }

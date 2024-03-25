@@ -1,6 +1,49 @@
 {
-    "short_name": "IManagement",
-    "name": "I-Management",
+    "short_name": "Imtsl",
+    "name": "Imtsl",
+    "categories": [
+      "Management",
+      "Network",
+      "workflow"
+      ],
+      "description": "Manage your Daily Incident call by exporting your excel sheet.",
+    "screenshots": [
+      {
+      "src": "https://todoly1.netlify.app/img/login.png",
+      "sizes": "586x1041",
+      "type": "image/png"
+      },
+      {
+      "src": "https://todoly1.netlify.app/img/dashboard.png",
+      "sizes": "586x1041",
+      "type": "image/png"
+      },
+      {
+      "src": "https://todoly1.netlify.app/img/report.png",
+      "sizes": "586x1041",
+      "type": "image/png"
+      },
+      {
+      "src": "https://todoly1.netlify.app/img/setting.png",
+      "sizes": "586x1041",
+      "type": "image/png"
+      },
+      {
+      "src": "https://todoly1.netlify.app/img/user-profile.png",
+      "sizes": "586x1041",
+      "type": "image/png"
+      },
+      {
+      "src": "https://todoly1.netlify.app/img/dark-dashboard.png",
+      "sizes": "586x1041",
+      "type": "image/png"
+      },
+      {
+      "src": "https://todoly1.netlify.app/img/dark-edit.png",
+      "sizes": "586x1041",
+      "type": "image/png"
+      }
+      ],
     "icons": [
       {
         "src": "favicon.ico",
@@ -18,6 +61,29 @@
         "sizes": "512x512"
       }
     ],
+    "shortcuts":[
+      {
+        "name":"Report",
+        "short_name": "Report",
+        "description": "Incident Report",
+        "url": "/report?utm_source=jumplist&utm_medium=shortcut",
+        "icons": [{"src":"https://todoly1.netlify.app/icons/feed.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }]
+
+      },
+      {
+        "name":"Setting",
+        "short_name": "Setting",
+        "description": "Update Your Setting",
+        "url": "/settings?utm_source=jumplist&utm_medium=shortcut",
+        "icons": [{"src":"https://todoly1.netlify.app/icons/edit.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }]
+  }
+],
     "start_url": "public",
     "id":"/?home=true",
     "display": "standalone",

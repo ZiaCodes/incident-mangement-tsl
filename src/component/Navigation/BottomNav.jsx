@@ -56,7 +56,7 @@ const BottomNav = () => {
         >
         <SiNginxproxymanager 
         className="text-red-600 text-3xl"
-        /> <b className="text-red-600">Incident</b>Mangement
+        /> <p className="lg:block md:block hidden"><b className="text-red-600">Incident</b> Mangement</p>
         </p>
 
         {

@@ -30,7 +30,9 @@ const Login = () => {
     setIsPending(true);
     const res = await signInUser(userInfo);
 
-    if(res.error){
+    console.log(res)
+
+    if(res?.error){
       setIsPending(false);
       return toast.error(res.error, {
         position: "bottom-left",
@@ -45,7 +47,7 @@ const Login = () => {
       
     }
     
-    if(res){
+    if(res?.user){
       localStorage.setItem('userProfile',JSON.stringify(res));
       toast.success("Login Successful", {
         position: "bottom-left",
@@ -74,7 +76,7 @@ const Login = () => {
   }
 
   useEffect(()=>{
-    let Jwt = JSON.parse(localStorage.getItem('userProfile'));
+    let Jwt = JSON.parse(localStorage?.getItem('userProfile'));
     if(Jwt){
         navigate('/');
     }
@@ -129,9 +131,8 @@ const Login = () => {
                 value={email}
                 onChange={handleChange}
                 name="email"
-                autoComplete='on'
                 placeholder='Email'
-                autocomplete="off"
+                autoComplete="off"
                 className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
                 />
 
@@ -141,9 +142,8 @@ const Login = () => {
                 name="password"
                 placeholder='Password'
                 type="password"
-                autoComplete='on'
                 id='passField'
-                autocomplete="off"
+                autoComplete="off"
                 className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
                 />
 
