@@ -779,3 +779,11 @@ select{
 .user-face img:hover{
   transform: translate(-5px, 8px) scale(1.5) rotate(-10deg);
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+    background-color: transparent !important;
+}

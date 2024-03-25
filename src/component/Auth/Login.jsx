@@ -131,6 +131,7 @@ const Login = () => {
                 name="email"
                 autoComplete='on'
                 placeholder='Email'
+                autocomplete="off"
                 className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
                 />
 
@@ -142,6 +143,7 @@ const Login = () => {
                 type="password"
                 autoComplete='on'
                 id='passField'
+                autocomplete="off"
                 className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
                 />
 

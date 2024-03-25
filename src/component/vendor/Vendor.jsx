@@ -200,7 +200,7 @@ const Vendor = () => {
     </TableContainer>
     </div>
 
-    <div className='invisible'>
+    <div className='invisible mb-20'>
       Hello world
     </div>
     </>
