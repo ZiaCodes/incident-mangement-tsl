@@ -9,6 +9,7 @@ import { IoSettings } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
 import { ToastOption } from "../Wrapper/ToastOption";
+
 const BottomNav = () => {
 
     const [user,setUser] = useState({});

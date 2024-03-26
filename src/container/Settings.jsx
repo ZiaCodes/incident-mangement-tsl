@@ -10,6 +10,7 @@ import { MdDarkMode,MdOutlineLightMode,MdDeveloperMode } from "react-icons/md";
 import { IoIosNavigate, IoMdPersonAdd } from "react-icons/io";
 import { FaDiceTwo } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
+import { updateUserActiveStatus } from '../apis/auth';
 
 const Settings = () => {
 
@@ -60,6 +61,20 @@ const Settings = () => {
 
     const handleDevMode = () =>{
         toast.error('Feature coming soon!', ToastOption);
+    }
+
+    const logoutFromApplication = async() =>{
+        let res = await updateUserActiveStatus({userId: user.id, isOnline: false})
+        if(res.error) return toast.error(`${res.error}`,ToastOption);
+
+        toast.success(`Log-out successfully.`, ToastOption);
+    }
+
+    const handleLogout = () =>{
+        logoutFromApplication();
+        localStorage.removeItem('userProfile');
+        navigate('/auth/login');
+        window.location.reload();
     }
     
 
@@ -140,11 +155,7 @@ const Settings = () => {
                 onClick={handleResetDashBoard}
             >Reset Data</button>
             <button 
-                onClick={()=>{
-                    localStorage.removeItem('userProfile');
-                    window.location.reload();
-                    navigate('/auth/login');
-                }}
+                onClick={handleLogout}
             className="btn-primary"
             >Logout</button>
         </div> 

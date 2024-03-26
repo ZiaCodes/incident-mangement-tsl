@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import Loader from './component/util/Loader';
+import { useState } from 'react';
 import Login from './component/Auth/Login';
 
 const Settings = React.lazy(()=> import('./container/Settings'));
@@ -18,6 +19,8 @@ const WatchList = React.lazy(()=> import('./container/WatchList'));
 const UserList = React.lazy(()=> import('./component/Auth/UserList'));
 
 function App() {
+
+  const [user, setUser] = useState(JSON.parse(localStorage?.getItem('userProfile')));
   
   const getTheme = () =>{
     const localTheme = localStorage?.getItem('theme');
@@ -35,6 +38,9 @@ function App() {
   
     useEffect(()=>{
       let Jwt = JSON.parse(localStorage?.getItem('userProfile'));
+      if(Jwt?.user){
+        setUser(Jwt.user);
+      }
 
       if(!Jwt?.user?.jwtToken){
           navigate('/auth/login',{replace:true});
@@ -52,6 +58,7 @@ function App() {
       localStorage.setItem('m_mode','Incident');
     }
   },[])
+
 
 
   return (
