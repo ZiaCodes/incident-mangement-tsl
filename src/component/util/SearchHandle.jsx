@@ -8,6 +8,7 @@ const SearchHandle = () => {
   const inputRef = useRef(null);
   const [userSelectedSet, setUserSelectedSet] = useState(new Set());
   const [data, setData] = useState([]);
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   const fetchUser = () => {
     if (searchTerm.trim() === "") {
@@ -54,6 +55,28 @@ const SearchHandle = () => {
     }
   };
 
+  const keyDownHandler = (e) =>{
+    e.preventDefault();
+    if( e.ctrlKey && e.key === 'k'){
+      console.log("You just pressed ctrl and K");
+      inputRef.current.focus();
+      setIsSearchActive(true);
+    }
+
+    if(e.key === 'Escape'){
+      inputRef.current.blur();
+      setIsSearchActive(false);
+    }
+  }
+
+  useEffect(()=>{
+    window.addEventListener('keydown',keyDownHandler);
+
+    return () =>{
+      window.removeEventListener('keydown',keyDownHandler)
+    }
+  },[])
+
   useEffect(() => {
     fetchUser();
   }, [searchTerm]);
@@ -73,7 +96,7 @@ const SearchHandle = () => {
             );
           })}
           {/* input field */}
-          <div>
+          <div className="bg-transparent w-full h-full">
             <input
               ref={inputRef}
               type="text"
@@ -82,6 +105,18 @@ const SearchHandle = () => {
               onKeyDown={handleKeyDown}
               placeholder="Search for a user"
             />
+            <p className="absolute top-1 right-2 font-extrabold">
+              {
+                !isSearchActive? <>
+                <span 
+                  className="shadow-md px-1 py-1 text-xs w-8 rounded-md font-bold">
+                    ctrl</span>+<span className="shadow-md px-1 py-1 text-xs w-8 rounded-md font-bold">
+                    k</span>
+                </> : 
+                  <span className="shadow-md px-1 py-1 text-xs w-8 rounded-md font-bold">
+                  Esc</span>
+              }
+            </p>
             {/* search suggestions */}
             <ul className="suggestions-list">
               {suggestion?.users?.map((user) => {

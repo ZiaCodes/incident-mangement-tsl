@@ -678,22 +678,24 @@ select{
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
 }
 
 .user-search-input input {
   width: 100%;
-  background-color: #000;
-  border: none;
-  height: 20px;
-  padding: 5px;
+  height: 100%;
+  padding: 8px;
   background-color: transparent;
+  z-index: 999999999999;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: 0.5s all;
 }
 
 .user-search-input input:focus {
   outline: none;
+  box-shadow: 0 5px 15px #0000002e;
+  border: 1px solid #989898;
+  
 }
 
 .suggestions-list {

@@ -13,7 +13,6 @@ const WatchList = () => {
 
         if(data){
             setTicketData(data);
-            console.log(data)
         }
 
     },[])

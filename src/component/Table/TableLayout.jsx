@@ -197,10 +197,31 @@ const TableLayout = () => {
     }
   },[isVerified])
 
+  const KeyToResetData = (e) =>{
+    e.preventDefault();
+    if(e.ctrlKey && e.altKey && e.key === 'd'){
+      setTableData([])
+      localStorage.removeItem('XLDATA');
+      localStorage.removeItem('formateIncidentData');
+
+
+      return toast.success('Reset data successfully.',ToastOption);
+
+    }
+  }
+
+  useEffect(()=>{
+    window.addEventListener('keydown',KeyToResetData);
+
+    return () =>{
+      window.removeEventListener('keydown',KeyToResetData)
+    }
+  },[])
 
   if(mode === 'Request'){
     return <Request/>
   }
+  
 
 
   return(
@@ -254,16 +275,7 @@ const TableLayout = () => {
           }
         }
         localStorage.setItem('formateIncidentData',JSON.stringify(tableData));
-        toast.success('Updated Successfully!', {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-          });
+        toast.success('Updated Successfully!', ToastOption);
 
           setIsOpen(false)
 
