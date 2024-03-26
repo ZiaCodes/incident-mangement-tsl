@@ -9,37 +9,37 @@
       "description": "Manage your Daily Incident call by exporting your excel sheet.",
     "screenshots": [
       {
-      "src": "https://todoly1.netlify.app/img/login.png",
+      "src": "/img/login.png",
       "sizes": "586x1041",
       "type": "image/png"
       },
       {
-      "src": "https://todoly1.netlify.app/img/dashboard.png",
+      "src": "/img/dashboard.png",
       "sizes": "586x1041",
       "type": "image/png"
       },
       {
-      "src": "https://todoly1.netlify.app/img/report.png",
+      "src": "/img/report.png",
       "sizes": "586x1041",
       "type": "image/png"
       },
       {
-      "src": "https://todoly1.netlify.app/img/setting.png",
+      "src": "/img/setting.png",
       "sizes": "586x1041",
       "type": "image/png"
       },
       {
-      "src": "https://todoly1.netlify.app/img/user-profile.png",
+      "src": "/img/user-profile.png",
       "sizes": "586x1041",
       "type": "image/png"
       },
       {
-      "src": "https://todoly1.netlify.app/img/dark-dashboard.png",
+      "src": "/img/dark-dashboard.png",
       "sizes": "586x1041",
       "type": "image/png"
       },
       {
-      "src": "https://todoly1.netlify.app/img/dark-edit.png",
+      "src": "/img/dark-edit.png",
       "sizes": "586x1041",
       "type": "image/png"
       }
@@ -95,11 +95,11 @@
         }]
   }
 ],
-    "start_url": "public",
+    "start_url": "/",
     "id":"/?home=true",
     "display": "standalone",
     "theme_color": "#f1f1f1",
-    "background_color": "#f1f1f1",
+    "background_color": "#1f1f1f",
     "launch_handler": {
       "route_to": "existing-client",
       "navigate_existing_client": "never"

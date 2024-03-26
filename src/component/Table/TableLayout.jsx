@@ -205,7 +205,7 @@ const TableLayout = () => {
       localStorage.removeItem('formateIncidentData');
 
 
-      return toast.success('Reset data successfully.',ToastOption);
+      return toast.success('Data Formated!',ToastOption);
 
     }
   }
