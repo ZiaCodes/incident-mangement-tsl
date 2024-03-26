@@ -10,7 +10,9 @@ import { MdDarkMode,MdOutlineLightMode,MdDeveloperMode } from "react-icons/md";
 import { IoIosNavigate, IoMdPersonAdd } from "react-icons/io";
 import { FaDiceTwo } from "react-icons/fa6";
 import { FaUserCircle } from "react-icons/fa";
+import { FaKeyboard } from "react-icons/fa6";
 import { updateUserActiveStatus } from '../apis/auth';
+import ShortCutkeys from '../component/util/ShortCutkeys';
 
 const Settings = () => {
 
@@ -19,6 +21,7 @@ const Settings = () => {
     const [mode,setMode] = useState(localStorage?.getItem('m_mode'));
     const [navStyle, setNavStyle] = useState(localStorage?.getItem('navigationStyle'));
     const [devMode, setDevMode] = useState('Off');
+    const [shortCutBox , setShortCutBox] = useState(false);
 
     const navigate = useNavigate();
     const {toggleTheme} = useTheme();
@@ -85,6 +88,10 @@ const Settings = () => {
         }
     },[]);
 
+    if(shortCutBox){
+        return <ShortCutkeys onclick={()=>setShortCutBox(false)}/>
+    }
+
     
     return(
         <MainContainer>
@@ -121,14 +128,14 @@ const Settings = () => {
         <ul className="flex justify-self-end gap-2 mt-7 flex-col">
             <li className='flex justify-start items-center gap-2  cursor-pointer'>
                 <FaUserCircle/>
-                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/${user?.id}`}>
+                <Link className='p-0 hover:underline underline-offset-2 shadow-none capitalize font-normal' to={`/settings/${user?.id}`}>
                     My profile
                 </Link>
             </li>
             <hr className='opacity-25' />
             <li  className='flex justify-start items-center gap-2 cursor-pointer'>
                 <IoMdPersonAdd/>
-                <Link className='p-0 shadow-none capitalize font-normal' to={`/settings/admin-page`}>
+                <Link className='p-0 hover:underline underline-offset-2 shadow-none capitalize font-normal' to={`/settings/admin-page`}>
                     Add User 
                 </Link>
             </li> 
@@ -145,6 +152,13 @@ const Settings = () => {
                 <hr className='opacity-25' />
                 <li className='flex justify-start items-center gap-1 cursor-pointer' onClick={handleDevMode}>
                     <MdDeveloperMode/>Developer Option : {devMode}
+                </li>
+                <hr className='opacity-25' />
+                <li onClick={() =>{
+                    setShortCutBox(true);
+                }} className='flex justify-start items-center gap-1 cursor-pointer'>
+                    <FaKeyboard/>
+                    Shortcut keys
                 </li>
 
         </ul>

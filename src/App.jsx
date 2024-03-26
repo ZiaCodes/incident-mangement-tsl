@@ -5,7 +5,9 @@ import { ToastContainer } from 'react-toastify';
 import Loader from './component/util/Loader';
 import { useState } from 'react';
 import Login from './component/Auth/Login';
+import ShortCutkeys from './component/util/ShortCutkeys';
 
+// const ShortCutkeys = React.lazy(() => ('./component/util/ShortCutkeys'));
 const Settings = React.lazy(()=> import('./container/Settings'));
 const Home = React.lazy(()=> import('./container/Home'));
 const Navigation = React.lazy(()=> import('./component/Navigation/Navigation'))
@@ -60,6 +62,60 @@ function App() {
   },[])
 
 
+  const keyNavigateHandler = (e) =>{
+    e.preventDefault();
+
+    if( e.ctrlKey && e.key === 'r'){
+      window.location.reload(); 
+    }
+
+    if(!user?.user) return;
+    if( e.altKey && e.key === 'h'){
+      navigate('/')      
+    }
+
+    if( e.altKey && e.key === 'r'){
+      navigate('/report')      
+    }
+
+    if( e.altKey && e.key === 'w'){
+      navigate('/watchlist')      
+    }
+
+    if( e.altKey && e.key === 's'){
+      navigate('/settings')      
+    }
+
+    if( e.altKey && e.key === 'p'){
+      navigate(`/settings/${user?.user.id}`)      
+    }
+
+    if( e.ctrlKey && e.key === 'r'){
+      window.location.reload(); 
+    }
+
+    // console.log(e=e || window.event)
+
+    if(e.ctrlKey && e.key === '.'){
+      let localStyle = localStorage.getItem('navigationStyle');
+
+      if(localStyle === 'Simple'){
+        localStorage.setItem('navigationStyle','Menu');
+      }else{
+        localStorage.setItem('navigationStyle','Simple');
+      }
+    }
+  }
+
+  useEffect(()=>{
+    window.addEventListener('keydown',keyNavigateHandler);
+
+    return () =>{
+      window.removeEventListener('keydown',keyNavigateHandler)
+    }
+  },[])
+
+
 
   return (
     <>
@@ -89,6 +145,8 @@ function App() {
       <Route path='settings/:userId' element={<UserProfile/>} />
       <Route path='settings/admin-page' element={<AdminPage/>} />
       <Route path='/settings/admin-page/all-user' element={<UserList/>} />
+      <Route path='/settings/shortcut-keys' element={<ShortCutkeys/>} />
+
       <Route path='auth/login' element={<Login/>} />
       <Route path="*" element={<NotFound/>} />
     </Routes>
