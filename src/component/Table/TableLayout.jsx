@@ -72,6 +72,7 @@ const TableLayout = () => {
   const handleSearch = ({target}) =>{
     const {value} = target;
     setSearch(value);
+    console.log(value)
   }
 
   const getTableData = () =>{
@@ -203,8 +204,6 @@ const TableLayout = () => {
       setTableData([])
       localStorage.removeItem('XLDATA');
       localStorage.removeItem('formateIncidentData');
-
-
       return toast.success('Data Formated!',ToastOption);
 
     }
@@ -283,7 +282,7 @@ const TableLayout = () => {
        /> : null
     }
     
-    <SearchHandle/>
+    <SearchHandle search={search} method={handleSearch}/>
 
     <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase ml-4'>
         {
