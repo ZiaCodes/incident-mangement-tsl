@@ -1,13 +1,15 @@
 import React from 'react'
 import { IoCloseCircle } from 'react-icons/io5'
 
+const commonStyle = 'flex justify-between items-center p-1'
+
 const ShortCutkeys = ({onclick}) => {
   return (
         <div>
         <div className='setting-wrapper'>
         <div className="setting-header">
             <div className='setting-logo'>
-                <h1 className='flex flex-col justify-center items-start font-bold'>
+                <h1 className='flex justify-center items-start flex-col font-bold'>
                 List of Shortcut keys
                 <p className=' opacity-75 font-extralight text-xs relative'>Useful Key combination </p>
                 </h1>
@@ -18,24 +20,24 @@ const ShortCutkeys = ({onclick}) => {
         <p className='font-bold'>General keys</p>
         <hr className='pb-1'/>
         <ul>
-            <li className='flex justify-between items-center p-1'>Serach  <code >Ctrl + k</code></li>
-            <li className='flex justify-between items-center p-1'>Home    <code >Alt + h</code></li>
-            <li className='flex justify-between items-center p-1'>Report  <code >Alt + r</code></li>
-            <li className='flex justify-between items-center p-1'>WatchList  <code >Alt + w</code></li>
-            <li className='flex justify-between items-center p-1'>Setting  <code >Alt + s</code></li>
-            <li className='flex justify-between items-center p-1'>Profile  <code >Alt + p</code></li>
+            <li className={commonStyle}>Serach      <code >Ctrl + k</code></li>
+            <li className={commonStyle}>Home        <code >Alt + h</code></li>
+            <li className={commonStyle}>Report      <code >Alt + r</code></li>
+            <li className={commonStyle}>WatchList   <code >Alt + w</code></li>
+            <li className={commonStyle}>Setting     <code >Alt + s</code></li>
+            <li className={commonStyle}>Profile     <code >Alt + p</code></li>
         </ul>
         <br />
         <p className=' font-bold'>Advanced keys</p>
         <hr className='pb-1'/>
         <ul>
-            <li className='flex justify-between items-center p-1'>
+            <li className={commonStyle}>
             Reset Data  <code >Alt + Ctrl + d</code>
             </li>
-            <li className='flex justify-between items-center p-1'>
+            <li className={commonStyle}>
             Change Nav Style  <code > Ctrl + . </code> 
             </li>
-            <li className='flex justify-between items-center p-1'>
+            <li className={commonStyle}>
             Refresh/Reload page  <code > Ctrl + R </code> 
             </li>
         </ul>

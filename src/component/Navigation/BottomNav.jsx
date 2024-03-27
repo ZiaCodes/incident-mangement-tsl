@@ -10,6 +10,8 @@ import { FaHeart } from "react-icons/fa";
 import { SiNginxproxymanager } from "react-icons/si";
 import { ToastOption } from "../Wrapper/ToastOption";
 
+const commonClass = 'shadow-none flex justify-center items-center'
+
 const BottomNav = () => {
 
     const [user,setUser] = useState({});
@@ -78,25 +80,25 @@ const BottomNav = () => {
     >
     
 
-    <Link title="Home" className="shadow-none flex justify-center items-center " to='/'>
+    <Link title="Home" className={commonClass} to='/'>
         <ImHome 
         className=" text-xl text-center  "
         />
     </Link>
 
-    <Link title="Report" className="shadow-none flex justify-center items-center " to='/report'>
+    <Link title="Report" className={commonClass} to='/report'>
         <BiSolidReport 
         className=" text-xl text-center  "
         />
     </Link>
 
-    <Link title="fav" className="shadow-none flex justify-center items-center " to='/watchlist'>
+    <Link title="fav" className={commonClass} to='/watchlist'>
         <FaHeart 
         className=" text-xl text-center text-red-600"
         />
     </Link>
 
-    <Link title="setting" className="shadow-none flex justify-center items-center " to='/settings'>
+    <Link title="setting" className={commonClass} to='/settings'>
         <IoSettings 
         className=" text-xl text-center  "
         />

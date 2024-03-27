@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { ToastOption } from '../Wrapper/ToastOption';
 
+let commonStyle = 'p-2 outline-none bg-transparent border-b-2'
 const AdminPage =() =>{
 
     const [isLoading,setIsLoading] = useState(false);
@@ -100,11 +101,12 @@ const AdminPage =() =>{
                 </button>
             </div> 
             <div className="admin-page-body">
-                <form onSubmit={handleRegister} className='mt-5 flex flex-col flex-wrap gap-4'>
+                <form onSubmit={handleRegister} 
+                className='mt-5 flex flex-col flex-wrap gap-4'>
                     <input 
                         value={userInfo.name}
                         onChange={handleChange}
-                        className='p-2 outline-none bg-transparent border-b-2'
+                        className={commonStyle}
                         placeholder='Full Name'
                         name='name'
                         type="text"
@@ -112,7 +114,7 @@ const AdminPage =() =>{
                     <input 
                         value={userInfo.email}
                         onChange={handleChange}
-                        className='p-2 outline-none bg-transparent border-b-2' 
+                        className={commonStyle} 
                         placeholder='Email' 
                         name='email'
                         type="email"
@@ -120,7 +122,7 @@ const AdminPage =() =>{
                     <input
                         value={userInfo.phoneNumber}
                         onChange={handleChange}
-                        className='p-2 text-left outline-none bg-transparent border-b-2'
+                        className={commonStyle}
                         placeholder='Phone Number'
                         name='phoneNumber'
                         type="text"
@@ -128,7 +130,7 @@ const AdminPage =() =>{
                     <input 
                         value={userInfo.company}
                         onChange={handleChange}
-                        className='p-2 outline-none bg-transparent border-b-2' 
+                        className={commonStyle} 
                         placeholder='Company' 
                         name='company'
                         type="text"
@@ -136,7 +138,7 @@ const AdminPage =() =>{
                     <input
                         value={userInfo.password}
                         onChange={handleChange}
-                        className='p-2 outline-none bg-transparent border-b-2' 
+                        className={commonStyle} 
                         placeholder='password' 
                         name='password'
                         type="text"

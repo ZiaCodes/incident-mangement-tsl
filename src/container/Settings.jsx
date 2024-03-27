@@ -14,6 +14,7 @@ import { FaKeyboard } from "react-icons/fa6";
 import { updateUserActiveStatus } from '../apis/auth';
 import ShortCutkeys from '../component/util/ShortCutkeys';
 
+const commonStyle = 'flex justify-start items-center cursor-pointer '
 const Settings = () => {
 
     const [theme, setTheme] = useState(localStorage?.getItem('theme'));
@@ -126,14 +127,14 @@ const Settings = () => {
             Change your setting according to your prefernce.
         </p>
         <ul className="flex justify-self-end gap-2 mt-7 flex-col">
-            <li className='flex justify-start items-center gap-2  cursor-pointer'>
+            <li className={commonStyle + ' gap-2'}>
                 <FaUserCircle/>
                 <Link className='p-0 hover:underline underline-offset-2 shadow-none capitalize font-normal' to={`/settings/${user?.id}`}>
                     My profile
                 </Link>
             </li>
             <hr className='opacity-25' />
-            <li  className='flex justify-start items-center gap-2 cursor-pointer'>
+            <li  className={commonStyle + ' gap-2'}>
                 <IoMdPersonAdd/>
                 <Link className='p-0 hover:underline underline-offset-2 shadow-none capitalize font-normal' to={`/settings/admin-page`}>
                     Add User 
@@ -142,21 +143,21 @@ const Settings = () => {
             <hr className='opacity-25' />
             <li 
                 onClick={handleNavStyle}
-                className='flex justify-start items-center gap-1 cursor-pointer'>
+                className={commonStyle + ' gap-1'}>
                     <IoIosNavigate/> Navigation style : {navStyle}
             </li>
             <hr className='opacity-25'/>
-                <li className='flex justify-start items-center gap-1 cursor-pointer' onClick={changeMMode}>
+                <li className={commonStyle + ' gap-1'} onClick={changeMMode}>
                     <FaDiceTwo/>Application mode : {mode}
                 </li>
                 <hr className='opacity-25' />
-                <li className='flex justify-start items-center gap-1 cursor-pointer' onClick={handleDevMode}>
+                <li className={commonStyle + ' gap-1'} onClick={handleDevMode}>
                     <MdDeveloperMode/>Developer Option : {devMode}
                 </li>
                 <hr className='opacity-25' />
                 <li onClick={() =>{
                     setShortCutBox(true);
-                }} className='flex justify-start items-center gap-1 cursor-pointer'>
+                }} className={commonStyle + ' gap-1'}>
                     <FaKeyboard/>
                     Shortcut keys
                 </li>

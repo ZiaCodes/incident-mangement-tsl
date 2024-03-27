@@ -19,6 +19,8 @@ const findEmailByADID = (email) =>{
     return email;
 }
 
+const commonStyle = 'capitalize p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'
+
 const UserProfile = () => {
     const [user,setUser] = useState({});
     useDocumentTitle(`Profile | ${user?.name}`);
@@ -102,7 +104,7 @@ const UserProfile = () => {
                 onClick={changePasswordHandle}
                 className='flex justify-start items-center gap-4'>
                 <label htmlFor="name"><RiLockPasswordFill/> </label>
-                <a className='capitalize p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer' href='#'>
+                <a className={commonStyle} href='#'>
                     Change Password
                 </a>
             </div>
@@ -110,13 +112,13 @@ const UserProfile = () => {
             onClick={forgetPasswordHandle}
                 className='flex justify-start items-center gap-4'>
                 <label htmlFor="name"><MdSyncProblem/> </label>
-                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>
+                <p className={commonStyle}>
                     Forget Password
                 </p>
             </div>
             <div className='flex justify-start items-center gap-4'>
                 <label htmlFor="name"><MdDangerous className='text-red-600'/> </label>
-                <p className='p-0 shadow-none transition-all font-light text-xs  hover:underline hover:text-red-600 cursor-pointer'>
+                <p className={commonStyle}>
                     Delete Account
                 </p>
             </div>

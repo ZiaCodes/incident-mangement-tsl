@@ -63,7 +63,6 @@ function App() {
 
 
   const keyNavigateHandler = (e) =>{
-    e.preventDefault();
 
     if( e.ctrlKey && e.key === 'r'){
       window.location.reload(); 

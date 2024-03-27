@@ -8,10 +8,10 @@ import { CgSpinner } from "react-icons/cg";
 import { toast } from 'react-toastify';
 import { ToastOption } from '../Wrapper/ToastOption';
 
+let commonStyle = 'p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
 const Login = () => {
 
   const navigate = useNavigate();
-
   useDocumentTitle("Login Page | Incident Management")
   
   const [userInfo,setUserinfo] = useState({
@@ -99,7 +99,7 @@ const Login = () => {
                 name="email"
                 placeholder='Email'
                 autoComplete="off"
-                className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
+                className={commonStyle}
                 />
 
                 <input 
@@ -110,7 +110,7 @@ const Login = () => {
                 type="password"
                 id='passField'
                 autoComplete="off"
-                className='p-2 bg-transparent outline-none border border-green-600 rounded-sm text-white'
+                className={commonStyle}
                 />
 
                 <div className='text-white font-thin text-xs flex gap-1 -mt-5'>

@@ -194,7 +194,6 @@ const TableLayout = () => {
   },[isVerified])
 
   const KeyToResetData = (e) =>{
-    e.preventDefault();
     if(e.ctrlKey && e.altKey && e.key === 'd'){
       setTableData([])
       localStorage.removeItem('XLDATA');
@@ -279,7 +278,6 @@ const TableLayout = () => {
     
     <SearchHandle searchValue={search} method={(e) =>{
       setSearch(e.target.value)
-      console.log(e.target.value)
     } }/>
 
     <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase ml-4'>

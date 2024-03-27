@@ -7,8 +7,9 @@ const SearchHandle = (props) => {
   
 
   const keyDownHandler = (e) =>{
-    e.preventDefault();
+    
     if( e.ctrlKey && e.key === 'k'){
+      e.preventDefault();
       inputRef.current.focus();
       setIsSearchActive(true);
     }
@@ -25,7 +26,7 @@ const SearchHandle = (props) => {
     return () =>{
       window.removeEventListener('keydown',keyDownHandler)
     }
-  },[])
+  },[]);
   
   return (
     <div className="user-search-container ">
