@@ -18,25 +18,25 @@ const ShortCutkeys = ({onclick}) => {
         <p className='font-bold'>General keys</p>
         <hr className='pb-1'/>
         <ul>
-            <li className='flex justify-between items-center p-1'>Serach : <code >Ctrl + k</code></li>
-            <li className='flex justify-between items-center p-1'>Home :   <code >Alt + h</code></li>
-            <li className='flex justify-between items-center p-1'>Report : <code >Alt + r</code></li>
-            <li className='flex justify-between items-center p-1'>WatchList : <code >Alt + w</code></li>
-            <li className='flex justify-between items-center p-1'>Setting : <code >Alt + s</code></li>
-            <li className='flex justify-between items-center p-1'>Profile : <code >Alt + p</code></li>
+            <li className='flex justify-between items-center p-1'>Serach  <code >Ctrl + k</code></li>
+            <li className='flex justify-between items-center p-1'>Home    <code >Alt + h</code></li>
+            <li className='flex justify-between items-center p-1'>Report  <code >Alt + r</code></li>
+            <li className='flex justify-between items-center p-1'>WatchList  <code >Alt + w</code></li>
+            <li className='flex justify-between items-center p-1'>Setting  <code >Alt + s</code></li>
+            <li className='flex justify-between items-center p-1'>Profile  <code >Alt + p</code></li>
         </ul>
         <br />
         <p className=' font-bold'>Advanced keys</p>
         <hr className='pb-1'/>
         <ul>
             <li className='flex justify-between items-center p-1'>
-            Reset Data : <code >Alt + Ctrl + d</code>
+            Reset Data  <code >Alt + Ctrl + d</code>
             </li>
             <li className='flex justify-between items-center p-1'>
-            Change Nav Style : <code > Ctrl + . </code> 
+            Change Nav Style  <code > Ctrl + . </code> 
             </li>
             <li className='flex justify-between items-center p-1'>
-            Refresh/Reload page : <code > Ctrl + R </code> 
+            Refresh/Reload page  <code > Ctrl + R </code> 
             </li>
         </ul>
         </div>

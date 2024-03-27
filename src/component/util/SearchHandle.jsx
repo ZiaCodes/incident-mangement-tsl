@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const SearchHandle = ({search,method}) => {
+const SearchHandle = (props) => {
   const inputRef = useRef(null);
   const [isSearchActive, setIsSearchActive] = useState(false);
 
@@ -30,13 +30,14 @@ const SearchHandle = ({search,method}) => {
   return (
     <div className="user-search-container ">
         <div className="user-search-input">
-          <div className="bg-transparent w-full h-full">
+          <div className="w-full h-full">
             <input
               ref={inputRef}
               type="text"
-              value={search}
-              onChange={method}
+              value={props.searchValue}
+              onChange={props.method}
               placeholder="Search for a user"
+              className="z-50"
             />
             <p className="absolute top-1 right-2 font-extrabold">
               {

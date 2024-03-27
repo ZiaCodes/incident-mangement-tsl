@@ -66,7 +66,7 @@
         "name":"Add user",
         "short_name": "Add user",
         "description": "Add a New User",
-        "url": "settings/admin-page/?utm_source=jumplist&utm_medium=shortcut",
+        "url": "/settings/admin-page/?utm_source=jumplist&utm_medium=shortcut",
         "icons": [{"src":"https://todoly1.netlify.app/icons/edit.png",
           "type": "image/png",
           "sizes": "192x192"
@@ -99,7 +99,7 @@
     "id":"/?home=true",
     "display": "standalone",
     "theme_color": "#f1f1f1",
-    "background_color": "#1f1f1f",
+    "background_color": "#f1f1f1",
     "launch_handler": {
       "route_to": "existing-client",
       "navigate_existing_client": "never"

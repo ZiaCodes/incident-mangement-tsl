@@ -69,11 +69,6 @@ const TableLayout = () => {
     setContextMenu(initialContextMenu);
   });
 
-  const handleSearch = ({target}) =>{
-    const {value} = target;
-    setSearch(value);
-    console.log(value)
-  }
 
   const getTableData = () =>{
     setIsLoading(true);
@@ -282,7 +277,10 @@ const TableLayout = () => {
        /> : null
     }
     
-    <SearchHandle search={search} method={handleSearch}/>
+    <SearchHandle searchValue={search} method={(e) =>{
+      setSearch(e.target.value)
+      console.log(e.target.value)
+    } }/>
 
     <div className='flex flex-wrap justify-left items-center gap-4 font-bold uppercase ml-4'>
         {
