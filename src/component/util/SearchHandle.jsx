@@ -8,8 +8,7 @@ const SearchHandle = (props) => {
 
   const keyDownHandler = (e) =>{
     
-    if( e.ctrlKey && e.key === 'k'){
-      e.preventDefault();
+    if( e.ctrlKey && e.key === 'm'){
       inputRef.current.focus();
       setIsSearchActive(true);
     }
@@ -46,7 +45,7 @@ const SearchHandle = (props) => {
                 <span 
                   className="shadow-md px-1 py-1 text-xs w-8 rounded-md font-bold">
                     ctrl</span>+<span className="shadow-md px-1 py-1 text-xs w-8 rounded-md font-bold">
-                    k</span>
+                    m</span>
                 </> : 
                   <span className="shadow-md px-1 py-1 text-xs w-8 rounded-md font-bold">
                   Esc</span>
